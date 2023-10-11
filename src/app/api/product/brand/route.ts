@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
 
             const newBrand = new Brand({ name, img, slug })
             const saveBrand = await newBrand.save();
-            console.log(saveBrand)
 
             return NextResponse.json({
                 status: 200,
@@ -35,7 +34,7 @@ export async function POST(req: NextRequest) {
         console.log(error)
         return NextResponse.json({
             status: 500,
-            message: error,
+            message: 'Somthing went wrong ' + error,
         }, { status: 500 })
     }
 }
@@ -63,82 +62,8 @@ export async function GET() {
         console.log(error)
         return NextResponse.json({
             status: 500,
-            message: error,
+            message: 'Somthing went wrong ' + error,
         }, { status: 500 })
     }
 }
 
-// brand?id=64b52e0ec1c322b44520f07c 
-export async function DELETE(req: NextRequest) {
-
-    try {
-        await connect();
-        const url = new URL(req.url);
-        const id = url.searchParams.get("id");
-
-        const brandExist = await Brand.findOne({ id })
-
-        const deleteBrand = await Brand.findByIdAndDelete(id);
-
-        if (deleteBrand) {
-            return NextResponse.json({
-                status: 200,
-                message: 'Brand Deleted',
-            }, { status: 200 })
-        }
-        else {
-            return NextResponse.json({
-                status: 400,
-                message: 'Brand Not Deleted',
-            }, { status: 400 })
-        }
-
-    } catch (error) {
-        console.log(error)
-        return NextResponse.json({
-            status: 500,
-            message: error,
-        }, { status: 500 })
-    }
-}
-
-export async function PUT(req: NextRequest) {
-    try {
-        await connect();
-        const url = new URL(req.url);
-        const id = url.searchParams.get("id");
-
-        const { name, slug, img } = await req.json();
-        const updateBrandData = { name, slug, img };
-       
-        const brandExist = await Brand.findOne({ id })
-        if(!brandExist){
-            return NextResponse.json({
-                status: 400,
-                message: 'Brand Not Exist',
-            }, { status: 400 })
-        }
-        const updateeBrand = await Brand.findByIdAndUpdate(id,updateBrandData);
-        console.log(updateeBrand)
-
-        if (updateeBrand) {
-            return NextResponse.json({
-                status: 200,
-                message: 'Brand Updated',
-            }, { status: 200 })
-        }
-        else {
-            return NextResponse.json({
-                status: 400,
-                message: 'Brand Not Updated',
-            }, { status: 400 })
-        }
-
-    } catch (error) {
-        console.log(error)
-        return NextResponse.json({
-            status: 500,
-            message: error,
-        }, { status: 500 })
-    }
-}

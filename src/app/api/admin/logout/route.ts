@@ -7,7 +7,7 @@ export async function GET() {
             status: 200,
             success: true,
          },{status: 200,})
-         res.cookies.set("token","",{
+         res.cookies.set("admin-token","",{
             httpOnly:true,
             expires: new Date(0)
          });
@@ -16,7 +16,7 @@ export async function GET() {
     } catch (error:any) {
         return NextResponse.json({
             status: 500,
-            message: error,
+            message: 'Somthing went wrong ' + error,
         }, { status: 500 });
     }
 }

@@ -12,16 +12,14 @@ const categorySchema = new Schema({
     },
     img: {
         type: String,
-        required: [true, "Please provide a Category Image Link"],
     },
-    isParent:{
+    isChild:{
         type: Boolean,
-        require: [true, "Please provide a Category is Parent Category or not"],
     },
-    childCategorys:{
-        type:Array
+    parentCategorys:{
+        type: String
     }
-})
+},{ timestamps: true })
 
 const Category = models.Category || model("Category", categorySchema);
 

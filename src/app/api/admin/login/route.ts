@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
                     success: true,
                  },{status: 200,})
 
-                 result.cookies.set("token", token, {
+                 result.cookies.set("admin-token", token, {
                     httpOnly: true,
                  })
                  return result;
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
         console.log(error)
         return NextResponse.json({
             status: 500,
-            message: error,
+            message: 'Somthing went wrong ' + error,
         }, { status: 500 })
     }
 }

@@ -12,10 +12,8 @@ const brandSchema = new Schema({
     },
     img: {
         type: String,
-        required: [true, "Please provide a Brand Image Link"],
-        unique: true,
     }
-})
+},{ timestamps: true })
 
 const Brand = models.Brand || model("Brand", brandSchema);
 

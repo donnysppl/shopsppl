@@ -23,15 +23,16 @@ const productSchema = new Schema({
         required: [true, "Please provide a Product metakeyword"],
     },
     category: {
-        type: String,
-        required: [true, "Please provide a Product category"],
+        type: Array,
     },
-    categoryslug: {
+    brand: {
         type: String,
-        required: [true],
     },
-    parentcategory: {
-        type: String,
+    brandArr: {
+        type: Array,
+    },
+    categoryArr: {
+        type: Array,
     },
     model: {
         type: String,
@@ -39,11 +40,9 @@ const productSchema = new Schema({
     },
     shortdiscrip: {
         type: String,
-        required: [true, "Please provide a Product short discription"],
     },
     discription: {
         type: String,
-        required: [true, "Please provide a Product discription"],
     },
     mainproductimg: {
         type: String,
@@ -51,11 +50,9 @@ const productSchema = new Schema({
     },
     productimg: {
         type: Array,
-        required: [true, "Please provide a Product images"],
     },
     productrpd: {
         type: Array,
-        required: [true, "Please provide a Product images"],
     },
     productNormalPrice:{
         type: Number,
@@ -63,7 +60,6 @@ const productSchema = new Schema({
     },
     productSalePrice:{
         type: Number,
-        required: [true, "Please provide a Product Sale Price"],
     },
     productPriceDiffAmt:{
         type: Number
@@ -79,8 +75,20 @@ const productSchema = new Schema({
     },
     isFeatured:{
         type: Boolean,
-    }
-})
+    },
+    weight : {
+        type: Number,
+    },
+    lenght : {
+        type: Number,
+    },
+    width : {
+        type: Number,
+    },
+    height : {
+        type: Number,
+    },
+},{ timestamps: true })
 
 const Product = models.Product || model("Product", productSchema);
 

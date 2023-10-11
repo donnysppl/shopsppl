@@ -1,0 +1,102 @@
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+*::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+*::-webkit-scrollbar-thumb {
+    @apply bg-gray-500;
+    border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+}
+
+.backend-dashboard {
+    @apply bg-gradient-to-br from-gray-900 to-cyan-900 text-gray-50;
+}
+
+.form-inp {
+    @apply flex flex-col gap-2;
+}
+
+.form-label {
+    @apply text-sm font-medium text-gray-400;
+}
+
+.form-ctrl {
+    @apply p-3 rounded-md text-gray-200 hover:border-cyan-900 focus:outline-none w-full bg-gray-600 text-sm font-medium;
+}
+.form-ctrl.checkbox{
+    @apply p-3 rounded-md text-gray-200 hover:border-cyan-900 focus:outline-none w-3.5 h-3.5 me-2.5 ms-1 accent-cyan-500 bg-gray-600 text-sm font-medium;
+}
+
+.dashboard-btn {
+    @apply bg-gray-900 rounded-md border border-cyan-500 px-5 py-2 text-sm font-medium;
+}
+
+.dashboard-btn-sec {
+    @apply px-5 py-3;
+}
+
+.password-show {
+    @apply absolute text-gray-800;
+    width: 28px;
+    height: 28px;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.password-show svg {
+    width: 100%;
+    height: 100%;
+}
+
+.dash-nav-list {
+    @apply block rounded-md px-3 py-2 text-sm font-medium text-gray-400
+     hover:text-gray-300  hover:bg-gray-800 border border-transparent hover:border-gray-600;
+}
+
+.nav-scroll {
+    overflow-y: scroll;
+    height: calc(100vh - 15vh);
+    padding-right: 10px
+}
+
+.inner-pages-base-div{
+    @apply container border border-gray-600 rounded-md p-6;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background-color: #0d2f3c8c;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+.search-table-inp input{
+    padding-left: 40px;
+}
+
+/* ckeditor */
+.ckeditor-bg{
+    @apply border border-gray-600 rounded-md p-2 bg-gray-600;
+}
+.ck.ck-editor__main>.ck-editor__editable, 
+.ck.ck-editor .ck-editor__top .ck-sticky-panel .ck-toolbar{
+   background-color: #4B5563 !important;
+   border: none;
+}
+.ck.ck-toolbar>.ck-toolbar__items>:not(.ck-toolbar__line-break), .ck.ck-toolbar>.ck.ck-toolbar__grouped-dropdown,
+.ck.ck-dropdown .ck-button.ck-dropdown__button .ck-button__label,
+.ck.ck-icon{
+    color: #fff !important;
+}
+.ck.ck-button:not(.ck-disabled):hover, a.ck.ck-button:not(.ck-disabled):hover{
+    background-color: #647081 !important;
+}
+.ck.ck-reset_all{
+    border-bottom: 1px solid #ffffff8a !important;
+}
+.ck.ck-editor__main>.ck-editor__editable{
+    height: 200px;
+}

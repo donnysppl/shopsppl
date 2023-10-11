@@ -9,11 +9,11 @@ const dashNavList = [
         navlink: [
             {
                 innernavname: "Add Banner",
-                innernavlink: "./banner/add"
+                innernavlink: "/backend/backend-dashboard/banner/add"
             },
             {
                 innernavname: "Banner List",
-                innernavlink: "./banner/list"
+                innernavlink: "/backend/backend-dashboard/banner/list"
             }
         ]
     },
@@ -22,11 +22,11 @@ const dashNavList = [
         navlink: [
             {
                 innernavname: "Add Brand",
-                innernavlink: "/backend-dashboard/brand/add-brand"
+                innernavlink: "/backend/backend-dashboard/brand/add-brand"
             },
             {
                 innernavname: "Brand List",
-                innernavlink: "/backend-dashboard/brand/brand-list"
+                innernavlink: "/backend/backend-dashboard/brand/brand-list"
             }
         ]
     },
@@ -35,11 +35,11 @@ const dashNavList = [
         navlink: [
             {
                 innernavname: "Add Category",
-                innernavlink: "/backend-dashboard/category/add-category"
+                innernavlink: "/backend/backend-dashboard/category/add-category"
             },
             {
                 innernavname: "Category List",
-                innernavlink: "/backend-dashboard/category/list-category"
+                innernavlink: "/backend/backend-dashboard/category/list-category"
             }
         ]
     },
@@ -48,11 +48,11 @@ const dashNavList = [
         navlink: [
             {
                 innernavname: "Add Product",
-                innernavlink: "./product/add"
+                innernavlink: "/backend/backend-dashboard/product/add-product"
             },
             {
                 innernavname: "Product List",
-                innernavlink: "./product/list"
+                innernavlink: "/backend/backend-dashboard/product/list-product"
             }
         ]
     },
@@ -61,28 +61,24 @@ const dashNavList = [
         navlink: [
             {
                 innernavname: "Order List",
-                innernavlink: "./order"
+                innernavlink: "/backend/backend-dashboard/order/order-list"
             }
         ]
     },
     {
-        navhead: "Order",
+        navhead: "Pages Data",
         navlink: [
             {
-                innernavname: "Order List",
-                innernavlink: "./order"
+                innernavname: "Pages Add",
+                innernavlink: "/backend/backend-dashboard/pages/pages-add"
+            },
+            {
+                innernavname: "Pages List",
+                innernavlink: "/backend/backend-dashboard/pages/pages-list"
             }
         ]
     },
-    {
-        navhead: "Order",
-        navlink: [
-            {
-                innernavname: "Order List",
-                innernavlink: "./order"
-            }
-        ]
-    }
+
 ]
 
 export default function DashNav() {

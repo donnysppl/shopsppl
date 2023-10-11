@@ -2,13 +2,244 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .slide-center {
+    transform: translateX(calc(max(1200px, 100vw) / 2 - calc(1200px / 2)))
+  }
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-end-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 }
-
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-end-rgb));
+  overflow-x: hidden;
+}
+
+.loader-parent {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d2f3c8c;
+  z-index: 9;
+}
+
+.spinner {
+  width: 33.6px;
+  height: 33.6px;
+  animation: spinner-98imc8 2s infinite linear;
+  background-color: #d5d6ea;
+  border-radius: 50%;
+}
+
+@keyframes spinner-98imc8 {
+  0% {
+    transform: scale(0) rotate(-45deg) translateY(0);
+  }
+
+  50% {
+    transform: scale(1.25) rotate(960deg) translateY(100%);
+  }
+
+  100% {
+    transform: scale(0) rotate(2000deg) translateY(0);
+  }
+}
+
+.banner-slider .swiper-slide {
+  width: 90% !important;
+  border-radius: 20px;
+  transition: all 0.5s linear;
+  overflow: hidden;
+}
+
+.banner-slider .swiper-slide.swiper-slide-prev,
+.banner-slider .swiper-slide.swiper-slide-next {
+  opacity: 0.5;
+  transform: scale(0.92);
+  transition: all 0.5s linear;
+}
+
+.banner-slider .swiper-slide.swiper-slide-prev {
+  transform-origin: 75%;
+}
+
+.banner-slider .swiper-slide.swiper-slide-next {
+  transform-origin: 25%;
+}
+
+.pagination {
+  @apply flex rounded-md justify-center;
+}
+
+.pagination .page-item {
+  @apply relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0;
+}
+
+.pagination .page-item.active {
+  @apply relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
+}
+
+.pagination .page-item.prev {
+  @apply rounded-l-md;
+}
+
+.pagination .page-item.next {
+  @apply rounded-r-md;
+}
+
+
+/* login  */
+.front-form .form-control {
+  @apply w-full border border-gray-400 text-sm py-2 px-3 rounded-md;
+}
+.front-form .form-label{
+  @apply text-sm font-medium leading-normal pb-1.5 inline-block;
+}
+
+.spinnerFront {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side,#474bff 94%,#0000) top/9px 9px no-repeat,
+         conic-gradient(#0000 30%,#474bff);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+  animation: spinner-c7wet2 1s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+  100% {
+     transform: rotate(1turn);
+  }
+}
+
+.product-detail-slider .swiper-slide{
+  width: 100%;
+  height: 400px !important;
+  display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.product-detail-wrap-slider .swiper-slide{
+  background-color: #fff;
+  height: 60px;
+  display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+/* .product-tab {
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid;
+}
+.product-tab.active {
+  background-color: red;
+  transition: 0.5s all;
+  border-color: red;
+} */
+.product-tab:focus-visible, .btn-prim:focus-visible{
+  outline: none;
+}
+.product-tab, .btn-prim {
+  background: #FBCA1F;
+  font-family: inherit;
+  padding: 0.6rem 1.3rem;
+  font-weight: 900;
+  font-size: 16px;
+  border: 3px solid black;
+  border-radius: 0.4rem;
+  box-shadow: 0.1rem 0.1rem;
+  cursor: pointer;
+  color: #000;
+}
+.product-tab:hover, .btn-prim:hover {
+  transform: translate(-0.05rem, -0.05rem);
+  box-shadow: 0.15rem 0.15rem;
+}
+.product-tab:active, .btn-prim:active{
+  transform: translate(0.05rem, 0.05rem);
+  box-shadow: 0.05rem 0.05rem;
+}
+
+/* product specification amazon */
+
+.specification {
+	width:80%;
+	margin: 0 auto;
+}
+.specification p{
+    padding: 10px 0 20px 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.specification .a-column.a-span6 h1.a-size-medium.a-spacing-small{
+	padding: 10px 0 20px 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.specification figure.table table ul{
+	list-style:none !important;
+	padding:0;
+	margin:0;
+}
+.specification figure.table table ul li{
+  @apply m-0 text-sm;
+}
+.specification figure.table table tbody {
+    @apply flex flex-wrap gap-[1.2%];
+}
+.specification figure.table table tbody tr {
+  @apply w-[32%] flex items-start justify-start flex-col text-base border border-gray-500 p-2.5 rounded-xl mb-2.5;
+}
+.specification figure.table table tbody tr th {
+    padding: 5px 5px 10px 5px;
+    width: 100%;
+}
+.specification figure.table table tbody tr td {
+    padding: 10px 5px 5px 5px;
+    width: 100%;
+    text-align: start;
+    font-size: 14px;
+}
+.specification figure.table table tbody tr td:not(:first-child){
+	border-top: 1px solid #d4d4d42d;
+}
+.specification figure.table table tbody tr:only-child{
+  width: 100%;
+}
+
+/* cart drower */
+.bg-drawer{
+  @apply fixed w-full h-full 
+}
+.cart-drower{
+  @apply fixed w-96 z-20 h-screen bg-[#191919] top-0 transition-all ease-in-out border-l border-gray-400;
+}
+.cart-drower.open{
+  @apply right-0;
+}
+.cart-drower.close{
+  @apply -right-full;
+}
+
+/* home */
+.slider-overflow::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }

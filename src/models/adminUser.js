@@ -19,7 +19,7 @@ const adminSchema = new Schema({
         type: Boolean,
         default: false,
     }
-})
+},{ timestamps: true })
 
 const AdminUser = models.AdminUser || model("AdminUser", adminSchema);
 

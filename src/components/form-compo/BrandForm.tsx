@@ -1,11 +1,13 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import toast from 'react-hot-toast';
 
 type BrandFormProps = {
-    method: string
+    method: string,
+    id?: string,
 }
 
-export default function BrandForm({ method }: BrandFormProps) {
+export default function BrandForm({ method, id }: BrandFormProps) {
 
     const [brandState, setbrandState] = useState({
         name: '',
@@ -13,10 +15,41 @@ export default function BrandForm({ method }: BrandFormProps) {
         img: ''
     })
 
+    useEffect(() => {
+        const oldBrandFetch = async () => {
+            await fetch(`/api/product/brand/${id}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            }).then(res => res.json())
+                .then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        toast.success(res.message);
+                        setbrandState(res.result);
+                    }
+                    else if (res.status === 400) {
+                        toast.error(res.message);
+                    }
+                    else if (res.status === 500) {
+                        toast.error(res.message);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+
+                })
+        }
+        if (id) {
+            oldBrandFetch();
+        }
+    }, [id])
+
+    const brandURL = id ? `/api/product/brand/${id}` : '/api/product/brand'
+
     const onBrandDataSubmit = async (e: any) => {
         e.preventDefault();
 
-        await fetch('/api/product/brand', {
+        await fetch(brandURL, {
             method: method,
             body: JSON.stringify(brandState),
             headers: { 'Content-Type': 'application/json' },
@@ -24,15 +57,18 @@ export default function BrandForm({ method }: BrandFormProps) {
             .then(res => {
                 console.log(res);
                 if (res.status === 200) {
-
+                    toast.success(res.message);
+                    window.location.reload();
                 }
                 else if (res.status === 400) {
-
+                    toast.error(res.message);
+                }
+                else if (res.status === 500) {
+                    toast.error(res.message);
                 }
             })
             .catch(err => {
                 console.log(err);
-
             })
     }
     return (
