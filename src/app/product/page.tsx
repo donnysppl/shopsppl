@@ -15,8 +15,6 @@ async function fetchProd(page: number, limit: number,brand:string, category:stri
   return data;
 }
 
-export const dynamic = 'force-dynamic';
-
 export default async function ProductList({ searchParams }: { searchParams: { 
   page: string, limit: string , brand:string,category:string
 } }) {
