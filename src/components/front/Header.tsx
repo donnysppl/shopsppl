@@ -18,9 +18,7 @@ export default function Header() {
                     <div className="header-menu">
                         <ul className='flex gap-4 h-full items-center'>
                             <li><Link href={'/'}>Home</Link></li>
-                            <li><Link href={'/about'}>About</Link></li>
-                            <li><Link href={'/contact'}>Contact</Link></li>
-                            <li><Link href={'/shop'}>Shop</Link></li>
+                            <li><Link href={'/product'}>Product</Link></li>
                             <CartCompo/>
                         </ul>
                     </div>
