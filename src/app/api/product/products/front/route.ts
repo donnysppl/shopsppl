@@ -14,7 +14,7 @@ interface MyResultType {
     };
 }
 
-
+export const dynamic = 'force-dynamic';
 // page=undefined&limit=10&brand=thomson&category=all
 
 export async function GET(req: NextRequest) {

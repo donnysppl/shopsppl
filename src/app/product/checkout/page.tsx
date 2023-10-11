@@ -15,6 +15,8 @@ interface orderInptype {
   pincode: number,
 }
 
+export const dynamic = 'force-dynamic';
+
 export default function ProductCheckout() {
 
   const [checkoutProd, setcheckoutProd] = useState<Product[]>([]);

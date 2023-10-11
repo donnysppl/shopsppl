@@ -6,8 +6,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
-
-
 async function fetchProd(page: number, limit: number,brand:string, category:string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front?page=${page ? page : 1}&limit=${limit ? limit : 10}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`, {
     method: 'GET',
@@ -16,6 +14,8 @@ async function fetchProd(page: number, limit: number,brand:string, category:stri
   const data = fetchApi.json();
   return data;
 }
+
+export const dynamic = 'force-dynamic';
 
 export default async function ProductList({ searchParams }: { searchParams: { 
   page: string, limit: string , brand:string,category:string

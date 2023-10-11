@@ -1,3 +1,4 @@
+"use client";
 import { useCallback, useMemo, useRef, useState } from "react"
 import { BiChevronRight } from "react-icons/bi";
 
