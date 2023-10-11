@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Loader from "../Loader";
 import Select from 'react-select';
 
@@ -429,7 +429,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
             <div className="mb-4 form-inp">
                 <label htmlFor="img" className="form-label">Short Discription</label>
                 <div className="ckeditor-bg">
-                    <CKEditor
+                    {/* <CKEditor
                         editor={ClassicEditor}
                         data="<p>Short Discription</p>"
                         onReady={editor => {
@@ -439,14 +439,14 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                             const data = editor.getData();
                             setshortDisInp(data);
                         }}
-                    />
+                    /> */}
                 </div>
             </div>
 
             <div className="mb-4 form-inp">
                 <label htmlFor="img" className="form-label">Discription</label>
                 <div className="ckeditor-bg">
-                    <CKEditor
+                    {/* <CKEditor
                         editor={ClassicEditor}
                         data="<p>Discription</p>"
                         onReady={editor => {
@@ -456,7 +456,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                             const data = editor.getData();
                             setlongDisInp(data);
                         }}
-                    />
+                    /> */}
                 </div>
             </div>
 

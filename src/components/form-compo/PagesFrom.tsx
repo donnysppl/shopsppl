@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import toast from 'react-hot-toast';
 
 interface PageFormProps {
@@ -120,17 +120,14 @@ export default function PagesFrom({method,id}:PageFormProps) {
             <div className="mb-4 form-inp">
                 <label htmlFor="metakeyword" className="form-label">Page Data Discription</label>
                 <div className="ckeditor-bg">
-                    <CKEditor
+                    {/* <CKEditor
                         editor={ClassicEditor}
                         data={pagesInp.pagedata}
-                        onReady={editor => {
-                            console.log('Editor is ready to use!', editor);
-                        }}
-                        onChange={(event, editor) => {
+                        onChange={(event:any, editor:any) => {
                             const data = editor.getData();
                             setpagesInp({ ...pagesInp, pagedata: data })
                         }}
-                    />
+                    /> */}
                 </div>
             </div>
             <button type='submit' className='dashboard-btn' >Submit</button>
