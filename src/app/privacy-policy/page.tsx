@@ -13,7 +13,6 @@ async function pagesPrivPolic() {
 export async function generateMetadata() {
     const pagesData = await pagesPrivPolic();
     const dataResult = pagesData.result;
-    console.log(dataResult)
     return {
       title: dataResult[0].metatitle,
       description: dataResult[0].metadiscription,

@@ -128,10 +128,10 @@ export default function BannerForm({ method, id }: BannerFormProps) {
                                     <>
                                         <div className="flex gap-2">
                                             <div className="banner-img-preview">
-                                                <img src={bannerInp.bannerimg} alt="bannerimg" />
+                                                <Image width={200} height={200} src={bannerInp.bannerimg} alt="bannerimg" />
                                             </div>
                                             <div className="banner-img-preview">
-                                                <img src={bannerInp.bannermobimg} alt="bannermobimg" />
+                                                <Image width={200} height={200} src={bannerInp.bannermobimg} alt="bannermobimg" />
                                             </div>
                                         </div>
                                     </> : null

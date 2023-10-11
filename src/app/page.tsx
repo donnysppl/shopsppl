@@ -49,7 +49,7 @@ export default function Home() {
   return (
 
     <FrontLayout innercol={'bg-gray-100'}>
-      <Swiper
+      {/* <Swiper
         slidesPerView={'auto'}
         centeredSlides={true} loop={true} speed={2000}
         spaceBetween={0} initialSlide={1}
@@ -72,7 +72,7 @@ export default function Home() {
 
           ))
         }
-      </Swiper>
+      </Swiper> */}
       <div>Home</div>
 
       <ScrollCard/>

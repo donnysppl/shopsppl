@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import CommonTable from '@/components/table/CommonTable';
 import Link from "next/link";
 import toast from 'react-hot-toast';
+import Image from "next/image";
 
 export default function ListBanner() {
 
@@ -72,12 +73,12 @@ export default function ListBanner() {
         {
             header: 'Banner Image',
             accessorFn: (row, index) => roe + 1,
-            cell: cell => (<img className="w-[200px]" src={cell.row.original.bannerimg} alt="bannerimg" />)
+            cell: cell => (<Image width={200} height={100} src={cell.row.original.bannerimg} alt="bannerimg" />)
         },
         {
             header: 'Banner Mobile Image',
             accessorFn: (row, index) => roe + 1,
-            cell: cell => (<img  className="w-[200px]" src={cell.row.original.bannermobimg} alt="bannerimg" />)
+            cell: cell => (<Image width={200} height={100} src={cell.row.original.bannermobimg} alt="bannerimg" />)
         },
         {
           header: 'Banner Order',

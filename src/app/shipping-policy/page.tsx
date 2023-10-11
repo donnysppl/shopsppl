@@ -13,7 +13,6 @@ async function pagesShipment() {
 export async function generateMetadata() {
     const pagesData = await pagesShipment();
     const dataResult = pagesData.result;
-    console.log(dataResult)
     return {
       title: dataResult[0].metatitle,
       description: dataResult[0].metadiscription,
@@ -27,7 +26,6 @@ export default async function ShippingPolicy() {
 
     const pagesData = await pagesShipment();
     const dataResult = pagesData.result;
-    console.log(dataResult[0].pagedata)
 
     return (
         <FrontLayout innercol='bg-gray-200'>

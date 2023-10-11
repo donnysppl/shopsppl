@@ -13,7 +13,6 @@ async function pagesTermCond() {
 export async function generateMetadata() {
     const pagesData = await pagesTermCond();
     const dataResult = pagesData.result;
-    console.log(dataResult)
     return {
       title: dataResult[0].metatitle,
       description: dataResult[0].metadiscription,
@@ -27,7 +26,6 @@ export default async function TermsAndConditions() {
 
     const pagesData = await pagesTermCond();
     const dataResult = pagesData.result;
-    console.log(dataResult[0].pagedata)
 
     return (
         <FrontLayout innercol='bg-gray-200'>

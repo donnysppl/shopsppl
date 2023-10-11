@@ -115,6 +115,16 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                     console.log(err);
                 })
         }
+
+
+        if (id) {
+            fetchPrevProd();
+        }
+
+
+    }, [id])
+
+    useEffect(() => {
         const fetchCateData = async () => {
             // setloader(true);
             await fetch('/api/product/category', {
@@ -163,14 +173,10 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                     console.log(err);
                 })
         }
-
-        if (id) {
-            fetchPrevProd();
-        }
-
         fetchCateData();
         fetchBrandData();
     }, [])
+
 
     const onProductSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -376,7 +382,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
             <div className="mb-4 form-inp">
                 <label htmlFor="img" className="form-label">Choose Brand</label>
                 <Select styles={customStyles}
-                    value={allBanner.filter((item) => item.name === selectedbrand)}
+                    value={allBanner.filter((item: any) => item.name === selectedbrand)}
                     onChange={(option: any | null) => {
                         setSelectedbrand(option);
                         console.log(option)
@@ -394,28 +400,28 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                     <label htmlFor="weight" className="form-label">Product weight (KG)</label>
                     <input type="number" name='weight' className="form-ctrl" placeholder='Product weight' required
                         onChange={(e) => setproductinp({ ...productinp, weight: parseInt(e.target.value) })}
-                        value={productinp.weight}
+                        value={productinp.weight.toString()}
                     />
                 </div>
                 <div className="mb-2 form-inp">
                     <label htmlFor="lenght" className="form-label">Product lenght (CM)</label>
                     <input type="number" name='lenght' className="form-ctrl" placeholder='Product lenght' required
                         onChange={(e) => setproductinp({ ...productinp, lenght: parseInt(e.target.value) })}
-                        value={productinp.lenght}
+                        value={productinp.lenght.toString()}
                     />
                 </div>
                 <div className="mb-2 form-inp">
                     <label htmlFor="width" className="form-label">Product width (KG)</label>
                     <input type="number" name='width' className="form-ctrl" placeholder='Product width' required
                         onChange={(e) => setproductinp({ ...productinp, width: parseInt(e.target.value) })}
-                        value={productinp.width}
+                        value={productinp.width.toString()}
                     />
                 </div>
                 <div className="mb-2 form-inp">
                     <label htmlFor="height" className="form-label">Product height (KG)</label>
                     <input type="number" name='height' className="form-ctrl" placeholder='Product height' required
                         onChange={(e) => setproductinp({ ...productinp, height: parseInt(e.target.value) })}
-                        value={productinp.height}
+                        value={productinp.height.toString()}
                     />
                 </div>
             </div>
@@ -464,16 +470,16 @@ export default function ProductForm({ method, id }: ProdFormProps) {
 
             <div className="mb-4 form-check">
                 <label className="form-label" htmlFor="productimg">Product Image </label>
-                <textarea className="form-ctrl" id="productimg" name="productimg" rows={4} 
-                onChange={(e) => setproductinp({ ...productinp, productimg: e.target.value})}
-                value={'' || productinp.productimg} />
+                <textarea className="form-ctrl" id="productimg" name="productimg" rows={4}
+                    onChange={(e) => setproductinp({ ...productinp, productimg: e.target.value })}
+                    value={'' || productinp.productimg} />
             </div>
 
             <div className="mb-4 form-check">
                 <label className="form-label" htmlFor="productrpd">Product RPD Image </label>
-                <textarea className="form-ctrl" id="productrpd" name="productrpd" rows={4} 
-                onChange={(e) => setproductinp({ ...productinp, productrpd: e.target.value})}
-                value={'' || productinp.productrpd} />
+                <textarea className="form-ctrl" id="productrpd" name="productrpd" rows={4}
+                    onChange={(e) => setproductinp({ ...productinp, productrpd: e.target.value })}
+                    value={'' || productinp.productrpd} />
             </div>
 
             {/* <div className="mb-4 form-inp">

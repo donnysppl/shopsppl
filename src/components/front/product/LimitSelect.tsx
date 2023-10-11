@@ -2,11 +2,17 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-export default function LimitSelect() {
+interface pageType{
+    page:number,
+    brand:string,
+    category:string,
+}
+
+export default function LimitSelect({page,brand,category}:pageType) {
     const router = useRouter();
     const prodLimitChange = (e :React.ChangeEvent<HTMLSelectElement>) => {
         const value = parseInt(e.target.value,10)
-        router.push(`?limit=${value}`);
+        router.push(`?page=${page ? page : null}&limit=${value}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`);
     }
     return (
         <select className="form-select" defaultValue={'10'} onChange={(e) => prodLimitChange(e)}>

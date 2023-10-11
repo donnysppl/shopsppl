@@ -3,6 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { Product } from "@/helpers/interFace";
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 interface orderInptype {
   email: string,
@@ -168,7 +169,7 @@ export default function ProductCheckout() {
               checkoutProd && checkoutProd.map((item, index) => (
                 <li key={index} className='border-b border-gray-400 last:border-0 flex gap-4' >
                   <div className="prod-img w-[25%] h-[100px] rounded-lg overflow-hidden">
-                    <img src={item.mainproductimg} alt={item.name} className='w-full ' />
+                    <Image src={item.mainproductimg} alt={item.name} className='w-full ' width={100} height={100} />
                   </div>
                   <div className='text-sm w-[75%]'>
                     <div className="prod-name">{item.name}</div>

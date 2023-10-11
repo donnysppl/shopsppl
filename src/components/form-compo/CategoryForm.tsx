@@ -14,7 +14,7 @@ interface CateFormProps {
     id?: string,
 }
 
-export default function CategoryForm({method, id}:CateFormProps) {
+export default function CategoryForm({ method, id }: CateFormProps) {
 
     const [cateState, setcateState] = useState({
         name: '',
@@ -56,6 +56,14 @@ export default function CategoryForm({method, id}:CateFormProps) {
                     console.log(err);
                 })
         }
+
+        if (id) {
+            fetchEditCateData();
+        }
+
+    }, [id])
+
+    useEffect(() => {
         const fetchCateData = async () => {
             setloader(true);
             await fetch('/api/product/category', {
@@ -80,11 +88,9 @@ export default function CategoryForm({method, id}:CateFormProps) {
                     console.log(err);
                 })
         }
-        if(id){
-            fetchEditCateData();
-        }
         fetchCateData();
     }, [])
+
 
     const categoryURL = id ? `/api/product/category/${id}` : '/api/product/category'
 
@@ -121,14 +127,14 @@ export default function CategoryForm({method, id}:CateFormProps) {
             .catch(err => {
                 console.log(err);
             })
-        
+
     }
 
     return (
         <form onSubmit={onCategorySubmit} className='relative'>
 
             {
-                loader ? <Loader/> : null
+                loader ? <Loader /> : null
             }
 
             <div className="mb-4 form-inp">
@@ -158,7 +164,7 @@ export default function CategoryForm({method, id}:CateFormProps) {
             <div className="mb-3 form-check ">
                 <input type="checkbox" className="form-ctrl checkbox cursor-pointer" id="isParent" name="isParent"
                     onChange={(e) => setchildCatVal(!childCatVal)}
-                    checked={childCatVal} /> 
+                    checked={childCatVal} />
                 <label className="form-label cursor-pointer" htmlFor="isParent">IS Child Category</label>
             </div>
 
