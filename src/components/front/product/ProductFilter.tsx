@@ -11,6 +11,7 @@ const Categories = [
   ]
   
   const Brand = [
+    { name: 'All', slug: 'all' },
     { slug: 'kodaktv', name: 'Kodak TV' },
     { slug: 'blaupunkt', name: 'Blaupunkt' },
     { slug: 'thomson', name: 'Thomson' },

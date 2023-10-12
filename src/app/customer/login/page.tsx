@@ -1,6 +1,7 @@
 "use client";
 
 import LoaderFront from '@/components/front/Loader';
+import GoogleLoginbtn from '@/helpers/GoogleLoginbtn';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react'
@@ -16,7 +17,7 @@ export default function CustomerLogin() {
   const router = useRouter();
 
   const loginParam = searchParams.get('checkout');
-  
+
   const [cusLoginInp, setcusLoginInp] = useState<cusLoginInp>({
     email: '',
     password: ''
@@ -93,7 +94,7 @@ export default function CustomerLogin() {
     <>
       {/* <CustomerProv/> */}
       <main className='py-20'>
-        <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl drop-shadow-2xl relative overflow-hidden">
+        <div className="max-w-xl mx-auto bg-white p-10 rounded-xl drop-shadow-2xl relative overflow-hidden">
           {
             loader ? <LoaderFront /> : null
           }
@@ -119,6 +120,10 @@ export default function CustomerLogin() {
 
             <button type="submit" className='btn-prim'>Submit</button>
           </form>
+
+          <div className="">
+            <GoogleLoginbtn />
+          </div>
 
           {
             otpOption ?

@@ -6,7 +6,33 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
-async function fetchProd(page: number, limit: number,brand:string, category:string) {
+interface fetchProd {
+  result: {
+    result: any[];
+    next: {
+      page: number;
+      limit: number;
+    };
+    prev: {
+      page: number;
+      limit: number;
+    };
+    totalPosts: number;
+    totalPages:number;
+  }
+}
+
+export async function generateMetadata() {
+  return {
+    title: 'Product | Shop',
+    description: 'Product',
+    alternates:{
+      canonical:`/product`
+    }
+  }
+}
+
+async function fetchProd(page: number, limit: number, brand: string, category: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front?page=${page ? page : 1}&limit=${limit ? limit : 10}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`, {
     method: 'GET',
   })
@@ -15,26 +41,32 @@ async function fetchProd(page: number, limit: number,brand:string, category:stri
   return data;
 }
 
-export default async function ProductList({ searchParams }: { searchParams: { 
-  page: string, limit: string , brand:string,category:string
-} }) {
+export default async function ProductList({ searchParams }: {
+  searchParams: {
+    page: string, limit: string, brand: string, category: string
+  }
+}) {
   const pageParams = parseInt(searchParams.page);
-  const limitParams = parseInt(searchParams.limit);
+  const limitParams = parseInt(searchParams.limit) | 10;
   const brandParams = searchParams.brand;
   const categoryParams = searchParams.category;
-  const fetchProds = await fetchProd(pageParams, limitParams,brandParams,categoryParams);
+  const fetchProds: fetchProd = await fetchProd(pageParams, limitParams, brandParams, categoryParams);
+  const totalPost = fetchProds.result.totalPosts;
+  const totalPages =fetchProds.result.totalPages;
+
+
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="product-filter-main grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
         <div className="product-filter-part">
-        <ProductFilter brand={brandParams} category={categoryParams} page={searchParams.page} limit={searchParams.limit}/>
+          <ProductFilter brand={brandParams} category={categoryParams} page={searchParams.page} limit={searchParams.limit} />
         </div>
         <div className="product-part lg:col-span-3">
           <div className="mx-auto max-w-screen-xl px-4 py-3">
             <div className='flex justify-between p-4'>
               <h2>product List</h2>
               <div>
-                <LimitSelect brand={brandParams} category={categoryParams} page={pageParams}/>
+                <LimitSelect brand={brandParams} category={categoryParams} page={pageParams} />
               </div>
             </div>
             <ul className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-5">
@@ -76,7 +108,7 @@ export default async function ProductList({ searchParams }: { searchParams: {
               fetchProds.result.next ?
                 <div className="next">
                   <Link href={`?${new URLSearchParams({
-                    page: fetchProds.result.next.page, limit: searchParams.limit
+                    page: fetchProds.result.next.page.toString(), limit: searchParams.limit
                   })}`}>Next</Link>
                 </div> : null
             }
@@ -85,10 +117,12 @@ export default async function ProductList({ searchParams }: { searchParams: {
               fetchProds.result.prev ?
                 <div className="next">
                   <Link href={`?${new URLSearchParams({
-                    page: fetchProds.result.prev.page, limit: searchParams.limit
+                    page: fetchProds.result.prev.page.toString(), limit: searchParams.limit
                   })}`}>Prev</Link>
                 </div> : null
             }
+<div>Page {pageParams ? pageParams : 1} to {totalPages}</div>
+            
           </div>
 
         </div>

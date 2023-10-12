@@ -12,36 +12,52 @@ export function middleware(request: NextRequest) {
 
     const token = request.cookies.get('admin-token')?.value || '';
 
-    if(isPublicPath && token){
-        return NextResponse.redirect(new URL('/backend/backend-dashboard', request.nextUrl))
+    if (isPublicPath && token) {
+      return NextResponse.redirect(new URL('/backend/backend-dashboard', request.nextUrl))
     }
-    
-    if(!isPublicPath && !token){
-        return NextResponse.redirect(new URL('/backend/backend-login', request.nextUrl))
+
+    if (!isPublicPath && !token) {
+      return NextResponse.redirect(new URL('/backend/backend-login', request.nextUrl))
     }
   }
 
   if (request.nextUrl.pathname.startsWith('/customer')) {
-    const isPublicPath = path === '/customer/login';
+    const isCustLoginPublicPath = path === '/customer/login';
+    const isCustForgotPublicPath = path === '/customer/forgot-password';
+    // const isCustLoginPublicPath = path === '/customer/login';
 
     const token = request.cookies.get('customer-token')?.value || '';
 
-    if(isPublicPath && token){
+    if (isCustLoginPublicPath) {
+      if (isCustLoginPublicPath && token) {
         return NextResponse.redirect(new URL('/customer/dashboard', request.nextUrl))
-    }
-    
-    if(!isPublicPath && !token){
+      }
+
+      if (!isCustLoginPublicPath && !token) {
         return NextResponse.redirect(new URL('/customer/login', request.nextUrl))
+      }
     }
+
+    if(isCustForgotPublicPath){
+      if (isCustForgotPublicPath && token) {
+        return NextResponse.redirect(new URL('/customer/dashboard', request.nextUrl))
+      }
+
+      if (!isCustForgotPublicPath && !token) {
+        return NextResponse.redirect(new URL('/customer/forgot-password', request.nextUrl))
+      }
+    }
+
+
   }
-    
+
 
 }
- 
-// See "Matching Paths" below to learn more
-// export const config = {
-//   matcher: [
-//     '/backend-dashboard/:path*', '/backend-login',
-//   ],
-// }
+
+export const config = {
+  matcher: [
+    '/backend/backend-dashboard/:path*', '/backend/backend-login',
+    '/customer/:path*',
+  ],
+}
 

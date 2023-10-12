@@ -18,22 +18,31 @@ export async function POST(req: NextRequest) {
                 message: 'User Not exist',
             }, { status: 400 })
         } else {
-            const validPassword = await bcryptjs.compare(password, customerExist.password)
-            if (!validPassword) {
+            if (!customerExist.password) {
                 return NextResponse.json({
                     status: 400,
-                    message: 'Wrong Password',
+                    message: 'Please Forgot your password',
                 }, { status: 400 })
             }
             else {
-                const sendOTP = await sendOtp(email, customerExist._id);
-                return NextResponse.json({
-                    status: 200,
-                    message: 'Check the mail for otp',
-                    mail: sendOTP,
-                    result: customerExist
-                }, { status: 200 })
+                const validPassword = await bcryptjs.compare(password, customerExist.password)
+                if (!validPassword) {
+                    return NextResponse.json({
+                        status: 400,
+                        message: 'Wrong Password',
+                    }, { status: 400 })
+                }
+                else {
+                    const sendOTP = await sendOtp(email, customerExist._id);
+                    return NextResponse.json({
+                        status: 200,
+                        message: 'Check the mail for otp',
+                        mail: sendOTP,
+                        result: customerExist
+                    }, { status: 200 })
+                }
             }
+
         }
     } catch (error) {
         console.log(error)

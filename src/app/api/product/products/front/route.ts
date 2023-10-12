@@ -12,6 +12,8 @@ interface MyResultType {
         page: number;
         limit: number;
     };
+    totalPosts:number;
+    totalPages:number;
 }
 
 export const dynamic = 'force-dynamic';
@@ -61,6 +63,11 @@ export async function GET(req: NextRequest) {
                     result.prev = { page: pages - 1, limit: limit };
                 }
                 result.result = data.slice(startIndex, ensIndex);
+                const totalPosts = await Product.countDocuments();
+                const totalPages = Math.ceil(totalPosts / limit);
+                result.totalPosts = totalPosts;
+                result.totalPages = totalPages
+
 
                 return NextResponse.json({
                     status: 200,
