@@ -12,7 +12,6 @@ const customerSchema = new Schema({
     },
     phone:{
         type: String,
-        required: [true, "Please provide a Phone Number"],
     },
     password:{
         type: String,

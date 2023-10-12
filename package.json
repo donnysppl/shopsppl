@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^38.1.1",
+    "@ckeditor/ckeditor5-build-classic": "^40.0.0",
     "@ckeditor/ckeditor5-react": "^6.1.0",
     "@react-oauth/google": "^0.7.3",
     "@tanstack/react-table": "^8.9.3",
@@ -19,8 +19,6 @@
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
     "bcryptjs": "^2.4.3",
-    "ckeditor5": "^38.1.1",
-    "ckeditor5-custom-build": "file:ckeditor5",
     "csvtojson": "^2.0.10",
     "dompurify": "^3.0.6",
     "eslint": "8.45.0",
