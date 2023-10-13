@@ -10,17 +10,15 @@ async function pagesTermCond() {
     return data;
 }
 
-// export async function generateMetadata() {
-//     const pagesData = await pagesTermCond();
-//     const dataResult = pagesData.result;
-//     return {
-//       title: dataResult[0].metatitle,
-//       description: dataResult[0].metadiscription,
-//       alternates:{
-//         canonical:`/terms-and-conditions`
-//       }
-//     }
-//   }
+export async function generateMetadata() {
+    return {
+      title: 'Terms And Conditions',
+      description: 'Terms And Conditions',
+      alternates:{
+        canonical:`/terms-and-conditions`
+      }
+    }
+  }
 
 export default async function TermsAndConditions() {
 
