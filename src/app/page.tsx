@@ -13,6 +13,7 @@
 import FrontLayout from '@/components/layout/FrontLayout'
 import Image from 'next/image';
 import ScrollCard from '@/components/form-compo/ScrollCard';
+import Banner from '@/components/home-page/Banner';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,30 +50,7 @@ export default function Home() {
   return (
 
     <FrontLayout innercol={'bg-gray-100'}>
-      {/* <Swiper
-        slidesPerView={'auto'}
-        centeredSlides={true} loop={true} speed={2000}
-        spaceBetween={0} initialSlide={1}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay={{
-          delay: 2500,
-        }}
-        modules={[Pagination, Autoplay]}
-        className="banner-slider mt-2"
-      >
-        {
-          bannerData && bannerData.map((item, index) => (
-            <SwiperSlide key={index} className='bg-purple-900'>
-              <div className='' >
-                <Image src={item.bannerimg} width={1400} height={500} alt={item.name} />
-              </div>
-            </SwiperSlide>
-
-          ))
-        }
-      </Swiper> */}
+      <Banner/>
       <div>Home</div>
 
       <ScrollCard/>

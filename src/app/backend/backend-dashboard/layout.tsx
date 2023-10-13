@@ -3,6 +3,7 @@ import './dashboard.css';
 import { Toaster } from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 
+
 const DashNav = dynamic(() => import('@/components/DashNav'))
 
 export default function DashboardLayout({
@@ -12,7 +13,7 @@ export default function DashboardLayout({
 }) {
     return (
         <html lang="en">
-            <body >
+            <body>
                 <Toaster position="bottom-center" reverseOrder={false} />
                 <div className='backend-dashboard'>
                     <section className="w-screen h-screen">

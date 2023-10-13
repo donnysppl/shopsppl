@@ -1,0 +1,81 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import Image from 'next/image';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination, Autoplay } from 'swiper/modules';
+
+interface bannerType {
+    name: string;
+    bannerimg: string;
+    bannermobimg: string;
+}
+
+export default function Banner() {
+
+    const [bannerData, setbannerData] = useState<bannerType[]>([]);
+    const [loading, setloading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const bannerFetch = async () => {
+            await fetch('/api/banner/list', {
+                method: 'GET',
+            }).then(res => res.json())
+                .then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        const data = res.result
+                        const newData = data.concat(data)
+                        setbannerData(res.result);
+                        setloading(false);
+                    }
+                    else if (res.status === 400) {
+
+                    }
+                    else if (res.status === 500) {
+
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+        bannerFetch();
+    }, [])
+
+    return (
+        <Swiper
+            slidesPerView={'auto'}
+            loop={true} speed={2000}
+            spaceBetween={0} initialSlide={1}
+            pagination={{
+                clickable: true,
+            }}
+            autoplay={{
+                delay: 2500,
+            }}
+            modules={[Pagination, Autoplay]}
+            className="banner-slider mt-2"
+        >
+            {
+                loading ?
+                    <SwiperSlide className='animate-pulse'>
+                        <div className='w-screen h-[500px] bg-gray-400' >
+                        </div>
+                    </SwiperSlide> :
+                    bannerData.map((item, index) => (
+                        <SwiperSlide key={index} className=' '>
+                            <div className='' >
+                                <Image src={item.bannerimg} width={1920} height={600}
+                                    className='object-cover object-center'
+                                    alt={item.name} />
+                            </div>
+                        </SwiperSlide>
+
+                    ))
+            }
+        </Swiper>
+    )
+}

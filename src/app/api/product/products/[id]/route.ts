@@ -74,8 +74,15 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         const categoryData = await Category.find({ name: { $in: category } });
         const brandData = await Brand.find({ name: { $in: brand } });
 
-        const productimgArr = productimg.split(",");
-        const productRPDArr = productrpd.split(",");
+        console.log(typeof(productimg),typeof(productrpd))
+
+        const productimgStr = productimg.toString();
+        const productRPDStr = productimg.toString();
+
+        const productimgArr = productimgStr.split(",");
+        const productRPDArr = productRPDStr.split(",");
+
+        console.log(productimgArr, productRPDArr)
 
         const updateProdData = await {
             name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg:productimgArr, productrpd:productRPDArr, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, categoryArr: categoryData, productPriceDiffAmt, productPriceDiffpercent, brand, weight, brandArr: brandData

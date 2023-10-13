@@ -55,7 +55,7 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
                                     :
                                     <li>
 
-                                        <div className="tab-content-two">
+                                        <div className="tab-content-two specification text-gray-400">
                                             <div dangerouslySetInnerHTML={{ __html: specification }} />
                                         </div>
                                     </li>

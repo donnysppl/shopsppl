@@ -6,6 +6,11 @@ import { toast } from "react-hot-toast";
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Loader from "../Loader";
 import Select from 'react-select';
+import dynamic from 'next/dynamic'
+
+var Editor = dynamic(() => import("@/components/form-compo/Editor"), {
+    ssr: false
+})
 
 interface AllCategory {
     name: string;
@@ -79,7 +84,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
 
     const [allCate, setallCate] = useState<AllCategory[]>([]);
     const [allBanner, allBetbanner] = useState<any>([]);
-    const [shortDisInp, setshortDisInp] = useState<string>('');
+    let [shortDisInp, setshortDisInp] = useState<string>('');
     const [longDisInp, setlongDisInp] = useState<string>('');
     const [loader, setloader] = useState(false);
     const [selectedOption, setSelectedOption] = useState<any>(null);
@@ -285,9 +290,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
             alignItems: 'center',
         }),
     };
-
-
-
+console.log(shortDisInp,longDisInp)
 
     return (
         <form onSubmit={onProductSubmit} className="relative items-center">
@@ -429,34 +432,20 @@ export default function ProductForm({ method, id }: ProdFormProps) {
             <div className="mb-4 form-inp">
                 <label htmlFor="img" className="form-label">Short Discription</label>
                 <div className="ckeditor-bg">
-                    {/* <CKEditor
-                        editor={ClassicEditor}
-                        data="<p>Short Discription</p>"
-                        onReady={editor => {
-                            console.log('Editor is ready to use!', editor);
-                        }}
-                        onChange={(event, editor) => {
-                            const data = editor.getData();
+                    <Editor name="shortDiscription" value={shortDisInp} 
+                        onChange={(data:string) => {
                             setshortDisInp(data);
-                        }}
-                    /> */}
+                        }} />
                 </div>
             </div>
 
             <div className="mb-4 form-inp">
                 <label htmlFor="img" className="form-label">Discription</label>
                 <div className="ckeditor-bg">
-                    {/* <CKEditor
-                        editor={ClassicEditor}
-                        data="<p>Discription</p>"
-                        onReady={editor => {
-                            console.log('Editor is ready to use!', editor);
-                        }}
-                        onChange={(event, editor) => {
-                            const data = editor.getData();
+                    <Editor name="shortDiscription" value={longDisInp}
+                        onChange={(data:string) => {
                             setlongDisInp(data);
-                        }}
-                    /> */}
+                        }} />
                 </div>
             </div>
 

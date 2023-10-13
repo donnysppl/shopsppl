@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors:{
+        prim:'#013088',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
