@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-
+const withMT = require("@material-tailwind/react/utils/withMT");
 const plugin = require('tailwindcss/plugin')
 
-module.exports = {
+module.exports = withMT({
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       colors:{
         prim:'#013088',
+        act:'#ffd049'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -29,4 +30,4 @@ module.exports = {
       })
     })
   ],
-}
+})
