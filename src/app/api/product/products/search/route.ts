@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
         const searchQ = searchParams.get('q');
         console.log(searchQ)
 
-        const data = await Product.find({"name":{$regex : ".*" + searchQ + ".*",$options:'i'}});
+        const data = await Product.find({"name":{$regex : ".*" + searchQ + ".*",$options:'i'}}).select('name _id slug');
         console.log(data)
         if(!data){
             return NextResponse.json({

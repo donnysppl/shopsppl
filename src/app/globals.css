@@ -255,6 +255,13 @@ body {
   display: none;
 }
 
+/* front form */
+.input{
+  @apply w-full rounded-full border-gray-200 bg-gray-100 p-2 text-sm font-medium text-gray-700 placeholder:text-gray-700;
+}
+.input.search{
+  @apply ps-10;
+}
 
 @media only screen and (max-width: 991.99px) {
 
