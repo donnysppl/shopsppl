@@ -3,6 +3,7 @@ import { Product } from '@/helpers/interFace';
 import { notFound } from 'next/navigation';
 import React from 'react'
 import OnBuyFunct from "@/helpers/onBuyFunct";
+import OnCartFunct from '@/helpers/onCartFunct';
 import ProdTabs from '@/components/front/product/ProdTabs';
 
 async function fetchSingleProd(slug:string) {
@@ -83,6 +84,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
                   </div> : <>
                     {/* <button onClick={(e) => onCartNow(prodDetailData?._id)} className="btn-prim" >Add to Cart</button>
                     <button onClick={(e) => onBuyFunct(prodDetailData?._id)} className="btn-prim ms-2">Buy Now</button> */}
+                    <OnCartFunct id={prodDetailData?._id} />
                     <OnBuyFunct id={prodDetailData?._id} />
                   </>
                 }

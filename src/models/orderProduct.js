@@ -39,7 +39,16 @@ const orderProdSchema = new Schema({
     },
     orderid:{
         type: String,
-    }
+    },
+    paymentid:{
+        type: String,
+    },
+    orderid: {
+        type: String,
+    },
+     paymentdate: {
+        type: String,
+    },
 },{ timestamps: true })
 
 const ProductOrder = models.ProductOrder || model("ProductOrder", orderProdSchema);

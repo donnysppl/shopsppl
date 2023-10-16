@@ -2,6 +2,7 @@ import MaterialWapper from '@/components/layout/MaterialWapper'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Libre_Baskerville } from 'next/font/google'
+import Script from 'next/script'
 
 const libre = Libre_Baskerville({
   weight: ['400', '700'],
@@ -32,6 +33,7 @@ export default function RootLayout({
           {children}
         </MaterialWapper>
       </body>
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
     </html>
   )
 }

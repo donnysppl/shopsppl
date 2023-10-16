@@ -15,11 +15,34 @@ interface orderInptype {
   pincode: number,
 }
 
+interface RazorOrderes {
+  id: string;
+  entity: string;
+  amount: number;
+  amount_paid: number;
+  amount_due: number;
+  currency: string;
+  receipt: string | null;
+  offer_id: string | null;
+  status: string;
+  attempts: number;
+  notes: any[]; // Depending on the structure of notes, you might want to create a separate interface for it
+  created_at: number;
+}
+
+interface CustomWindow extends Window {
+  Razorpay?: any;
+}
+
+declare var window: CustomWindow;
+
 export const dynamic = 'force-dynamic';
 
 export default function ProductCheckout() {
 
   const [checkoutProd, setcheckoutProd] = useState<Product[]>([]);
+  const [razorOrderRes, setrazorOrderRes] = useState<RazorOrderes>();
+  const [userData, setuserData] = useState<string>('');
   const [orderInp, setorderInp] = useState<orderInptype>({
     email: '',
     name: '',
@@ -43,11 +66,12 @@ export default function ProductCheckout() {
           console.log(res)
           if (res.status === 200) {
             setcheckoutProd(res.result);
-            const totalSalePrice = res.result.reduce((acc : any, product:Product) => {
+            const totalSalePrice = res.result.reduce((acc: any, product: Product) => {
               return acc + product.productSalePrice;
             }, 0);
             console.log(totalSalePrice)
             settotalPrice(totalSalePrice);
+            createRazorpayOrder(totalSalePrice);
           }
           if (res.status === 400) {
 
@@ -59,6 +83,29 @@ export default function ProductCheckout() {
     }
     if (prodSearchParams) {
       fetchCheckProdData(prodSearchParams);
+    }
+
+    // razorpay order created 
+    const createRazorpayOrder = async (price: number) => {
+
+      await fetch('/api/razorpay/ordercreate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          amount: price
+        })
+      }).then(res => res.json())
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            setrazorOrderRes(res.result)
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
 
   }, [prodSearchParams])
@@ -87,9 +134,11 @@ export default function ProductCheckout() {
       state: orderInp.state,
       pincode: orderInp.pincode,
       orderprod: checkoutData,
-      totalbill:totalPrice
+      totalbill: totalPrice
     }
     console.log(orderInp, checkoutData)
+
+    // order data save
     await fetch(`/api/order`, {
       method: 'POST',
       headers: {
@@ -101,12 +150,68 @@ export default function ProductCheckout() {
         console.log(res)
         if (res.status === 200) {
           toast.success(res.message);
+          razorpay(res.result._id);
         }
       })
       .catch(err => {
         console.log(err);
       })
+    console.log(userData)
+    // razorpay opt front
+    
+
   }
+
+  const razorpay = (id:string) => {
+    const options = {
+      key: `${process.env.NEXT_PUBLIC_RAZORPAY_SECRET_ID}`,
+      amount: razorOrderRes?.amount,
+      currency: "INR",
+      name: "SHOPSPPL",
+      description: "SHOPSPPL product payment",
+      image: `${process.env.NEXT_PUBLIC_BASE_URL}/img/logo.png`,
+      order_id: razorOrderRes?.id,
+      // callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/razorpay/paymentverification`,
+      "handler": async function (response: any) {
+        const resData = {
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_signature: response.razorpay_signature,
+          userid: id,
+        }
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/razorpay/paymentverification`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(resData)
+        }).then(res => res.json())
+          .then(res => {
+            console.log(res)
+            if (res.status === 200) {
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      },
+      prefill: {
+        name: orderInp.name,
+        email: orderInp.email,
+        contact: "9000090000"
+      },
+      notes: {
+        address: "Razorpay Corporate Office"
+      },
+      theme: {
+        color: "#3399cc"
+      }
+    };
+    console.log(options)
+    var rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  }
+
 
   return (
     <main className='max-w-screen-xl mx-auto py-20'>
@@ -184,14 +289,14 @@ export default function ProductCheckout() {
             }
           </ul>
           <div className='total-product-price'>
-              <ul>
-                <li>
-                  <div className="flex justify-between">
-                    <span>Total</span>
-                    <span>{totalPrice}</span>
-                  </div>
-                </li>
-              </ul>
+            <ul>
+              <li>
+                <div className="flex justify-between">
+                  <span>Total</span>
+                  <span>{totalPrice}</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer utilities {
+  html {
+    font-family: 'Libre Baskerville', serif;
+  }
   .slide-center {
     transform: translateX(calc(max(1200px, 100vw) / 2 - calc(1200px / 2)))
   }
