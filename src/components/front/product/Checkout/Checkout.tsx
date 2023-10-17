@@ -86,29 +86,6 @@ export default function Checkout() {
             fetchCheckProdData(prodSearchParams);
         }
 
-        // razorpay order created 
-        // const createRazorpayOrder = async (price: number) => {
-
-        //   await fetch('/api/razorpay/ordercreate', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //       amount: price
-        //     })
-        //   }).then(res => res.json())
-        //     .then(res => {
-        //       console.log(res)
-        //       if (res.status === 200) {
-        //         setrazorOrderRes(res.result)
-        //       }
-        //     })
-        //     .catch(err => {
-        //       console.log(err);
-        //     })
-        // }
-
     }, [prodSearchParams])
 
     const oncheckout = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -151,7 +128,10 @@ export default function Checkout() {
                 console.log(res)
                 if (res.status === 200) {
                     toast.success(res.message);
-                      createRazorpayOrder(res.result.totalbill);
+                    setuserData(res.result._id)
+                    if (res.result.totalbill) {
+                        createRazorpayOrder(res.result.totalbill, res.result._id);
+                    }
                 }
             })
             .catch(err => {
@@ -160,45 +140,51 @@ export default function Checkout() {
     }
 
     // razorpay order created 
-    const createRazorpayOrder = async (price: number) => {
+    const createRazorpayOrder = async (price: number, id:string) => {
 
-        await fetch('/api/razorpay/ordercreate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                amount: price
-            })
-        }).then(res => res.json())
-            .then(res => {
-                console.log(res)
-                if (res.status === 200) {
-                    setrazorOrderRes(res.result)
-                      razorpay(res.result._id);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        if (price) {
+            console.log(price)
+            await fetch('/api/razorpay/ordercreate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount: price
+                })
+            }).then(res => res.json())
+                .then(res => {
+                    console.log(res)
+                    if (res.status === 200) {
+                        setrazorOrderRes(res.result)
+                        if (res.result) {
+                            razorpay(res.result , id);
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
     }
 
-    const razorpay = (id: string) => {
+    const razorpay = (res: RazorOrderes, orderid :string) => {
         const options = {
             key: `${process.env.NEXT_PUBLIC_RAZORPAY_SECRET_ID}`,
-            amount: razorOrderRes?.amount,
+            amount: res.amount,
             currency: "INR",
             name: "SHOPSPPL",
             description: "SHOPSPPL product payment",
             image: `${process.env.NEXT_PUBLIC_BASE_URL}/img/logo.png`,
-            order_id: razorOrderRes?.id,
+            order_id: res.id,
             // callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/razorpay/paymentverification`,
+            // userid is a order id
             "handler": async function (response: any) {
                 const resData = {
                     razorpay_payment_id: response.razorpay_payment_id,
                     razorpay_order_id: response.razorpay_order_id,
                     razorpay_signature: response.razorpay_signature,
-                    userid: id,
+                    userid: orderid,
                 }
                 await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/razorpay/paymentverification`, {
                     method: 'POST',
