@@ -4,7 +4,7 @@ import React from 'react'
 export default function ProductCheckout() {
   return (
     <>
-    <Checkout />
+    <div className='relative'><Checkout /></div>
     </>
   )
 }

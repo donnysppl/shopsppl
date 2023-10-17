@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Product } from "@/helpers/interFace";
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface orderInptype {
     email: string,
@@ -36,13 +37,15 @@ interface CustomWindow extends Window {
 
 declare var window: CustomWindow;
 
-export const dynamic = 'force-dynamic';
 
 export default function Checkout() {
+
+    const router = useRouter();
 
     const [checkoutProd, setcheckoutProd] = useState<Product[]>([]);
     const [razorOrderRes, setrazorOrderRes] = useState<RazorOrderes>();
     const [prodLoading, setprodLoading] = useState<boolean>(true);
+    const [razorpayLoader, setrazorpayLoader] = useState<boolean>(false);
     const [userData, setuserData] = useState<string>('');
     const [orderInp, setorderInp] = useState<orderInptype>({
         email: '',
@@ -90,7 +93,7 @@ export default function Checkout() {
 
     const oncheckout = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        setrazorpayLoader(true);
         const checkoutData = []
         for (let i = 0; i < checkoutProd.length; i++) {
             checkoutData.push({
@@ -196,6 +199,8 @@ export default function Checkout() {
                     .then(res => {
                         console.log(res)
                         if (res.status === 200) {
+                            setrazorpayLoader(false);
+                            router.push(`/product/checkout/thankyou?reference=${res.razorpay_payment_id}`)
                         }
                     })
                     .catch(err => {
@@ -222,6 +227,13 @@ export default function Checkout() {
 
     return (
         <main className='max-w-screen-xl mx-auto py-20'>
+            {
+                razorpayLoader ? 
+                <div className="razor-loader bg-gray-900 bg-opacity-25 w-screen h-screen absolute inset-0
+                z-10 flex items-center justify-center">
+                    <div className="spinner"></div>
+                </div> : null
+            }
             <div className="flex gap-10">
                 <div className="p-10 md:w-[65%] bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
                     <h2 className='font-semibold'>Checkout</h2>

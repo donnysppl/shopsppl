@@ -6,6 +6,7 @@
   html {
     font-family: 'Libre Baskerville', serif;
   }
+
   .slide-center {
     transform: translateX(calc(max(1200px, 100vw) / 2 - calc(1200px / 2)))
   }
@@ -217,22 +218,22 @@ body {
   width: 100%;
 }
 
-/* cart drower */
-/* .bg-drawer {
-  @apply fixed w-full h-full
+/* checkout */
+.razor-loader .spinner {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side,#474bff 94%,#0000) top/9px 9px no-repeat,
+         conic-gradient(#0000 30%,#474bff);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+  animation: spinner-c7wet2 1s infinite linear;
 }
 
-.cart-drower {
-  @apply fixed w-96 z-20 h-screen bg-[#191919] top-0 transition-all ease-in-out border-l border-gray-400;
+@keyframes spinner-c7wet2 {
+  100% {
+     transform: rotate(1turn);
+  }
 }
-
-.cart-drower.open {
-  @apply right-0;
-}
-
-.cart-drower.close {
-  @apply -right-full;
-} */
 
 /* responsive menu drower */
 .bg-drawer {
@@ -259,31 +260,35 @@ body {
 }
 
 /* front form */
-.input{
+.input {
   @apply w-full rounded-full border-gray-200 bg-gray-100 p-2 text-sm font-medium text-gray-700 placeholder:text-gray-700;
 }
-.input.search{
+
+.input.search {
   @apply ps-10;
 }
 
 /* content-part */
-.content-part h2{
-  font-size:1.5rem;
-  line-height:120%;
-  margin-bottom:1.2rem;
+.content-part h2 {
+  font-size: 1.5rem;
+  line-height: 120%;
+  margin-bottom: 1.2rem;
   margin-top: 0.5rem;
-  font-weight:600;
+  font-weight: 600;
 }
-.content-part p{
-  font-size:0.9rem;
-  margin-bottom:1rem;
+
+.content-part p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
-.content-part ul li{
-  font-size:0.9rem;
-  margin-bottom:0.5rem;
+
+.content-part ul li {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
-.content-part ul{
-  margin-bottom:1rem;
+
+.content-part ul {
+  margin-bottom: 1rem;
 }
 
 @media only screen and (max-width: 991.99px) {
@@ -302,8 +307,8 @@ body {
   }
 
   /* content-part */
-.content-part h2{
-  font-size:1.2rem;
-  line-height:100%;
-}
+  .content-part h2 {
+    font-size: 1.2rem;
+    line-height: 100%;
+  }
 }
