@@ -266,6 +266,26 @@ body {
   @apply ps-10;
 }
 
+/* content-part */
+.content-part h2{
+  font-size:1.5rem;
+  line-height:120%;
+  margin-bottom:1.2rem;
+  margin-top: 0.5rem;
+  font-weight:600;
+}
+.content-part p{
+  font-size:0.9rem;
+  margin-bottom:1rem;
+}
+.content-part ul li{
+  font-size:0.9rem;
+  margin-bottom:0.5rem;
+}
+.content-part ul{
+  margin-bottom:1rem;
+}
+
 @media only screen and (max-width: 991.99px) {
 
   /* product filter */
@@ -280,4 +300,10 @@ body {
   .mob-filter.open {
     @apply left-0;
   }
+
+  /* content-part */
+.content-part h2{
+  font-size:1.2rem;
+  line-height:100%;
+}
 }
