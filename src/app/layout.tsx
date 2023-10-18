@@ -1,4 +1,3 @@
-import MaterialWapper from '@/components/layout/MaterialWapper'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Libre_Baskerville } from 'next/font/google'
@@ -29,9 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={libre.className}>
-        <MaterialWapper>
           {children}
-        </MaterialWapper>
       </body>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
     </html>

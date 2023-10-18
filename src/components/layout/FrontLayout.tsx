@@ -1,18 +1,21 @@
 import React from 'react'
 import Header from '../front/Header'
 import Footer from '../front/Footer'
+import { ShoppingCardProvider } from '@/hooks/ShoppingCartContext'
 
-export default function FrontLayout({ children,innercol
+export default function FrontLayout({ children, innercol
 }: {
-    children: React.ReactNode, innercol:string
+    children: React.ReactNode, innercol: string
 }) {
     return (
         <>
-            <Header />
-            <main className={innercol}>
-                {children}
-            </main>
-            <Footer />
+            <ShoppingCardProvider>
+                <Header />
+                <main className={innercol}>
+                    {children}
+                </main>
+                <Footer />
+            </ShoppingCardProvider>
         </>
     )
 }

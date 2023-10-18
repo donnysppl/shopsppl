@@ -5,6 +5,7 @@ import React from 'react'
 import OnBuyFunct from "@/helpers/onBuyFunct";
 import OnCartFunct from '@/helpers/onCartFunct';
 import ProdTabs from '@/components/front/product/ProdTabs';
+import QuantyPart from '@/components/front/product/QuantyPart';
 
 async function fetchSingleProd(slug:string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
@@ -77,13 +78,12 @@ export default async function ProductSingle({ params }: { params: { slug: string
                 }
               </div>
               <div className="product-btn-part mt-3">
+                <QuantyPart id={prodDetailData?._id} />
                 {
                   loading ? <div className="flex gap-2">
                     <div className="animate-pulse bg-gray-300 rounded-md h-9 w-28"></div>
                     <div className="animate-pulse bg-gray-300 rounded-md h-9 w-28"></div>
                   </div> : <>
-                    {/* <button onClick={(e) => onCartNow(prodDetailData?._id)} className="btn-prim" >Add to Cart</button>
-                    <button onClick={(e) => onBuyFunct(prodDetailData?._id)} className="btn-prim ms-2">Buy Now</button> */}
                     <OnCartFunct id={prodDetailData?._id} />
                     <OnBuyFunct id={prodDetailData?._id} />
                   </>

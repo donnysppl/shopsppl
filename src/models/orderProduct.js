@@ -49,6 +49,12 @@ const orderProdSchema = new Schema({
      paymentdate: {
         type: String,
     },
+    ship_add:{
+        type: Boolean,
+    },
+    ship_address:{
+        type: Object,
+    }
 },{ timestamps: true })
 
 const ProductOrder = models.ProductOrder || model("ProductOrder", orderProdSchema);

@@ -31,22 +31,7 @@ body {
 }
 
 .btn-prim {
-  font-size: 14px;
-  line-height: 100%;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: .75rem;
-  background-color: #dfd335;
-  color: #fff;
-  border-radius: 10rem;
-  font-weight: 600;
-  padding: .75rem 1.5rem;
-  padding-left: 20px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: background-color .3s;
+  @apply text-[0.8rem] text-center inline-flex items-center justify-center bg-act text-black rounded-full font-semibold py-2 px-6 hover:bg-prim hover:text-act transition ease-linear;
 }
 
 .loader-parent {
@@ -223,15 +208,15 @@ body {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: radial-gradient(farthest-side,#474bff 94%,#0000) top/9px 9px no-repeat,
-         conic-gradient(#0000 30%,#474bff);
-  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+  background: radial-gradient(farthest-side, #474bff 94%, #0000) top/9px 9px no-repeat,
+    conic-gradient(#0000 30%, #474bff);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
   animation: spinner-c7wet2 1s infinite linear;
 }
 
 @keyframes spinner-c7wet2 {
   100% {
-     transform: rotate(1turn);
+    transform: rotate(1turn);
   }
 }
 
@@ -251,6 +236,33 @@ body {
 .menu-drower.close {
   @apply -left-full;
 }
+
+/* cart */
+.cart-icon-div svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.cart-icon-div {
+  position: relative;
+}
+
+span.cart-icon-div-quantity {
+  @apply absolute -right-4 text-[0.65rem] rounded-full w-6 h-6 flex items-center justify-center bg-act text-prim font-bold scale-75 -bottom-4;
+}
+
+.cart-header {
+  height: 50px;
+}
+
+.cart-checkout-btn {
+  height: 50px;
+}
+
+.cart-data {
+  height: calc(100% - 100px);
+}
+
 
 /* home */
 .slider-overflow::-webkit-scrollbar {

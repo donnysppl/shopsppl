@@ -12,9 +12,8 @@ export default function DashboardLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
-            <body>
-                <Toaster position="bottom-center" reverseOrder={false} />
+        <>
+        <Toaster position="bottom-center" reverseOrder={false} />
                 <div className='backend-dashboard'>
                     <section className="w-screen h-screen">
                         <div className="w-72 border-r border-gray-500 p-4 fixed top-0 z-10 h-screen">
@@ -30,8 +29,7 @@ export default function DashboardLayout({
                         </div>
                     </section>
                 </div>
-            </body>
-        </html>
+        </>
 
 
 

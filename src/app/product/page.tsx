@@ -5,6 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react'
+import OnBuyFunct from "@/helpers/onBuyFunct";
+import OnCartFunct from '@/helpers/onCartFunct';
+import { GrNext } from "react-icons/gr";
+import ProductCard from '@/components/front/product/ProductCard';
 
 interface fetchProd {
   result: {
@@ -18,7 +22,7 @@ interface fetchProd {
       limit: number;
     };
     totalPosts: number;
-    totalPages:number;
+    totalPages: number;
   }
 }
 
@@ -26,8 +30,8 @@ export async function generateMetadata() {
   return {
     title: 'Product | Shop',
     description: 'Product',
-    alternates:{
-      canonical:`/product`
+    alternates: {
+      canonical: `/product`
     }
   }
 }
@@ -52,7 +56,7 @@ export default async function ProductList({ searchParams }: {
   const categoryParams = searchParams.category;
   const fetchProds: fetchProd = await fetchProd(pageParams, limitParams, brandParams, categoryParams);
   const totalPost = fetchProds.result.totalPosts;
-  const totalPages =fetchProds.result.totalPages;
+  const totalPages = fetchProds.result.totalPages;
 
   console.log(fetchProds)
 
@@ -74,57 +78,39 @@ export default async function ProductList({ searchParams }: {
             <ul className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-5">
               {
                 fetchProds && fetchProds.result.result.map((item: Product, index: number) => (
-                  <li className="p-2.5 border rounded-2xl bg-white flex flex-col justify-between" key={index}>
-                    <Link href={`/product/${item.slug}`}>
-
-                      <div className="relative">
-                        <Image src={item.mainproductimg} width={300} height={275} alt={item.name} className="object-contain object-center mx-auto" />
-                        <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
-                          {typeof item.productPriceDiffpercent === 'number'
-                            ? `${Math.floor(item.productPriceDiffpercent)}% OFF`
-                            : 'N/A'}
-                        </span>
-                      </div>
-                    </Link>
-                    <div className="bg-gray-100 rounded-lg p-2">
-                      <Link href={`/product/${item.slug}`}>
-                        <p className="mb-1 text-sm text-primary-500">{item.brand}</p>
-                        <h5 className="text-sm font-semibold text-gray-800 line-clamp-2">{item.name}</h5>
-                        <div className="price">
-                          <p className="text-sm font-semibold text-gray-800">₹{item.productSalePrice} <span className="line-through">₹{item.productNormalPrice}</span></p>
-                        </div>
-                        <div className="btn-part ">
-                          {/* <button onClick={() => addCartProduct(item._id)} className="border rounded-xl bg-red-700 text-gray-200 p-1.5">Add To Cart</button>
-                          <button className="border rounded-xl bg-red-700 text-gray-200 p-1.5">View</button> */}
-                        </div>
-                      </Link>
-                    </div>
-
-
-                  </li>
+                  <ProductCard key={index} {...item}/>
                 ))
               }
             </ul>
 
-            {
-              fetchProds.result.next ?
-                <div className="next">
-                  <Link href={`?${new URLSearchParams({
-                    page: fetchProds.result.next.page.toString(), limit: searchParams.limit
-                  })}`}>Next</Link>
-                </div> : null
-            }
+            <div className='flex gap-4 justify-between items-center py-4' >
+              <div>
+                <div>Page {pageParams ? pageParams : 1} to {totalPages}</div>
 
-            {
-              fetchProds.result.prev ?
-                <div className="next">
-                  <Link href={`?${new URLSearchParams({
-                    page: fetchProds.result.prev.page.toString(), limit: searchParams.limit
-                  })}`}>Prev</Link>
-                </div> : null
-            }
-<div>Page {pageParams ? pageParams : 1} to {totalPages}</div>
-            
+              </div>
+
+              <div className='flex gap-3'>
+                {
+                  fetchProds.result.prev ?
+                    <div className="next ">
+                      <Link className='btn-prim gap-2' href={`?${new URLSearchParams({
+                        page: fetchProds.result.prev.page.toString(), limit: searchParams.limit
+                      })}`}><GrNext className='rotate-180' /> Prev</Link>
+                    </div> : null
+                }
+                {
+                  fetchProds.result.next ?
+                    <div className="next">
+                      <Link className='btn-prim gap-2' href={`?${new URLSearchParams({
+                        page: fetchProds.result.next.page.toString(), limit: searchParams.limit
+                      })}`}>Next <GrNext /></Link>
+                    </div> : null
+                }
+
+
+              </div>
+            </div>
+
           </div>
 
         </div>

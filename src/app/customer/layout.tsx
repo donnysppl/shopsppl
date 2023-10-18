@@ -8,7 +8,6 @@ export default function CustomerLayout({
     children: React.ReactNode
 }) {
 
-    
 
     return (
         <FrontLayout innercol={'bg-gray-100'}>

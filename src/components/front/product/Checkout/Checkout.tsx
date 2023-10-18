@@ -14,6 +14,7 @@ interface orderInptype {
     city: string,
     state: string,
     pincode: number,
+    companyname: string,
 }
 
 interface RazorOrderes {
@@ -55,7 +56,20 @@ export default function Checkout() {
         city: '',
         state: '',
         pincode: 0,
+        companyname: ''
     })
+    const [shipAdd, setshipAdd] = useState<boolean>(false);
+    const [orderShipInp, setorderShipInp] = useState<orderInptype>({
+        email: '',
+        name: '',
+        phone: 0,
+        address: '',
+        city: '',
+        state: '',
+        pincode: 0,
+        companyname: ''
+    })
+
     const [totalPrice, settotalPrice] = useState<number>(0)
     const searchParams = useSearchParams();
     const prodSearchParams = searchParams.get('product');
@@ -115,7 +129,21 @@ export default function Checkout() {
             state: orderInp.state,
             pincode: orderInp.pincode,
             orderprod: checkoutData,
-            totalbill: totalPrice
+            totalbill: totalPrice,
+            companyname:orderInp.companyname,
+
+            ship_add:shipAdd,
+
+            ship_address:{
+                email: orderShipInp.email,
+                name: orderShipInp.name,
+                phone: orderShipInp.phone,
+                address: orderShipInp.address,
+                city: orderShipInp.city,
+                state: orderShipInp.state,
+                pincode: orderShipInp.pincode,
+                companyname:orderShipInp.companyname,
+            }
         }
         console.log(orderInp, checkoutData)
 
@@ -143,7 +171,7 @@ export default function Checkout() {
     }
 
     // razorpay order created 
-    const createRazorpayOrder = async (price: number, id:string) => {
+    const createRazorpayOrder = async (price: number, id: string) => {
 
         if (price) {
             console.log(price)
@@ -161,7 +189,7 @@ export default function Checkout() {
                     if (res.status === 200) {
                         setrazorOrderRes(res.result)
                         if (res.result) {
-                            razorpay(res.result , id);
+                            razorpay(res.result, id);
                         }
                     }
                 })
@@ -171,7 +199,7 @@ export default function Checkout() {
         }
     }
 
-    const razorpay = (res: RazorOrderes, orderid :string) => {
+    const razorpay = (res: RazorOrderes, orderid: string) => {
         const options = {
             key: `${process.env.NEXT_PUBLIC_RAZORPAY_SECRET_ID}`,
             amount: res.amount,
@@ -228,11 +256,11 @@ export default function Checkout() {
     return (
         <main className='max-w-screen-xl mx-auto py-20'>
             {
-                razorpayLoader ? 
-                <div className="razor-loader bg-gray-900 bg-opacity-25 w-screen h-screen absolute inset-0
+                razorpayLoader ?
+                    <div className="razor-loader bg-gray-900 bg-opacity-25 w-screen h-full absolute inset-0
                 z-10 flex items-center justify-center">
-                    <div className="spinner"></div>
-                </div> : null
+                        <div className="spinner"></div>
+                    </div> : null
             }
             <div className="flex gap-10">
                 <div className="p-10 md:w-[65%] bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
@@ -241,46 +269,106 @@ export default function Checkout() {
                     <form onSubmit={oncheckout} className='front-form relative'>
                         <div className=''>
                             <h4>Billing Details</h4>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="mb-4">
+                            <div className="grid grid-cols-2 gap-x-4">
+                                <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Name</label>
                                     <input type="text" name='name' className="form-control" placeholder='Name'
                                         onChange={(e) => setorderInp({ ...orderInp, name: e.target.value })} />
                                 </div>
-                                <div className="mb-4">
+                                <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Email address</label>
                                     <input type="email" name='email' className="form-control" placeholder='Email address'
                                         onChange={(e) => setorderInp({ ...orderInp, email: e.target.value })} />
                                 </div>
-                            </div>
-
-                            <div className="mb-4">
-                                <label htmlFor="address" className="form-label">Address</label>
-                                <input type="text" name='address' className="form-control" placeholder='Address'
-                                    onChange={(e) => setorderInp({ ...orderInp, address: e.target.value })} />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="mb-4">
-                                    <label htmlFor="city" className="form-label">City</label>
-                                    <input type="text" name='city' className="form-control" placeholder='City'
-                                        onChange={(e) => setorderInp({ ...orderInp, city: e.target.value })} />
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="state" className="form-label">State</label>
-                                    <input type="text" name='state' className="form-control" placeholder='state'
-                                        onChange={(e) => setorderInp({ ...orderInp, state: e.target.value })} />
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="pincode" className="form-label">PIN Code</label>
-                                    <input type="number" pattern="[0-9]{6}" maxLength={6} name='pincode' className="form-control" placeholder='pincode'
-                                        onChange={(e) => setorderInp({ ...orderInp, pincode: parseInt(e.target.value) })} />
-                                </div>
-                                <div className="mb-4">
+                                <div className="mb-3">
                                     <label htmlFor="phone" className="form-label">Phone No.</label>
                                     <input type="tel" pattern="[0-9]{10}" name='phone' className="form-control" placeholder='Phone No.'
                                         onChange={(e) => setorderInp({ ...orderInp, phone: parseInt(e.target.value) })} />
                                 </div>
+                                <div className="mb-3">
+                                    <label htmlFor="address" className="form-label">Address</label>
+                                    <input type="text" name='address' className="form-control" placeholder='Address'
+                                        onChange={(e) => setorderInp({ ...orderInp, address: e.target.value })} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="companyname" className="form-label">Company name (optional)</label>
+                                    <input type="text" name='companyname' className="form-control" placeholder='Company name (optional)'
+                                        onChange={(e) => setorderInp({ ...orderInp, companyname: e.target.value })} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="city" className="form-label">City</label>
+                                    <input type="text" name='city' className="form-control" placeholder='City'
+                                        onChange={(e) => setorderInp({ ...orderInp, city: e.target.value })} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="state" className="form-label">State</label>
+                                    <input type="text" name='state' className="form-control" placeholder='state'
+                                        onChange={(e) => setorderInp({ ...orderInp, state: e.target.value })} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="pincode" className="form-label">PIN Code</label>
+                                    <input type="number" pattern="[0-9]{6}" maxLength={6} name='pincode' className="form-control" placeholder='pincode'
+                                        onChange={(e) => setorderInp({ ...orderInp, pincode: parseInt(e.target.value) })} />
+                                </div>
+
                             </div>
+
+                            <div className="check-shipping-add">
+                                <div className="mb-3">
+                                    <input className="form-check-input" name='shipment' type="checkbox" id="shipment" value={shipAdd ? 'checked' : ''} onChange={(e) => setshipAdd(e.target.checked)} />
+                                    <label className="form-label" htmlFor="shipment">
+                                        Ship to a different address?
+                                    </label>
+                                </div>
+                            </div>
+
+                            {
+                                shipAdd ?
+                                    <div className="grid grid-cols-2 gap-x-4">
+                                        <div className="mb-3">
+                                            <label htmlFor="name" className="form-label">Name</label>
+                                            <input type="text" name='name' className="form-control" placeholder='Name'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, name: e.target.value })} />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="email" className="form-label">Email address</label>
+                                            <input type="email" name='email' className="form-control" placeholder='Email address'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, email: e.target.value })} />
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="phone" className="form-label">Phone No.</label>
+                                            <input type="tel" pattern="[0-9]{10}" name='phone' className="form-control" placeholder='Phone No.'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, phone: parseInt(e.target.value) })} />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label htmlFor="address" className="form-label">Address</label>
+                                            <input type="text" name='address' className="form-control" placeholder='Address'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, address: e.target.value })} />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label htmlFor="companyname" className="form-label">Company name (optional)</label>
+                                            <input type="text" name='companyname' className="form-control" placeholder='Company name (optional)'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, companyname: e.target.value })} />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label htmlFor="city" className="form-label">City</label>
+                                            <input type="text" name='city' className="form-control" placeholder='City'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, city: e.target.value })} />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label htmlFor="state" className="form-label">State</label>
+                                            <input type="text" name='state' className="form-control" placeholder='state'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, state: e.target.value })} />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label htmlFor="pincode" className="form-label">PIN Code</label>
+                                            <input type="number" pattern="[0-9]{6}" maxLength={6} name='pincode' className="form-control" placeholder='pincode'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, pincode: parseInt(e.target.value) })} />
+                                        </div>
+
+                                    </div> : null
+                            }
+
 
 
 
