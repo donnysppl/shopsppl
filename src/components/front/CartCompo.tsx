@@ -63,7 +63,7 @@ export default function CartCompo() {
                                         <>
                                             Cart is Empty
                                         </> :
-                                    cartProd.map((item, index) => (
+                                    cartProd && cartProd.map((item:Product, index:number) => (
                             <li key={index} className="">
                                 <div className='cart-product flex gap-2.5 border border-gray-400 mb-2.5 rounded-xl overflow-hidden'>
                                     <Image src={item.mainproductimg} width={100} height={100} alt={item.name} />
