@@ -63,28 +63,28 @@ export default function CartCompo() {
                                         <>
                                             Cart is Empty
                                         </> :
-                                    cartProd && cartProd.map((item:Product, index:number) => (
-                            <li key={index} className="">
-                                <div className='cart-product flex gap-2.5 border border-gray-400 mb-2.5 rounded-xl overflow-hidden'>
-                                    <Image src={item.mainproductimg} width={100} height={100} alt={item.name} />
-                                    <div className="prod-data p-1.5">
-                                        <div className="name text-[0.7rem] line-clamp-2">{item.name}</div>
-                                        <div className="inline-flex gap-2 items-center text-[0.7rem]">1 <AiOutlineClose /> ₹ {item.productSalePrice}</div>
-                                        <div className="remove-btn flex justify-end"><button onClick={() => removeFromQuantity(item._id)} className="btn-prim scale-75">Remove</button></div>
-                                    </div>
-                                </div>
-                            </li>
-                            ))
+                                        cartProd && cartProd.map((item: Product, index: number) => (
+                                            <li key={index} className="">
+                                                <div className='cart-product flex gap-2.5 border border-gray-400 mb-2.5 rounded-xl overflow-hidden'>
+                                                    <Image src={item.mainproductimg} width={100} height={100} alt={item.name} />
+                                                    <div className="prod-data p-1.5">
+                                                        <div className="name text-[0.7rem] line-clamp-2">{item.name}</div>
+                                                        <div className="inline-flex gap-2 items-center text-[0.7rem]">1 <AiOutlineClose /> ₹ {item.productSalePrice}</div>
+                                                        <div className="remove-btn flex justify-end"><button onClick={() => removeFromQuantity(item._id)} className="btn-prim scale-75">Remove</button></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        ))
                             }
                         </ul>
                     </div>
                     {
-                        cartProd.length ? 
-                        <div className="cart-checkout-btn">
-                        <button className='btn-prim w-full'>Checkout</button>
-                    </div> : null
+                        cartProd.length ?
+                            <div className="cart-checkout-btn">
+                                <button className='btn-prim w-full'>Checkout</button>
+                            </div> : null
                     }
-                    
+
                 </div>
             </div>
         </>
