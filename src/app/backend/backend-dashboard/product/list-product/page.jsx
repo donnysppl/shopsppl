@@ -105,7 +105,7 @@ export default function ListProduct() {
                     <h2 className='font-medium'>
                         Product List
                     </h2>
-                    <Link href={'/backend-dashboard/product/export'}><button className="dashboard-btn">Export</button></Link>
+                    <Link href={'./export'}><button className="dashboard-btn">Export</button></Link>
                 </div>
             </div>
 

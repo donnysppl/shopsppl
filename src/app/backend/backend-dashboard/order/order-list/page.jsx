@@ -48,7 +48,7 @@ export default function OrderList() {
         },
         {
             header: 'Order',
-            accessorFn: (row, index) => row.orderid + ' ' + row.name,
+            accessorFn: (row, index) => row.sppl_orderid + ' ' + row.name,
         },
         {
             header: 'Date',

@@ -12,7 +12,7 @@ export default function ListPagesBackend() {
 
     useEffect(() => {
         const orderListFetch = async () => {
-            await fetch('/api/pages', {
+            await fetch('/api/terms-policy', {
                 method: 'GET',
                 cache: 'no-store',
             }).then(res => res.json())

@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
         if (dataupdate) {
             const bulkOperations = jsonData.map((record) => {
                 const simplifiedString = record.Product_ID.replace(/"/g, '');
+                
                 const filter = { _id: simplifiedString }; 
                 const update = {
                     $set: {

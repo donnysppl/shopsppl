@@ -74,19 +74,25 @@ export default function ProductExport() {
                             </div>
                         </div>
 
-                        <div className='mt-5 '>
-                            <h4 className='mb-2'>Import</h4>
-                            <form className='p-4' onSubmit={onProdSheetUpoad} encType="multipart/form-data" >
-                                <input type="file" name="file" className="form-ctrl"
-                                    onChange={(e) => setfile(e.target.files?.[0] as File)} />
-                                <div className='my-3'>
-                                    <input type="checkbox" className='me-2' name="update" id='updateProductData'
-                                        onChange={(e) => setupdate(e.target.checked)} />
-                                    <label htmlFor="updateProductData" >Product Update</label>
-                                </div>
-                                <button type='submit' className='dashboard-btn'>Upload</button>
+                        <div className='mt-5 grid grid-cols-2 gap-4'>
+                            <div>
+                                <h4 className='mb-2'>Import New Product</h4>
+                                <form className='' onSubmit={onProdSheetUpoad} encType="multipart/form-data" >
+                                    <input type="file" name="file" className="form-ctrl mb-3"
+                                        onChange={(e) => setfile(e.target.files?.[0] as File)} />
+                                    <button type='submit' className='dashboard-btn'>Upload</button>
 
-                            </form>
+                                </form>
+                            </div>
+                            <div>
+                                <h4 className='mb-2'>Update Product</h4>
+                                <form className='' onSubmit={onProdSheetUpoad} encType="multipart/form-data" >
+                                    <input type="file" name="file" className="form-ctrl mb-3"
+                                        onChange={(e) => setfile(e.target.files?.[0] as File)} />
+                                    <button type='submit' className='dashboard-btn'>Upload</button>
+
+                                </form>
+                            </div>
                         </div>
                     </>
             }

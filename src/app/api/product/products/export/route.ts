@@ -33,13 +33,19 @@ export async function GET(req: NextRequest) {
             { header: "Publish", key: "isPublish" },
             { header: "Status", key: "isStatus" },
             { header: "Featured", key: "isFeatured" },
+            { header: "InStock", key: "inStock" },
+            { header: "Stock Number", key: "stock" },
         ];
 
         const productData = await Product.find();
 
         const customPoductData = [];
         for (let i = 0; i < productData.length; i++) {
+            // const id = productData[i]._id;
+            // const replaceID = id.replace(/^"|"$/g, '');
             const categString = productData[i].category.toString();
+            const productimgString = productData[i].productimg.toString();
+            const productRPDString = productData[i].productrpd.toString();
             customPoductData.push({
                 _id: productData[i]._id,
                 name: productData[i].name,
@@ -52,8 +58,8 @@ export async function GET(req: NextRequest) {
                 category: categString,
                 discription: productData[i].discription,
                 mainproductimg: productData[i].mainproductimg,
-                productimg: productData[i].productimg,
-                productrpd: productData[i].productrpd,
+                productimg: productimgString,
+                productrpd: productRPDString,
                 productNormalPrice: productData[i].productNormalPrice,
                 productSalePrice: productData[i].productSalePrice,
                 weight: productData[i].weight,

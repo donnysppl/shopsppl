@@ -14,7 +14,7 @@ export default function DashboardLayout({
     return (
         <>
         <Toaster position="bottom-center" reverseOrder={false} />
-                <div className='backend-dashboard'>
+                <div className='backend-dashboard font-sans'>
                     <section className="w-screen h-screen">
                         <div className="w-72 border-r border-gray-500 p-4 fixed top-0 z-10 h-screen">
                             <DashNav />

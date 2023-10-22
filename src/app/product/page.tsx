@@ -118,6 +118,3 @@ export default async function ProductList({ searchParams }: {
     </div>
   )
 }
-
-
-

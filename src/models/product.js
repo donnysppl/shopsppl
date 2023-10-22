@@ -88,6 +88,12 @@ const productSchema = new Schema({
     height : {
         type: Number,
     },
+    inStock:{
+        type: Boolean, 
+    },
+    stock:{
+        type:Number,
+    }
 },{ timestamps: true })
 
 const Product = models.Product || model("Product", productSchema);

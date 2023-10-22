@@ -2,34 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import ProductOrder from "@/models/orderProduct";
 import CustomerAdmin from "@/models/customerUser";
+import { orderInptype } from "@/helpers/interFace";
 
 interface CustomerAdminType {
     _id: string, username: string, email: string, password: string, phone: string, isWhatsappNo: boolean,
     cart: any, orderlist: any
-}
-
-interface orderInptype {
-    email: string,
-    name: string,
-    phone: number,
-    address: string,
-    city: string,
-    state: string,
-    pincode: number,
-    companyname: string,
-    totalbill: number,
-    ship_add: boolean,
-    ship_address: object,
-    orderprod: Array<[
-        productname: string,
-        productId: string,
-        productslug: string,
-        productmodel: string,
-        productnormalprice: number,
-        productsaleprice: number,
-    ]>,
-    status:string,
-    orderid:string,
 }
 
 export async function POST(req: NextRequest) {
@@ -38,7 +15,8 @@ export async function POST(req: NextRequest) {
         const { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,ship_add,ship_address} = await req.json();
         const oldOrderData = await ProductOrder.count();
 
-        const newData = { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,status: 'payment_pending', orderid: `SPPLW${oldOrderData + 1} `} as orderInptype
+        const newData = { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,status: 'payment_pending', 
+        sppl_orderid: `SPPLW${oldOrderData + 1} `} as orderInptype
         if (ship_add === true) {
             newData.ship_add = ship_add;
             newData.ship_address = ship_address;
@@ -47,8 +25,9 @@ export async function POST(req: NextRequest) {
         const customerExist: CustomerAdminType | null = await CustomerAdmin.findOne({ email });
         if (customerExist) {
             await CustomerAdmin.updateOne({ _id: customerExist._id }, {
-                $push: { orderlist: newOrderData._id }
+                $push: { orderlist: newOrderData._id },
             })
+            newOrderData.customerid = customerExist._id;
             const saveNewOrderData = await newOrderData.save();
             return NextResponse.json({
                 status: 200,
@@ -58,6 +37,7 @@ export async function POST(req: NextRequest) {
         else {
             const newCustomer = new CustomerAdmin({ email, username: name, phone, orderlist: newOrderData._id })
             await newCustomer.save();
+            newOrderData.customerid = newCustomer._id;
             const saveNewOrderData = await newOrderData.save();
             return NextResponse.json({
                 status: 200,

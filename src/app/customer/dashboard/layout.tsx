@@ -11,7 +11,7 @@ export default function CustomerLayout({
 }) {
 
     return (
-        <FrontLayout innercol={'bg-gray-100'}>
+        <>
             <Toaster
                 position="bottom-center"
                 reverseOrder={false}
@@ -40,6 +40,6 @@ export default function CustomerLayout({
                 </div>
 
             </main>
-        </FrontLayout>
+        </>
     )
 }

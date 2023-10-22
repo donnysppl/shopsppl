@@ -44,6 +44,7 @@ interface ProdInp {
     lenght: Number;
     width: Number;
     height: Number;
+    stock: Number;
 }
 interface ProdFormProps {
     method: string,
@@ -76,11 +77,13 @@ export default function ProductForm({ method, id }: ProdFormProps) {
         lenght: 0,
         width: 0,
         height: 0,
+        stock: 0,
     })
 
     const [isPublish, setisPublish] = useState<boolean>(false);
     const [isStatus, setisStatus] = useState<boolean>(false);
     const [isFeatured, setisFeatured] = useState<boolean>(false);
+    const [isInStock, setisInStock] = useState<boolean>(false);
 
     const [allCate, setallCate] = useState<AllCategory[]>([]);
     const [allBanner, allBetbanner] = useState<any>([]);
@@ -107,6 +110,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                         setisFeatured(res.result.isFeatured);
                         setSelectedOption(res.result.categoryArr);
                         setSelectedbrand(res.result.brand)
+                        setisInStock(res.result.inStock)
                     }
                     else if (res.status === 400) {
                         toast.error(res.message);
@@ -220,6 +224,8 @@ export default function ProductForm({ method, id }: ProdFormProps) {
             lenght: productinp.lenght,
             width: productinp.width,
             height: productinp.height,
+            inStock:isInStock,
+            stock:productinp.stock,
         }
         console.log(prodData)
 
@@ -290,7 +296,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
             alignItems: 'center',
         }),
     };
-console.log(shortDisInp,longDisInp)
+    console.log(shortDisInp, longDisInp)
 
     return (
         <form onSubmit={onProductSubmit} className="relative items-center">
@@ -432,8 +438,8 @@ console.log(shortDisInp,longDisInp)
             <div className="mb-4 form-inp">
                 <label htmlFor="img" className="form-label">Short Discription</label>
                 <div className="ckeditor-bg">
-                    <Editor name="shortDiscription" value={shortDisInp} 
-                        onChange={(data:string) => {
+                    <Editor name="shortDiscription" value={shortDisInp}
+                        onChange={(data: string) => {
                             setshortDisInp(data);
                         }} />
                 </div>
@@ -443,7 +449,7 @@ console.log(shortDisInp,longDisInp)
                 <label htmlFor="img" className="form-label">Discription</label>
                 <div className="ckeditor-bg">
                     <Editor name="shortDiscription" value={longDisInp}
-                        onChange={(data:string) => {
+                        onChange={(data: string) => {
                             setlongDisInp(data);
                         }} />
                 </div>
@@ -471,67 +477,8 @@ console.log(shortDisInp,longDisInp)
                     value={'' || productinp.productrpd} />
             </div>
 
-            {/* <div className="mb-4 form-inp">
-                <fieldset className="border border-gray-600 p-5 rounded-lg">
-                    <legend>Product Image :</legend>
-                    {mainProdImg.map((element, index) => (
-                        <div className="form-inline flex gap-5 items-end" key={index}>
-                            <div className="w-1/6">
-                                <label className="form-label">Order</label>
-                                <input className="form-ctrl" type="text" name="order" value={element.order} onChange={(e) => handleChange(index, e)} />
-                            </div>
-                            <div className="w-2/5">
-                                <label className="form-label">Image Link</label>
-                                <input className="form-ctrl" type="text" name="imglink" value={element.imglink} onChange={(e) => handleChange(index, e)} />
-                            </div>
 
-                            <div className="button-section flex gap-2">
-                                <button className=" bg-green-800 h-full p-2 rounded-lg text-sm" type="button" onClick={addFormFields}>
-                                    Add
-                                </button>
-                                {index ? (
-                                    <button type="button" className=" bg-red-500 h-full p-2 rounded-lg text-sm" onClick={() => removeFormFields(index)}>
-                                        Remove
-                                    </button>
-                                ) : null}
-                            </div>
-
-                        </div>
-                    ))}
-                </fieldset>
-            </div>
-
-            <div className="mb-4 form-inp">
-                <fieldset className="border border-gray-600 p-5 rounded-lg">
-                    <legend>Product RPD Images :</legend>
-                    {rpdProdImg.map((element, index) => (
-                        <div className="form-inline flex gap-5 items-end" key={index}>
-                            <div className="w-1/6">
-                                <label className="form-label">Order</label>
-                                <input className="form-ctrl" type="text" name="order" value={element.order} onChange={(e) => handleChangerpd(index, e)} />
-                            </div>
-                            <div className="w-2/5">
-                                <label className="form-label">Image Link</label>
-                                <input className="form-ctrl" type="text" name="imglink" value={element.imglink} onChange={(e) => handleChangerpd(index, e)} />
-                            </div>
-
-                            <div className="button-section flex gap-2">
-                                <button className=" bg-green-800 h-full p-2 rounded-lg text-sm" type="button" onClick={addFormFieldsrpd}>
-                                    Add
-                                </button>
-                                {index ? (
-                                    <button type="button" className=" bg-red-500 h-full p-2 rounded-lg text-sm" onClick={() => removeFormFieldsrpd(index)}>
-                                        Remove
-                                    </button>
-                                ) : null}
-                            </div>
-
-                        </div>
-                    ))}
-                </fieldset>
-            </div> */}
-
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-4 gap-5">
                 <div className="mb-4 form-check ">
                     <input type="checkbox" className="form-ctrl checkbox cursor-pointer" id="isPublish" name="isPublish"
                         onChange={(e) => setisPublish(e.target.checked)}
@@ -551,6 +498,13 @@ console.log(shortDisInp,longDisInp)
                         onChange={(e) => setisFeatured(e.target.checked)}
                         checked={isFeatured} />
                     <label className="form-label cursor-pointer" htmlFor="isFeatured">IS Featured</label>
+                </div>
+
+                <div className="mb-4 form-check ">
+                    <input type="checkbox" className="form-ctrl checkbox cursor-pointer" id="isInStock" name="isInStock"
+                        onChange={(e) => setisInStock(e.target.checked)}
+                        checked={isInStock} />
+                    <label className="form-label cursor-pointer" htmlFor="isInStock">IS IN Stock</label>
                 </div>
 
             </div>

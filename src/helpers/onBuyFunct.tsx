@@ -1,16 +1,13 @@
 "use client";
-import { useRouter } from 'next/navigation';
+import { useShoppingCart } from '@/hooks/ShoppingCartContext';
 import React from 'react'
 
 interface buyBtn {
     id:string,
 }
 export default function OnBuyFunct({id}:buyBtn) {
-    const route = useRouter();
-    const onBuyClick = () => {
-        route.push(`/product/checkout?product=${id}`)
-    }
+    const {buyFromCart} = useShoppingCart();
   return (
-    <button onClick={() => onBuyClick()} className="btn-prim ms-2">Buy Now</button>
+    <button onClick={() => buyFromCart(id)} className="btn-prim ms-2">Buy Now</button>
   )
 }

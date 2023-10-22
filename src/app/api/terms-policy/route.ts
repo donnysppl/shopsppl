@@ -5,7 +5,7 @@ import PagesModel from '@/models/pages';
 export async function POST(req: NextRequest) {
     try {
         await connect();
-        const {pagename,pagedata,metatitle,metadiscription,metakeyword,slug} = await req.json();
+        const {pagename,pagedata,metatitle,metadiscription,metakeyword,slug,icon} = await req.json();
         const checkPageData = await PagesModel.find({slug:slug});
         if(checkPageData.length > 0){
             return NextResponse.json({
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
             }, { status: 400 })
         }
         else{
-            const newPageData = new PagesModel({pagename,pagedata,metatitle,metadiscription,metakeyword,slug});
+            const newPageData = new PagesModel({pagename,pagedata,metatitle,metadiscription,metakeyword,slug,icon});
             const savepageData = await newPageData.save();
     
             if(!savepageData){

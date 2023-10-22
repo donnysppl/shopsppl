@@ -68,7 +68,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
         const { name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg, productrpd, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, productPriceDiffAmt, productPriceDiffpercent, brand, weight
             , lenght
-            , width
+            , width,inStock,stock
             , height } = await req.json();
 
         const categoryData = await Category.find({ name: { $in: category } });
@@ -86,7 +86,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
         const updateProdData = await {
             name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg:productimgArr, productrpd:productRPDArr, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, categoryArr: categoryData, productPriceDiffAmt, productPriceDiffpercent, brand, weight, brandArr: brandData
-            , lenght
+            , lenght,inStock,stock
             , width
             , height
         };

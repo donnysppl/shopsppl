@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     try {
         await connect();
         const { name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg, productrpd, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, productPriceDiffAmt, productPriceDiffpercent, brand, weight
-            , lenght
+            , lenght,inStock,stock
             , width
             , height } = await req.json();
 
@@ -26,10 +26,8 @@ export async function POST(req: NextRequest) {
             name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg:productimgArr, productrpd:productRPDArr, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, categoryArr: categoryData, productPriceDiffAmt, productPriceDiffpercent, brand, weight, brandArr: brandData
             , lenght
             , width
-            , height
+            , height,inStock,stock
         };
-
-        console.log(prodData)
 
         const productExist = await Product.findOne({ slug })
         // if(categoryArr){

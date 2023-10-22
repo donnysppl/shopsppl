@@ -25,6 +25,9 @@ const pagesSchema = new Schema({
         type: String,
         required: [true, "Please provide a metakeyword"],
     },
+    icon:{
+        type: String,
+    }
 },{ timestamps: true })
 
 const PagesModal = models.PagesModal || model("PagesModal", pagesSchema);

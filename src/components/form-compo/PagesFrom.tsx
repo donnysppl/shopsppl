@@ -1,7 +1,10 @@
+import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react'
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import toast from 'react-hot-toast';
+
+var Editor = dynamic(() => import("@/components/form-compo/Editor"), {
+    ssr: false
+})
 
 interface PageFormProps {
     method: string,
@@ -17,13 +20,14 @@ export default function PagesFrom({method,id}:PageFormProps) {
         metatitle: '',
         metadiscription: '',
         metakeyword: '',
+        icon:'',
     })
     const [loader, setloader] = useState(false)
 
     useEffect(() => {
         const fetchEditPagesData = async () => {
             setloader(true);
-            await fetch(`/api/pages/${id}`, {
+            await fetch(`/api/terms-policy/${id}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             }).then(res => res.json())
@@ -52,7 +56,7 @@ export default function PagesFrom({method,id}:PageFormProps) {
     
 
 
-    const pageURL = id ? `/api/pages/${id}` : '/api/pages'
+    const pageURL = id ? `/api/terms-policy/${id}` : '/api/terms-policy'
 
     const onPageDataSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         setloader(true);
@@ -118,16 +122,20 @@ export default function PagesFrom({method,id}:PageFormProps) {
                 />
             </div>
             <div className="mb-4 form-inp">
+                <label htmlFor="icon" className="form-label">Page icon</label>
+                <input type="text" name='icon' className="form-ctrl" placeholder='Page icon'
+                    onChange={(e) => setpagesInp({ ...pagesInp, icon: e.target.value })}
+                    value={'' || pagesInp.icon}
+                />
+            </div>
+            <div className="mb-4 form-inp">
                 <label htmlFor="metakeyword" className="form-label">Page Data Discription</label>
                 <div className="ckeditor-bg">
-                    {/* <CKEditor
-                        editor={ClassicEditor}
-                        data={pagesInp.pagedata}
-                        onChange={(event:any, editor:any) => {
-                            const data = editor.getData();
+                    <Editor name="pagedata" value={pagesInp.pagedata}
+                        onChange={(data: string) => {
                             setpagesInp({ ...pagesInp, pagedata: data })
-                        }}
-                    /> */}
+                        }} />
+
                 </div>
             </div>
             <button type='submit' className='dashboard-btn' >Submit</button>

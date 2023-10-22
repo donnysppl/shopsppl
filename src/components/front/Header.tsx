@@ -10,11 +10,8 @@ export default function Header() {
         <header className='w-full p-1.5 bg-prim text-white'>
             <div className="max-w-screen-2xl mx-auto py-2 px-4 row flex gap-2 justify-between">
                      <div className="w-[200px]">
-                         <Image src="/img/logo.png" className='w-[150px]'
-                             width={200}
-                             height={50}
-                             objectFit='contain'
-                             alt="Logo" />
+
+                             <img src="/img/logo.png" alt="Logo" className='w-36' />
                      </div>
                      <div className="header-menu flex items-center">
                          <div className='md:block hidden'>

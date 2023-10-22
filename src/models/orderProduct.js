@@ -54,6 +54,12 @@ const orderProdSchema = new Schema({
     },
     ship_address:{
         type: Object,
+    },
+    sppl_orderid:{
+        type: String,
+    },
+    customerid:{
+        type: String,
     }
 },{ timestamps: true })
 

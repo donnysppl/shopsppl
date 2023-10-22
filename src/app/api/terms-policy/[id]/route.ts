@@ -30,11 +30,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     try {
         await connect();
-        const {pagename,pagedata,metatitle,metadiscription,metakeyword,slug} = await req.json();
-        const prevPageData = await PagesModel.findById({_id : params.id});
-
+        const {pagename,pagedata,metatitle,metadiscription,metakeyword,slug,icon} = await req.json();
         const updateData = {
-            pagename,pagedata,metatitle,metadiscription,metakeyword,slug
+            pagename,pagedata,metatitle,metadiscription,metakeyword,slug,icon
         }
 
         const updatePageData = await PagesModel.findByIdAndUpdate(params.id,updateData);

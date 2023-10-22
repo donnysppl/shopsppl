@@ -1,10 +1,12 @@
 "use client";
-import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { Product } from "@/helpers/interFace";
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useShoppingCart } from '@/hooks/ShoppingCartContext';
+import { AiOutlineClose } from "react-icons/ai";
+
 
 interface orderInptype {
     email: string,
@@ -71,13 +73,15 @@ export default function Checkout() {
     })
 
     const [totalPrice, settotalPrice] = useState<number>(0)
-    const searchParams = useSearchParams();
-    const prodSearchParams = searchParams.get('product');
+
+    const { cartItem,getItemQuantity,removeFromQuantity } = useShoppingCart();
+
+    const prodID = cartItem.map(item => item.id).join(',');
 
     useEffect(() => {
 
-        const fetchCheckProdData = async (id: string) => {
-            await fetch(`/api/product/checkout?product=${id}`, {
+        const fetchCheckProdData = async () => {
+            await fetch(`/api/product/checkout?product=${prodID}`, {
                 method: 'GET',
             }).then(res => res.json())
                 .then(res => {
@@ -85,9 +89,9 @@ export default function Checkout() {
                     if (res.status === 200) {
                         setcheckoutProd(res.result);
                         const totalSalePrice = res.result.reduce((acc: any, product: Product) => {
-                            return acc + product.productSalePrice;
+                            const prodQuant = getItemQuantity(product._id)
+                            return (acc + product.productSalePrice) * prodQuant;
                         }, 0);
-                        console.log(totalSalePrice)
                         settotalPrice(totalSalePrice);
                         setprodLoading(false);
                     }
@@ -99,17 +103,18 @@ export default function Checkout() {
                     console.log(err);
                 })
         }
-        if (prodSearchParams) {
-            fetchCheckProdData(prodSearchParams);
+        if (prodID) {
+            fetchCheckProdData();
         }
 
-    }, [prodSearchParams])
+    }, [prodID])
 
     const oncheckout = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setrazorpayLoader(true);
         const checkoutData = []
         for (let i = 0; i < checkoutProd.length; i++) {
+            const prodQuant = getItemQuantity(checkoutProd[i]._id)
             checkoutData.push({
                 productname: checkoutProd[i].name,
                 productId: checkoutProd[i]._id,
@@ -117,6 +122,7 @@ export default function Checkout() {
                 productmodel: checkoutProd[i].model,
                 productnormalprice: checkoutProd[i].productNormalPrice,
                 productsaleprice: checkoutProd[i].productSalePrice,
+                quantity:prodQuant,
             })
         }
 
@@ -130,11 +136,11 @@ export default function Checkout() {
             pincode: orderInp.pincode,
             orderprod: checkoutData,
             totalbill: totalPrice,
-            companyname:orderInp.companyname,
+            companyname: orderInp.companyname,
 
-            ship_add:shipAdd,
+            ship_add: shipAdd,
 
-            ship_address:{
+            ship_address: {
                 email: orderShipInp.email,
                 name: orderShipInp.name,
                 phone: orderShipInp.phone,
@@ -142,10 +148,10 @@ export default function Checkout() {
                 city: orderShipInp.city,
                 state: orderShipInp.state,
                 pincode: orderShipInp.pincode,
-                companyname:orderShipInp.companyname,
+                companyname: orderShipInp.companyname,
             }
         }
-        console.log(orderInp, checkoutData)
+        console.log(orderData)
 
         // order data save
         await fetch(`/api/order`, {
@@ -264,11 +270,11 @@ export default function Checkout() {
             }
             <div className="flex gap-10">
                 <div className="p-10 md:w-[65%] bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
-                    <h2 className='font-semibold'>Checkout</h2>
+                    <h2 className='font-semibold mb-3'>Checkout</h2>
 
                     <form onSubmit={oncheckout} className='front-form relative'>
                         <div className=''>
-                            <h4>Billing Details</h4>
+                            <h4 className='mb-1.5'>Billing Details</h4>
                             <div className="grid grid-cols-2 gap-x-4">
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Name</label>
@@ -315,7 +321,7 @@ export default function Checkout() {
 
                             <div className="check-shipping-add">
                                 <div className="mb-3">
-                                    <input className="form-check-input" name='shipment' type="checkbox" id="shipment" value={shipAdd ? 'checked' : ''} onChange={(e) => setshipAdd(e.target.checked)} />
+                                    <input className="form-check-input me-1.5" name='shipment' type="checkbox" id="shipment" value={shipAdd ? 'checked' : ''} onChange={(e) => setshipAdd(e.target.checked)} />
                                     <label className="form-label" htmlFor="shipment">
                                         Ship to a different address?
                                     </label>
@@ -377,7 +383,7 @@ export default function Checkout() {
                     </form>
                 </div>
                 <div className="md:w-[35%] p-5 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
-                    <h3>Choose Product</h3>
+                    <h3 className='mb-2.5'>Choose Product</h3>
                     <ul>
                         {
                             prodLoading ?
@@ -395,15 +401,16 @@ export default function Checkout() {
                                     </div>
                                 </li> :
                                 checkoutProd && checkoutProd.map((item, index) => (
-                                    <li key={index} className='border-b border-gray-400 last:border-0 flex gap-4' >
-                                        <div className="prod-img w-[25%] h-[100px] rounded-lg overflow-hidden">
-                                            <Image src={item.mainproductimg} alt={item.name} className='w-full ' width={100} height={100} />
-                                        </div>
-                                        <div className='text-sm w-[75%]'>
-                                            <div className="prod-name">{item.name}</div>
-                                            <div className="prod-Prrice mt-2">
-                                                <span className="text-gray-900 font-medium leading-normal">₹{item?.productSalePrice} </span>
-                                                <span className="line-through ps-2">₹{item?.productNormalPrice}</span></div>
+                                    <li key={index} className="">
+                                        <div className='cart-product flex gap-2.5 border border-gray-400 mb-2.5 rounded-xl overflow-hidden'>
+                                            <Image src={item.mainproductimg} width={100} height={100} alt={item.name} />
+                                            <div className="prod-data p-1.5">
+                                                <div className="name text-[0.8rem] line-clamp-2">
+                                                    {item.name}</div>
+                                                <div className="inline-flex gap-2 items-center text-[0.8rem]">
+                                                    {getItemQuantity(item._id)} <AiOutlineClose /> ₹ {item.productSalePrice}</div>
+                                                <div className="remove-btn flex justify-end"><button onClick={() => removeFromQuantity(item._id)} className="btn-prim scale-75">Remove</button></div>
+                                            </div>
                                         </div>
                                     </li>
                                 ))
@@ -415,7 +422,7 @@ export default function Checkout() {
                             <li>
                                 <div className="flex justify-between">
                                     <span>Total</span>
-                                    <span>{totalPrice}</span>
+                                    <span>₹ {totalPrice}</span>
                                 </div>
                             </li>
                         </ul>
