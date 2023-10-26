@@ -4,23 +4,23 @@ import React from 'react'
 const support = [
     {
         titlt: 'Return And Refund Policy',
-        link: 'return-and-refund-policy',
+        link: '/terms-policy/return-and-refund-policy',
     },
     {
         titlt: 'Shipping Policy',
-        link: 'shipping-policy',
+        link: '/terms-policy/shipping-policy',
     },
     {
         titlt: 'Terms And Conditions',
-        link: 'terms-and-conditions',
+        link: '/terms-policy/terms-and-conditions',
     },
     {
         titlt: 'Privacy Policy',
-        link: 'privacy-policy',
+        link: '/terms-policy/privacy-policy',
     },
     {
         titlt: 'FAQ',
-        link: 'faq',
+        link: '/terms-policy/faq',
     },
 ]
 
