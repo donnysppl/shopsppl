@@ -6,7 +6,15 @@ import React from 'react'
 
 export default function ProductCard(item:Product) {
     return (
-        <li className="p-1.5 border rounded-2xl bg-white flex flex-col justify-between">
+        <li className="p-1.5 border rounded-2xl bg-white flex flex-col justify-between relative overflow-hidden">
+            {
+                !item.inStock ?
+                <>
+                <div className='out-of-stock-prod absolute w-full h-full bg-gray-900 bg-opacity-25 inset-0 z-10 flex justify-center items-center'>
+                    <div className='bg-act inline-block p-1.5 font-semibold uppercase'>{!item.inStock ? 'Out of Stock' : null}</div>
+                </div>
+                </> : null 
+            }
             <Link href={`/product/${item.slug}`}>
 
                 <div className="relative">

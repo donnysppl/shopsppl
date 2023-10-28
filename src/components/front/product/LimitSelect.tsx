@@ -11,7 +11,8 @@ interface pageType{
 export default function LimitSelect({page,brand,category}:pageType) {
     const router = useRouter();
     const prodLimitChange = (e :React.ChangeEvent<HTMLSelectElement>) => {
-        const value = parseInt(e.target.value,10)
+        console.log(e.target.value)
+        const value = parseInt(e.target.value)
         router.push(`?page=${page ? page : null}&limit=${value}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`);
     }
     return (

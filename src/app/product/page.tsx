@@ -39,6 +39,7 @@ export async function generateMetadata() {
 async function fetchProd(page: number, limit: number, brand: string, category: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front?page=${page ? page : 1}&limit=${limit ? limit : 10}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`, {
     method: 'GET',
+    next: { revalidate: 10 }
   })
   if (fetchApi.status !== 200) return notFound();
   const data = fetchApi.json();
@@ -51,14 +52,13 @@ export default async function ProductList({ searchParams }: {
   }
 }) {
   const pageParams = parseInt(searchParams.page);
-  const limitParams = parseInt(searchParams.limit) | 10;
+  const limitParams = parseInt(searchParams.limit);
   const brandParams = searchParams.brand;
   const categoryParams = searchParams.category;
   const fetchProds: fetchProd = await fetchProd(pageParams, limitParams, brandParams, categoryParams);
   const totalPost = fetchProds.result.totalPosts;
   const totalPages = fetchProds.result.totalPages;
 
-  console.log(fetchProds)
 
 
   return (

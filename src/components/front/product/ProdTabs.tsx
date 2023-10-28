@@ -19,8 +19,7 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
 
     const renderTabs = () => {
         return tabs.map((tab, index) => (
-            <li className={`${activeTab === index ? 'active' : null} cursor-pointer text-gray-100
-            text-base py-2 px-4 rounded-full bg-yellow-300`}
+            <li className={`${activeTab === index ? 'active' : null} cursor-pointer btn-prim`}
                 key={index}
                 onClick={() => setActiveTab(index)} >
                 {tab.title}
@@ -29,9 +28,9 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
     };
 
     return (
-        <section className="bg-black">
+        <section className="bg-black ">
             <div>
-                <div className="tab-item-part">
+                <div className="tab-item-part py-3">
                     <ul className="flex justify-center gap-5">
                         {renderTabs()}
                     </ul>

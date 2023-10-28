@@ -3,7 +3,7 @@
 import LoaderFront from '@/components/front/Loader';
 import GoogleLoginbtn from '@/helpers/GoogleLoginbtn';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 
@@ -13,10 +13,7 @@ interface cusLoginInp {
 }
 
 export default function CustomerLogin() {
-  const searchParams = useSearchParams();
   const router = useRouter();
-
-  const loginParam = searchParams.get('checkout');
 
   const [cusLoginInp, setcusLoginInp] = useState<cusLoginInp>({
     email: '',
@@ -47,6 +44,7 @@ export default function CustomerLogin() {
         }
         else if (res.status === 400) {
           toast.error(res.message)
+          setloader(false)
         }
       })
       .catch(err => {

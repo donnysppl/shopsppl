@@ -7,35 +7,35 @@ import OnCartFunct from '@/helpers/onCartFunct';
 import ProdTabs from '@/components/front/product/ProdTabs';
 import QuantyPart from '@/components/front/product/QuantyPart';
 
-async function fetchSingleProd(slug:string) {
+async function fetchSingleProd(slug: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
-      method: 'GET',
+    method: 'GET',
   })
   if (fetchApi.status !== 200) return notFound();
   const data = fetchApi.json();
   return data;
 }
 
-export async function generateMetadata({ params }: { params: { slug: string }}) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   const pagesData = await fetchSingleProd(params.slug);
   const dataResult = pagesData.result;
   return {
     title: dataResult.metatitle,
     description: dataResult.metadiscription,
-    alternates:{
-      canonical:`/product/${params.slug}`
+    alternates: {
+      canonical: `/product/${params.slug}`
     }
   }
 }
 
-export default async function ProductSingle({ params }: { params: { slug: string }}) {
+export default async function ProductSingle({ params }: { params: { slug: string } }) {
   const pagesData = await fetchSingleProd(params.slug);
- const prodDetailData = pagesData.result;
- let loading = false;
+  const prodDetailData = pagesData.result;
+  let loading = false;
 
   return (
     <>
-    <section className="text-gray-600 body-font overflow-hidden">
+      <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
 
@@ -48,11 +48,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
                   :
                   <ProdImgSlider {...prodDetailData} />
               }
-
-
             </div>
-
-
             <div className={`lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 
                   ${loading ? "space-y-3.5" : null}`}>
               <h2 className={`text-sm title-font text-gray-500 tracking-widest 
@@ -78,17 +74,22 @@ export default async function ProductSingle({ params }: { params: { slug: string
                 }
               </div>
               <div className="product-btn-part mt-3">
-                <QuantyPart id={prodDetailData?._id} />
                 {
-                  loading ? <div className="flex gap-2">
-                    <div className="animate-pulse bg-gray-300 rounded-md h-9 w-28"></div>
-                    <div className="animate-pulse bg-gray-300 rounded-md h-9 w-28"></div>
-                  </div> : <>
-                    <OnCartFunct id={prodDetailData?._id} />
-                    <OnBuyFunct id={prodDetailData?._id} />
-                  </>
+                  (prodDetailData?.inStock === false) ?
+                    <div className='bg-act inline-block p-1.5 font-semibold uppercase text-gray-900 '>Out of Stock</div> :
+                    <>
+                      <QuantyPart id={prodDetailData?._id} />
+                      {
+                        loading ? <div className="flex gap-2">
+                          <div className="animate-pulse bg-gray-300 rounded-md h-9 w-28"></div>
+                          <div className="animate-pulse bg-gray-300 rounded-md h-9 w-28"></div>
+                        </div> : <>
+                          <OnCartFunct id={prodDetailData?._id} />
+                          <OnBuyFunct id={prodDetailData?._id} />
+                        </>
+                      }
+                    </>
                 }
-
               </div>
             </div>
           </div>

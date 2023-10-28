@@ -31,6 +31,7 @@ export interface Product {
   slug: string;
   productPriceDiffpercent: number,
   productPriceDiffAmt: number
+  inStock:boolean
 
 }
 
