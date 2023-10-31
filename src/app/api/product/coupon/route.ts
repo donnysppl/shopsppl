@@ -5,7 +5,7 @@ import Coupon from '@/models/coupon';
 export async function POST(req: NextRequest) {
     try {
         await connect();
-        const {name,min_price,max_price,condition} = await req.json();
+        const {name,min_price,max_price,condition,discount,multiuse} = await req.json();
         const couponExist = await Coupon.find({name:name});
         console.log(couponExist)
         if(couponExist.length > 0){
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
             }, { status: 400 })
         }
         else{
-            const newCoupon = new Coupon({name,min_price,max_price,condition});
+            const newCoupon = new Coupon({name,min_price,max_price,condition,discount,multiuse});
             const saveCoupon = await newCoupon.save();
             return NextResponse.json({
                 status: 200,

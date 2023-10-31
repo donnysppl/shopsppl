@@ -12,20 +12,24 @@ interface CustomerAdminType {
 export async function POST(req: NextRequest) {
     try {
         await connect();
-        const { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,ship_add,ship_address} = await req.json();
+        const { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,ship_add,ship_address, totalprodprice,coupon,discountammount} = await req.json();
         const oldOrderData = await ProductOrder.count();
 
-        const newData = { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,status: 'payment_pending', 
-        sppl_orderid: `SPPLW${oldOrderData + 1} `} as orderInptype
+        const newData = { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,status: 'payment_pending', totalprodprice,coupon,discountammount,
+        sppl_orderid: `SPPLW${oldOrderData + 1} `} as orderInptype;
+
+        // checking shipping address exist
         if (ship_add === true) {
             newData.ship_add = ship_add;
             newData.ship_address = ship_address;
         }
-        const newOrderData = new ProductOrder(newData);
         const customerExist: CustomerAdminType | null = await CustomerAdmin.findOne({ email });
+
+        const newOrderData = new ProductOrder(newData);
         if (customerExist) {
             await CustomerAdmin.updateOne({ _id: customerExist._id }, {
-                $push: { orderlist: newOrderData._id },
+                $push: { orderlist: newOrderData._id,
+                    couponlist:coupon  },
             })
             newOrderData.customerid = customerExist._id;
             const saveNewOrderData = await newOrderData.save();
@@ -35,7 +39,7 @@ export async function POST(req: NextRequest) {
             }, { status: 200 })
         }
         else {
-            const newCustomer = new CustomerAdmin({ email, username: name, phone, orderlist: newOrderData._id })
+            const newCustomer = new CustomerAdmin({ email, username: name, phone, orderlist: newOrderData._id,couponlist:coupon })
             await newCustomer.save();
             newOrderData.customerid = newCustomer._id;
             const saveNewOrderData = await newOrderData.save();

@@ -43,6 +43,8 @@ export async function GET(req: NextRequest) {
                 filter.category = categoryParams;
             }
 
+
+            console.log(filter , pagesParams,limitParams)
             const startIndex = (pages - 1) * limit;
             const ensIndex = pages * limit;
             const data = await Product.find(filter)

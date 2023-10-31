@@ -60,7 +60,16 @@ const orderProdSchema = new Schema({
     },
     customerid:{
         type: String,
-    }
+    },
+    coupon:{
+        type: String,
+    },
+    totalprodprice:{
+        type: Number,
+    },
+    discountammount:{
+        type: Number,
+    },
 },{ timestamps: true })
 
 const ProductOrder = models.ProductOrder || model("ProductOrder", orderProdSchema);

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useShoppingCart } from '@/hooks/ShoppingCartContext';
 import { AiOutlineClose } from "react-icons/ai";
-
+import { RiCoupon4Line } from "react-icons/ri";
 
 interface orderInptype {
     email: string,
@@ -48,7 +48,7 @@ export default function Checkout() {
     const [checkoutProd, setcheckoutProd] = useState<Product[]>([]);
     const [razorOrderRes, setrazorOrderRes] = useState<RazorOrderes>();
     const [prodLoading, setprodLoading] = useState<boolean>(true);
-    const [razorpayLoader, setrazorpayLoader] = useState<boolean>(false);
+    const [razorpayLoader, setrazorpayLoader] = useState<boolean>(true);
     const [userData, setuserData] = useState<string>('');
     const [orderInp, setorderInp] = useState<orderInptype>({
         email: '',
@@ -73,13 +73,20 @@ export default function Checkout() {
     })
 
     const [totalPrice, settotalPrice] = useState<number>(0)
+    const [totalProdPrice, settotalProdPrice] = useState<number>(0)
 
-    const { cartItem,getItemQuantity,removeFromQuantity } = useShoppingCart();
+    const [couponopem, setcouponopem] = useState<boolean>(false);
+    const [coupon, setcoupon] = useState<string>('');
+    const [afterCoupProc, setafterCoupProc] = useState<number>(0)
+    const [discountAmt, setdiscountAmt] = useState<number>(0)
+    const [couponRes, setcouponRes] = useState<boolean>(false);
+
+    const { cartItem, getItemQuantity, removeFromQuantity } = useShoppingCart();
 
     const prodID = cartItem.map(item => item.id).join(',');
 
     useEffect(() => {
-
+        setrazorpayLoader(true)
         const fetchCheckProdData = async () => {
             await fetch(`/api/product/checkout?product=${prodID}`, {
                 method: 'GET',
@@ -93,10 +100,12 @@ export default function Checkout() {
                             return (acc + product.productSalePrice) * prodQuant;
                         }, 0);
                         settotalPrice(totalSalePrice);
+                        settotalProdPrice(totalSalePrice);
                         setprodLoading(false);
+                        setrazorpayLoader(false)
                     }
                     if (res.status === 400) {
-
+                        toast.error(res.message)
                     }
                 })
                 .catch(err => {
@@ -108,6 +117,63 @@ export default function Checkout() {
         }
 
     }, [prodID])
+
+    const onCouponSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setcouponRes(false);
+        setrazorpayLoader(true)
+
+        if (orderInp.email === '') {
+            setrazorpayLoader(false)
+            return toast.error('Please Fill your email address in billing address')
+        }
+        await fetch(`/api/product/coupon/verify`, {
+            method: 'POST',
+            cache: 'no-cache',
+            body: JSON.stringify({
+                name: coupon,
+                email: orderInp.email,
+                productprice: totalProdPrice,
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res)
+                if (res.status === 200) {
+                    setdiscountAmt(res.result.discountAmmount)
+                    setafterCoupProc(res.result.afterCouponPrice);
+                    settotalPrice(res.result.afterCouponPrice);
+                    setcouponRes(true);
+                    setrazorpayLoader(false)
+
+                    // if (res.result.min_price <= totalProdPrice && res.result.max_price >= totalProdPrice) {
+                    //     let afterCouponPrice = 0;
+                    //     if (res.result.condition === 'price') {
+                    //         setdiscountAmt(res.result.discount)
+                    //         afterCouponPrice = totalProdPrice - res.result.discount;
+                    //     }
+                    //     else if (res.result.condition === 'percentage') {
+                    //         const discAmt = (totalProdPrice * res.result.discount) / 100;
+                    //         setdiscountAmt(discAmt)
+                    //         afterCouponPrice = totalProdPrice - discAmt;
+                    //     }
+                    //     setafterCoupProc(afterCouponPrice);
+                    //     settotalPrice(afterCouponPrice);
+                    //     setcouponRes(true);
+                    // }
+                }
+                else if (res.status === 400) {
+                    toast.error(res.message);
+                    setrazorpayLoader(false)
+
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+
+    }
 
     const oncheckout = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -122,7 +188,7 @@ export default function Checkout() {
                 productmodel: checkoutProd[i].model,
                 productnormalprice: checkoutProd[i].productNormalPrice,
                 productsaleprice: checkoutProd[i].productSalePrice,
-                quantity:prodQuant,
+                quantity: prodQuant,
             })
         }
 
@@ -137,6 +203,9 @@ export default function Checkout() {
             orderprod: checkoutData,
             totalbill: totalPrice,
             companyname: orderInp.companyname,
+            totalprodprice: totalProdPrice,
+            coupon: coupon,
+            discountammount: discountAmt,
 
             ship_add: shipAdd,
 
@@ -417,14 +486,53 @@ export default function Checkout() {
                         }
 
                     </ul>
+
+                    <div className="apply-coupon">
+                        <div onClick={(e) => setcouponopem(!couponopem)} className='cursor-pointer flex items-center text-[0.9rem] gap-1 my-2 underline'>
+                            <RiCoupon4Line className='w-5 h-5' /> Have a coupon? Click here to enter your code
+                        </div>
+                        {
+                            couponopem ?
+                                <div className="coupon-inp ">
+                                    <div className="mb-4">
+                                        <form className='front-form relative' onSubmit={onCouponSubmit} >
+                                            <input type="text" name='city' className="form-control mb-3" placeholder='Enter Coupon Code'
+                                                onChange={(e) => setcoupon(e.target.value)} />
+                                            <button className='btn-prim'>Submit</button>
+                                        </form>
+                                    </div>
+                                </div> : null
+                        }
+
+                    </div>
                     <div className='total-product-price'>
                         <ul>
                             <li>
-                                <div className="flex justify-between">
-                                    <span>Total</span>
-                                    <span>₹ {totalPrice}</span>
+                                <div className="flex justify-between text-[0.9rem]">
+                                    <span>Total Product Price</span>
+                                    <span>₹ {totalProdPrice}</span>
                                 </div>
                             </li>
+                            {
+                                couponRes ?
+                                    <li className='border-b border-gray-300 text-[0.9rem]'>
+                                        <div className="flex justify-between">
+                                            <span>Coupon ({coupon})</span>
+                                            <span>₹ {discountAmt}</span>
+                                        </div>
+                                    </li> : null
+                            }
+
+                            {
+                                couponRes ?
+                                    <li>
+                                        <div className="flex justify-between">
+                                            <span>Total</span>
+                                            <span>₹ {totalPrice}</span>
+                                        </div>
+                                    </li> : null
+                            }
+
                         </ul>
                     </div>
                 </div>

@@ -33,6 +33,9 @@ const customerSchema = new Schema({
     },
     orderlist:{
         type:Array,
+    },
+    couponlist:{
+        type:Array,
     }
 },{ timestamps: true })
 

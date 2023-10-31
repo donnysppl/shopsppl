@@ -23,6 +23,21 @@
   padding: 0;
   box-sizing: border-box !important;
 }
+/* width */
+*::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 5px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  @apply bg-act; 
+}
 
 body {
   color: rgb(var(--foreground-rgb));

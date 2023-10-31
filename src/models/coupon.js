@@ -14,6 +14,12 @@ const CouponSchema = new Schema({
     condition:{
         type:String,
     },
+    discount:{
+        type:Number,
+    },
+    multiuse:{
+        type:Boolean,
+    }
 },{ timestamps: true })
 
 const Coupon = models.Coupon || model("Coupon", CouponSchema);

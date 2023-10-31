@@ -36,6 +36,7 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
   const searchparams = useSearchParams()
 
   const [filterOpen, setfilterOpen] = useState<boolean>(false)
+  const pageParams = page ? page : '1';
   const limitParam = limit ? limit : '10';
   const brandParam = brand ? brand : 'all';
   const categoryParam = category ? category : 'all';
@@ -59,7 +60,7 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
           <h4 className="font-bold py-1.5 px-1">Brand</h4>
           {Brand.map((item: any, index: number) => (
             <Link className={`${(brand === item.name) ? 'active' : null} filter-item`} key={index} href={`?${new URLSearchParams({
-              page: page, limit: limitParam,
+              page: pageParams, limit: limitParam,
               brand: item.name, category: categoryParam
             })}`}>{item.name}</Link>
           ))}
@@ -69,7 +70,7 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
           <h4 className="font-bold py-1.5 px-1">Categories</h4>
           {Categories.map((item: any, index: number) => (
             <Link className={`${(brand === item.name) ? 'active' : null} filter-item`} key={index} href={`?${new URLSearchParams({
-              page: page, limit: limitParam,
+              page: pageParams, limit: limitParam,
               brand: brandParam, category: item.name
             })}`}>{item.name}</Link>
           ))}

@@ -91,10 +91,14 @@ export interface orderInptype {
     productnormalprice: number;
     productsaleprice: number;
     quantity: number;
+    coupon:string,
   }>;
   status: string;
   orderid: string;
   sppl_orderid: string;
   paymentid: string;
   paymentdate: string;
+  coupon?:string,
+  totalprodprice:number,
+  discountammount?:number
 }
