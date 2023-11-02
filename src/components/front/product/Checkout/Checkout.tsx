@@ -140,27 +140,11 @@ export default function Checkout() {
             .then(res => {
                 console.log(res)
                 if (res.status === 200) {
-                    setdiscountAmt(res.result.discountAmmount)
+                    setdiscountAmt(res.result.discountAmount)
                     setafterCoupProc(res.result.afterCouponPrice);
                     settotalPrice(res.result.afterCouponPrice);
                     setcouponRes(true);
                     setrazorpayLoader(false)
-
-                    // if (res.result.min_price <= totalProdPrice && res.result.max_price >= totalProdPrice) {
-                    //     let afterCouponPrice = 0;
-                    //     if (res.result.condition === 'price') {
-                    //         setdiscountAmt(res.result.discount)
-                    //         afterCouponPrice = totalProdPrice - res.result.discount;
-                    //     }
-                    //     else if (res.result.condition === 'percentage') {
-                    //         const discAmt = (totalProdPrice * res.result.discount) / 100;
-                    //         setdiscountAmt(discAmt)
-                    //         afterCouponPrice = totalProdPrice - discAmt;
-                    //     }
-                    //     setafterCoupProc(afterCouponPrice);
-                    //     settotalPrice(afterCouponPrice);
-                    //     setcouponRes(true);
-                    // }
                 }
                 else if (res.status === 400) {
                     toast.error(res.message);
@@ -326,7 +310,6 @@ export default function Checkout() {
         var rzp1 = new window.Razorpay(options);
         rzp1.open();
     }
-
 
     return (
         <main className='max-w-screen-xl mx-auto py-20'>

@@ -4,6 +4,7 @@ import { Product, orderInptype } from "@/helpers/interFace";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
+
 export default function OrderDetail({ params }: { params: { id: string } }) {
 
   const [orderListData, setorderListData] = useState<orderInptype>();
@@ -11,7 +12,10 @@ export default function OrderDetail({ params }: { params: { id: string } }) {
   const [subTotal, setsubTotal] = useState<number>(0);
 
   useEffect(() => {
+    
     const orderListFetch = async () => {
+
+
       await fetch(`/api/order/${params.id}`, {
         method: 'GET',
         cache: 'no-store',

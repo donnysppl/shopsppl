@@ -5,6 +5,19 @@ import { useRouter } from 'next/navigation';
 
 const dashNavList = [
     {
+        navhead: "Blog",
+        navlink: [
+            {
+                innernavname: "Add Blog",
+                innernavlink: "/backend/backend-dashboard/blogs/add"
+            },
+            {
+                innernavname: "Blog List",
+                innernavlink: "/backend/backend-dashboard/blogs/list"
+            }
+        ]
+    },
+    {
         navhead: "Banner",
         navlink: [
             {
@@ -53,6 +66,14 @@ const dashNavList = [
             {
                 innernavname: "Product List",
                 innernavlink: "/backend/backend-dashboard/product/list-product"
+            },
+            {
+                innernavname: "Coupon Add",
+                innernavlink: "/backend/backend-dashboard/coupon/add"
+            },
+            {
+                innernavname: "Coupon List",
+                innernavlink: "/backend/backend-dashboard/coupon/list"
             }
         ]
     },
@@ -93,7 +114,7 @@ export default function DashNav() {
             .then(res => {
                 console.log(res);
                 if (res.status === 200) {
-                    router.push("/backend-login");
+                    router.push("/backend/backend-login");
                 }
                 else if (res.status === 400) {
 

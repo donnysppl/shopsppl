@@ -1,24 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
-import Coupon from '@/models/coupon';
+import BlogsModal from '@/models/blog';
 
-export async function GET(req: NextRequest, { params }: { params: { name: string }}) {
+export async function GET(req: NextRequest,{ params }: { params: { slug: string } }) {
     try {
         await connect();
-        const data = await Coupon.findOne({name:params.name});
-        console.log(data)
+
+        const data = await BlogsModal.findOne({slug:params.slug});
         if(!data){
             return NextResponse.json({
                 status: 400,
-                message: 'Coupon not found',
+                message: 'data not found',
             }, { status: 400 })
         }
         else{
             return NextResponse.json({
                 status: 200,
-                message: 'Coupon Found', result:data
+                message: 'Blog found', result:data
             }, { status: 200 })
         }
+
     } catch (error) {
         console.log(error)
         return NextResponse.json({

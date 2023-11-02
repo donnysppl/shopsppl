@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
                  const result = NextResponse.json({
                     message: "Login successful",
                     status: 200,
-                    success: true,
+                    success: true, tokenData:token
                  },{status: 200,})
 
                  result.cookies.set("admin-token", token, {

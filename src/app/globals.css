@@ -23,6 +23,7 @@
   padding: 0;
   box-sizing: border-box !important;
 }
+
 /* width */
 *::-webkit-scrollbar {
   width: 6px;
@@ -31,12 +32,12 @@
 
 /* Track */
 *::-webkit-scrollbar-track {
-  background: transparent; 
+  background: transparent;
 }
- 
+
 /* Handle */
 *::-webkit-scrollbar-thumb {
-  @apply bg-act; 
+  @apply bg-act;
 }
 
 body {
@@ -316,6 +317,13 @@ span.cart-icon-div-quantity {
 
 .content-part ul {
   margin-bottom: 1rem;
+}
+
+
+/* blog post */
+.blog-post-li:hover img {
+  scale: 1.05;
+  transition: 0.3s ease-in-out;
 }
 
 @media only screen and (max-width: 991.99px) {

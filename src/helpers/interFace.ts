@@ -102,3 +102,13 @@ export interface orderInptype {
   totalprodprice:number,
   discountammount?:number
 }
+
+export interface BlogInpProps {
+  title: string,
+  slug: string,
+  blogdata: string,
+  metatitle: string,
+  metadiscription: string,
+  metakeyword: string,
+  img: string
+}

@@ -3,6 +3,8 @@ import { connect } from "@/dbConfig/dbConfig";
 import ProductOrder from "@/models/orderProduct";
 import CustomerAdmin from "@/models/customerUser";
 import { orderInptype } from "@/helpers/interFace";
+import { cookies } from 'next/headers';
+import { adminToken } from "@/helpers/fetchToken";
 
 interface CustomerAdminType {
     _id: string, username: string, email: string, password: string, phone: string, isWhatsappNo: boolean,
@@ -62,6 +64,17 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
     try {
         await connect();
+
+        // check admin token
+        const cookie = cookies()
+        const adminTokenExist = adminToken(cookie);
+
+        if(!adminTokenExist){
+            return NextResponse.json({
+                status: 400,
+                message: 'Unauthorized',
+            }, { status: 400 })
+        }
 
         const orderData = await ProductOrder.find();
         if (!orderData) {

@@ -41,15 +41,18 @@ export default function BackendLogin() {
         console.log(res);
         if (res.status === 200) {
           toast.success(res.message)
-          router.push('/backend/backend-dashboard')
+          window.localStorage.setItem('admin-token', res.tokenData)
+          router.push('/backend/backend-dashboard');
+          setloading(false);
         }
         else if (res.status === 400) {
           toast.error(res.message)
+          setloading(false);
         }
         else if (res.status === 500) {
           toast.error(res.message)
+          setloading(false);
         }
-        setloading(false);
       })
       .catch(err => {
         console.log(err);
@@ -61,7 +64,15 @@ export default function BackendLogin() {
   return (
     <>
     <Toaster position="bottom-center" reverseOrder={false} />
-      <main className='backend-dashboard w-screen h-screen flex justify-center items-center p-2'>
+   
+      <main className='backend-dashboard w-screen h-screen flex justify-center items-center p-2 relative'>
+      {
+                loading ?
+                    <div className="razor-loader bg-gray-900 bg-opacity-25 w-screen h-full absolute inset-0
+                z-10 flex items-center justify-center">
+                        <div className="spinner"></div>
+                    </div> : null
+            }
         <div className='w-full lg:w-2/5 md:w-9/12 sm:w-full border border-gray-500 py-8 px-8 rounded-2xl'>
           <div className="backend-login-div">
 
