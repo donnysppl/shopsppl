@@ -1,13 +1,13 @@
 import FrontLayout from '@/components/layout/FrontLayout'
 import Link from 'next/link'
-
-export async function generateMetadata() {
-    return {
-        title: 'Blogs',
-        description: 'Blogs',
-        alternates: {
-            canonical: `/blog`
-        }
+import { Metadata } from 'next'
+ 
+// either Static metadata
+export const metadata: Metadata = {
+    title: 'Blogs',
+    description: 'Blogs',
+    alternates: {
+        canonical: `/blog`
     }
 }
 
@@ -36,7 +36,7 @@ export default function BlogList() {
                     </li>
                     {
                         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item: any, index: number) => (
-                            <li className="border border-gray-100 rounded-2xl overflow-hidden p-2.5 bg-white hover:shadow-xl transition-all blog-post-li">
+                            <li key={index} className="border border-gray-100 rounded-2xl overflow-hidden p-2.5 bg-white hover:shadow-xl transition-all blog-post-li">
                                 <div className="flex flex-col gap-1">
                                     <div className="overflow-hidden rounded-lg">
                                         <img className=''

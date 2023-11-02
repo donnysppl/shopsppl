@@ -1,6 +1,16 @@
 import FrontLayout from '@/components/layout/FrontLayout'
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next'
+
+// either Static metadata
+export const metadata: Metadata = {
+  title: 'Terms Policy',
+  description: 'Terms Policy',
+  alternates: {
+      canonical: `/terms-policy`
+  }
+}
 
 async function fetchterm() {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/terms-policy`, {

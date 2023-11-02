@@ -1,6 +1,7 @@
 import LimitSelect from '@/components/front/product/LimitSelect';
 import ProductFilter from '@/components/front/product/ProductFilter';
 import ProductListLayout from '@/components/layout/ProductListLayout';
+import { Metadata } from 'next'
 
 interface fetchProd {
   result: {
@@ -18,13 +19,14 @@ interface fetchProd {
   }
 }
 
-export async function generateMetadata() {
-  return {
-    title: 'Product | Shop',
-    description: 'Product',
-    alternates: {
+
+
+//  Static metadata
+export const metadata: Metadata = {
+  title: 'Product | Shop',
+  description: 'Product | Shop',
+  alternates: {
       canonical: `/product`
-    }
   }
 }
 
