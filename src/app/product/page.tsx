@@ -35,6 +35,7 @@ export default async function ProductList({ searchParams }: {
     page: string, limit: string, brand: string, category: string
   }
 }) {
+  console.log(searchParams)
   const pageParams = parseInt(searchParams.page ? searchParams.page : '1') ;
   const limitParams = parseInt(searchParams.limit);
   const brandParams = searchParams.brand;

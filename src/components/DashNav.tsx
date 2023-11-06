@@ -5,6 +5,16 @@ import { useRouter } from 'next/navigation';
 
 const dashNavList = [
     {
+        navhead: "Home",
+        navlink: [
+            {
+                innernavname: "Home Data",
+                innernavlink: "/backend/backend-dashboard/home"
+            },
+            
+        ]
+    },
+    {
         navhead: "Blog",
         navlink: [
             {

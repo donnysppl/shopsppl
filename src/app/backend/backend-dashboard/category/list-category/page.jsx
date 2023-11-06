@@ -15,12 +15,17 @@ export default function ListCategory() {
             setloading(true);
             await fetch('/api/product/category', {
                 method: 'GET',
+                next:{revalidate:10},
             }).then(res => res.json())
                 .then(res => {
                     console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
-                        setcatetableData(res.result);
+                        const result = res.result;
+                        if(result){
+                            const sortArr = result.sort((a,b) => Number(a.isChild) - Number(b.isChild));
+                            setcatetableData(sortArr)
+                        }
                     }
                     else if (res.status === 400) {
                         toast.error(res.message);
@@ -61,6 +66,7 @@ export default function ListCategory() {
                 console.log(err);
             })
     }
+
 
     const data = useMemo(() => catetableData, [catetableData])
 
