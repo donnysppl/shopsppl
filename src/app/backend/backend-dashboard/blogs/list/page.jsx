@@ -78,8 +78,8 @@ export default function BlogListBK() {
       header: 'Action',
       cell: cell => (
         <div className="flex gap-5">
-          <Link href={`/backend/backend-dashboard/blogs/edit/${cell.row.original._id}`}><button className="text-green-400">Edit</button></Link>
-          <button onClick={(e) => onDeleteBlog(e, cell.row.original._id)} className="text-red-400">Delete</button>
+          <Link href={`/backend/backend-dashboard/blogs/edit/${cell.row.original._id}`}><button className="edit-btn">Edit</button></Link>
+          <button onClick={(e) => onDeleteBlog(e, cell.row.original._id)} className="delete-btn">Delete</button>
         </div>
       )
     }

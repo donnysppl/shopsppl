@@ -2,19 +2,25 @@
 
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import { GoDot } from "react-icons/go";
+import { Disclosure, Transition } from '@headlessui/react';
+import { FiMinus } from "react-icons/fi";
+import { GoPlus } from "react-icons/go";
 
 const dashNavList = [
     {
+        id: 1,
         navhead: "Home",
         navlink: [
             {
                 innernavname: "Home Data",
                 innernavlink: "/backend/backend-dashboard/home"
             },
-            
+
         ]
     },
     {
+        id: 2,
         navhead: "Blog",
         navlink: [
             {
@@ -28,6 +34,7 @@ const dashNavList = [
         ]
     },
     {
+        id: 3,
         navhead: "Banner",
         navlink: [
             {
@@ -41,6 +48,7 @@ const dashNavList = [
         ]
     },
     {
+        id: 4,
         navhead: "Brand",
         navlink: [
             {
@@ -54,6 +62,7 @@ const dashNavList = [
         ]
     },
     {
+        id: 5,
         navhead: "Category",
         navlink: [
             {
@@ -67,6 +76,7 @@ const dashNavList = [
         ]
     },
     {
+        id: 6,
         navhead: "Product",
         navlink: [
             {
@@ -88,6 +98,7 @@ const dashNavList = [
         ]
     },
     {
+        id: 7,
         navhead: "Order",
         navlink: [
             {
@@ -97,6 +108,7 @@ const dashNavList = [
         ]
     },
     {
+        id: 8,
         navhead: "Pages Data",
         navlink: [
             {
@@ -135,6 +147,7 @@ export default function DashNav() {
             })
     }
 
+
     return (
         <div className="w-full">
             <div className="dashboard-nav-list">
@@ -144,19 +157,43 @@ export default function DashNav() {
                 <div className="nav-scroll">
                     {
                         dashNavList && dashNavList.map((item, index) => (
-                            <div key={index} className="pb-1 mb-3 border-b border-gray-600">
-                                <div className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
-                                    {item.navhead}
-                                </div>
-                                <div className="space-y-1 flex flex-col mb-3 ">
-                                    {
-                                        item && item.navlink.map((item, index) => (
-                                            <Link key={index} className="dash-nav-list" href={item.innernavlink}>{item.innernavname}</Link>
-                                        ))
-                                    }
-                                </div>
-
-                            </div>
+                            <Disclosure as="div" key={item.id} className="dash-nav-head" >
+                                {({ open }) => (
+                                    <>
+                                        <div className={`dash-nav-head-link ${open ? 'active' : null}`}>
+                                            <Disclosure.Button className="flex w-full items-center justify-between">
+                                                <span className="text-xs font-semibold uppercase tracking-wider">{item.navhead}</span>
+                                                <span className="ml-6 flex items-center">
+                                                    {open ? (
+                                                        <FiMinus className="h-5 w-5" aria-hidden="true" />
+                                                    ) : (
+                                                        <GoPlus className="h-5 w-5" aria-hidden="true" />
+                                                    )}
+                                                </span>
+                                            </Disclosure.Button>
+                                            <Transition
+                                                enter="transition duration-100 ease-out"
+                                                enterFrom="transform scale-90 opacity-0"
+                                                enterTo="transform scale-100 opacity-100"
+                                                leave="transition duration-75 ease-out"
+                                                leaveFrom="transform scale-100 opacity-100"
+                                                leaveTo="transform scale-90 opacity-0"
+                                            >
+                                                <Disclosure.Panel className="pt-6">
+                                                    {
+                                                        item && item.navlink.map((item, index) => (
+                                                            <Link key={index} className="dash-nav-list" href={item.innernavlink}>
+                                                                <span><GoDot /></span>
+                                                                <span className='text-xs font-semibold uppercase tracking-wider'>{item.innernavname}</span>
+                                                            </Link>
+                                                        ))
+                                                    }
+                                                </Disclosure.Panel>
+                                            </Transition>
+                                        </div>
+                                    </>
+                                )}
+                            </Disclosure>
                         ))
                     }
                     <div className="pb-1 mb-3">
@@ -172,6 +209,9 @@ export default function DashNav() {
 
 
             </div>
+
+
         </div>
+
     )
 }

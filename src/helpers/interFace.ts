@@ -31,7 +31,7 @@ export interface Product {
   slug: string;
   productPriceDiffpercent: number,
   productPriceDiffAmt: number
-  inStock:boolean
+  inStock: boolean
 
 }
 
@@ -91,16 +91,16 @@ export interface orderInptype {
     productnormalprice: number;
     productsaleprice: number;
     quantity: number;
-    coupon:string,
+    coupon: string,
   }>;
   status: string;
   orderid: string;
   sppl_orderid: string;
   paymentid: string;
   paymentdate: string;
-  coupon?:string,
-  totalprodprice:number,
-  discountammount?:number
+  coupon?: string,
+  totalprodprice: number,
+  discountammount?: number
 }
 
 export interface BlogInpProps {
@@ -111,4 +111,25 @@ export interface BlogInpProps {
   metadiscription: string,
   metakeyword: string,
   img: string
+}
+export interface Category {
+  img: string,
+  isChild: boolean,
+  name: string,
+  parentCategorys: string,
+  _id: string
+}
+export interface HomeCateSlider {
+  category: string,
+  _id: string,
+  categorySlider: [
+    {
+      slide: string,
+      buylink: string,
+      file: string,
+      resfile: string,
+      _id: string,
+    }
+  ]
+
 }

@@ -286,7 +286,20 @@ span.cart-icon-div-quantity {
   height: 0;
   display: none;
 }
-
+.cateslide-pagination {
+  color: #fff;
+  display: inline !important;
+  padding: 5px 15px;
+  border-radius: 50px !important;
+  font-size: 14px;
+}
+.cateslide .swiper-pagination-bullet-active{
+  @apply bg-act text-black font-semibold;
+}
+.cateslide .swiper-pagination{
+  top: 60px !important;
+  height: 100px;
+}
 /* front form */
 .input {
   @apply w-full rounded-full border-gray-200 bg-gray-100 p-2 text-sm font-medium text-gray-700 placeholder:text-gray-700;

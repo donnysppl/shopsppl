@@ -33,11 +33,8 @@ export default async function BlogDetails({ params }: { params: { slug: string }
     return (
         <FrontLayout innercol={'bg-white'}>
             <div className="blog-detail-data">
-                <div className="main-img w-full h-full overflow-hidden relative text-white">
-                    {/* <img className='w-full h-full object-cover object-center bg-overlay bg-blend-multiply'
-                        src="https://assets-global.website-files.com/63c0810afc574dff4625bbd4/63c08718be56c34382b452cc_main_1.jpg"
-                        alt="" /> */}
-                    <Image src={dataResult?.img} width={1600} height={600} alt={dataResult?.title}
+                <div className="main-img w-full h-[80vh] overflow-hidden relative text-white">
+                    <Image src={dataResult?.img} fill alt={dataResult?.title} className='w-full h-auto'
                         sizes="(min-width: 1280px) 100wv, (min-width: 1040px) 100wv, (min-width: 780px) 100wv, (min-width: 600px) 100wv, 100wv" />
 
                     <div className='absolute inset-0 font-bold text-white text-2xl backdrop-brightness-50

@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { useReactTable, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, getFilteredRowModel } from '@tanstack/react-table'
+import { GrFormNext } from "react-icons/gr";
+import { TbPlayerTrackNext } from "react-icons/tb";
+
 
 export default function CommonTable({ data, columns, loading }) {
 
@@ -40,48 +43,49 @@ export default function CommonTable({ data, columns, loading }) {
           <input type="text" id="table-search" className="form-ctrl ps-14" placeholder="Search for items" value={filterimg} onChange={(e) => setfilterimg(e.target.value)} />
         </div>
       </div>
-      <div className=" w-full table-responsive overflow-x-auto">
+      <div className=" w-full table-responsive overflow-x-auto border border-gray-200 rounded-lg overflow-hidden">
 
         {
-          loading ? 'Loading...' : <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-500">
+          loading ? 'Loading...' :
+            <table className="w-full text-sm text-left text-gray-500  dark:text-gray-400">
 
-            <thead className="text-xs text-gray-300 uppercase bg-gray-900">
-              {
-                table.getHeaderGroups().map(headerGroup => (
-                  <tr key={headerGroup.id}>
-                    {headerGroup.headers.map(header => (
-                      <th className="px-6 py-4" key={header.id} onClick={header.column.getToggleSortingHandler()}>
+              <thead className="text-xs font-semibold text-gray-800 uppercase bg-gray-200">
+                {
+                  table.getHeaderGroups().map(headerGroup => (
+                    <tr key={headerGroup.id}>
+                      {headerGroup.headers.map(header => (
+                        <th className="px-6 py-4" key={header.id} onClick={header.column.getToggleSortingHandler()}>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                          {
+                            { asc: '🔼', desc: '🔽' }[header.column.getIsSorted() ?? null]
+                          }
+                        </th>
+                      ))}
+                    </tr>
+                  ))
+                }
+              </thead>
+              <tbody>
+                {table.getRowModel().rows.map(row => (
+                  <tr className="border-b border-dashed border-gray-200 hover:bg-gray-100" key={row.id}>
+                    {row.getVisibleCells().map(cell => (
+                      <td className="px-6 py-4 text-gray-900" key={cell.id}>
                         {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
+                          cell.column.columnDef.cell,
+                          cell.getContext()
                         )}
-                        {
-                          { asc: '🔼', desc: '🔽' }[header.column.getIsSorted() ?? null]
-                        }
-                      </th>
+                      </td>
                     ))}
                   </tr>
                 ))
-              }
-            </thead>
-            <tbody>
-              {table.getRowModel().rows.map(row => (
-                <tr className="border-b border-gray-500 hover:bg-gray-800" key={row.id}>
-                  {row.getVisibleCells().map(cell => (
-                    <td className="px-6 py-4" key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))
-              }
+                }
 
-            </tbody>
+              </tbody>
 
-          </table>
+            </table>
         }
 
 
@@ -98,10 +102,14 @@ export default function CommonTable({ data, columns, loading }) {
           </span>
         </div>
         <div className="flex gap-2">
-          <button onClick={() => table.setPageIndex(0)} className="py-2 px-3 border rounded-md text-sm">{'<<'}</button>
-          <button disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()} className="py-2 px-3 border rounded-md text-sm">{'<'}</button>
-          <button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()} className="py-2 px-3 border rounded-md text-sm">{'>'}</button>
-          <button onClick={() => table.setPageIndex(table.getPageCount() - 1)} className="py-2 px-3 border rounded-md text-sm">{'>>'}</button>
+          <button onClick={() => table.setPageIndex(0)} className="py-2 px-3 rounded-md text-sm hover:bg-gray-200">
+          <TbPlayerTrackNext className="rotate-180" />
+          </button>
+          <button disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()} className="py-2 px-3 rounded-md text-sm hover:bg-gray-200"><GrFormNext className="rotate-180" /></button>
+          <button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()} className="py-2 px-3 rounded-md text-sm hover:bg-gray-200"><GrFormNext className="" /></button>
+          <button onClick={() => table.setPageIndex(table.getPageCount() - 1)} className="py-2 px-3 rounded-md text-sm hover:bg-gray-200">
+          <TbPlayerTrackNext className="" />
+          </button>
         </div>
 
       </div>

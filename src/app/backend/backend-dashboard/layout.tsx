@@ -13,22 +13,27 @@ export default function DashboardLayout({
 }) {
     return (
         <>
-        <Toaster position="bottom-center" reverseOrder={false} />
-                <div className='backend-dashboard font-sans'>
-                    <section className="w-screen h-screen">
-                        <div className="w-72 border-r border-gray-500 p-4 fixed top-0 z-10 h-screen">
-                            <DashNav />
-                        </div>
-                        <div className="right-part pl-72 overflow-y-scroll h-full">
-                            <div className="dashboard-right-inner w-full">
-                                <div className="mx-auto w-full p-5">
-                                    {children}
-                                </div>
-                            </div>
+            <Toaster position="bottom-center" reverseOrder={false} />
+            <div className='backend-dashboard font-sans'>
+                <section className="w-screen h-screen flex">
+                    <div className='w-80 p-2.5 flex-none'>
+                        <div className='h-full rounded-2xl'>
 
+                            <div className='w-full h-full'>
+                                <DashNav />
+
+                            </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+                    <div className='flex-auto p-2.5'>
+                        <div className=' h-full rounded-2xl p-4 bg-[#E5E7EB] bg-opacity-90 text-'>
+                            <div className='w-full h-full overflow-x-hidden overflow-y-scroll rounded-2xl'>
+                                {children}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </>
 
 

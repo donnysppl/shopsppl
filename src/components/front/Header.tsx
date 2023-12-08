@@ -17,7 +17,7 @@ export default function Header() {
                          <div className='md:block hidden'>
                          <ul className='flex gap-4 h-full text-sm items-center'>
                              <li><Link href={'/'}>Home</Link></li>
-                             <li><Link href={'/about'}>About Us</Link></li>
+                             {/* <li><Link href={'/about'}>About Us</Link></li> */}
                              <li><Link href={'/product'}>Product</Link></li>
                              <li><Link href={'/contact'}>Contact</Link></li>
                              <Search/>

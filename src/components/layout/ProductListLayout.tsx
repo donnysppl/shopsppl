@@ -14,7 +14,7 @@ interface searchPropType {
     categorySearch: string,
 }
 interface fetchProd {
-    result: Product[];
+    result: Product[] | undefined | null;
     next?: {
         page: number;
         limit: number;
@@ -73,7 +73,7 @@ export default function ProductListLayout() {
                             </div>
                         ))
                         :
-                        prodList && prodList?.result.map((item: Product, index: number) => (
+                        prodList && prodList?.result?.map((item: Product, index: number) => (
                             <ProductCard key={index} {...item} />
                         ))
                 }
@@ -81,7 +81,6 @@ export default function ProductListLayout() {
             <div className='flex gap-4 justify-between items-center py-4' >
                 <div>
                     <div>Page {page ? page : 1} to {prodList?.totalPages}</div>
-
                 </div>
 
                 <div className='flex gap-3'>

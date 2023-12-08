@@ -42,7 +42,7 @@ export default async function ProductList({ searchParams }: {
   const categoryParams = searchParams.category;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="max-w-screen-2xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
       <div className="product-filter-main grid grid-cols-1 gap-x-8 md:gap-y-10 gap-y-2 lg:grid-cols-4">
         <div className="product-filter-part">
           <ProductFilter brand={brandParams} category={categoryParams} page={searchParams.page} limit={searchParams.limit} />

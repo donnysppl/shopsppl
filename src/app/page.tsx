@@ -11,9 +11,10 @@
 // import { Pagination, Autoplay } from 'swiper/modules';
 
 import FrontLayout from '@/components/layout/FrontLayout'
-import Image from 'next/image';
 import ScrollCard from '@/components/form-compo/ScrollCard';
 import Banner from '@/components/home-page/Banner';
+import Category from '@/components/home-page/Category';
+import CateSlid from '@/components/home-page/CateSlid';
 
 export const dynamic = 'force-dynamic';
 
@@ -54,6 +55,8 @@ export default function Home() {
       <div>Home</div>
 
       <ScrollCard/>
+      <Category/>
+      <CateSlid />
 
     </FrontLayout>
   )
