@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import XLSX from "xlsx";
-import { writeFile } from 'fs/promises'
-import fs from "fs";
+import * as XLSX from 'xlsx';
 import Product from "@/models/product";
 import { connect } from "@/dbConfig/dbConfig";
-import { ImportSheetArr } from "@/helpers/interFace";
 import Category from "@/models/category";
 import Brand from "@/models/brand";
 
@@ -15,9 +12,6 @@ export async function POST(req: NextRequest) {
         const data = await req.formData()
         console.log(data)
         const file: File | null = data.get('file') as unknown as File;
-        const dataupdateValue = data.get('update');
-        const dataupdate = (dataupdateValue === 'true');
-        console.log(dataupdate)
         console.log(file)
 
         if (!file) {
@@ -27,18 +21,9 @@ export async function POST(req: NextRequest) {
         const bytes = await file.arrayBuffer()
         const buffer = Buffer.from(bytes)
 
-        const path = `public/uploads/temp/${file.name}`
-        const pathFolder = 'public/uploads/temp'
-        if (!fs.existsSync(pathFolder)) {
-            fs.mkdirSync(pathFolder, { recursive: true });
-            console.log('folder created');
-        }
-        await writeFile(path, buffer)
-        console.log(`open ${path} to see the uploaded file`)
-        let wrokbook = XLSX.readFile(path)
-        let worksheet = wrokbook.Sheets[wrokbook.SheetNames[0]]
-        const jsonData: ImportSheetArr = XLSX.utils.sheet_to_json(worksheet);
-
+        const workbook = XLSX.read(buffer, { type: 'buffer' });
+        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet) as any;
         const sheetData = [];
 
         for (let i = 0; i < jsonData.length; i++) {

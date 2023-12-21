@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from '../front/Header'
 import Footer from '../front/Footer'
-import { ShoppingCardProvider } from '@/hooks/ShoppingCartContext'
+import { ShoppingCardProvider } from '@/hooks/ShoppingCartContext';
+import { Toaster } from 'react-hot-toast';
 
 export default function FrontLayout({ children, innercol
 }: {
@@ -9,6 +10,7 @@ export default function FrontLayout({ children, innercol
 }) {
     return (
         <>
+        <Toaster position="bottom-center" reverseOrder={false} />
             <ShoppingCardProvider>
                 <Header />
                 <main className={innercol}>

@@ -63,10 +63,10 @@ export async function POST(req: NextRequest) {
                 } else {
                     const couponExist = customerExist.couponlist.includes(name);
                     if (couponExist) {
-                        return {
+                        return NextResponse.json({
                             status: 400,
                             message: 'Coupon already used',
-                        };
+                        }, { status: 400 });
                     } else {
                         return await verifyCouponPrice(couponDataExist, productprice);
                     }

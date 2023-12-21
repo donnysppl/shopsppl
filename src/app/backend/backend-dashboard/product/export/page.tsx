@@ -55,8 +55,36 @@ export default function ProductExport() {
                 console.log(err);
             })
     }
+
+    const onProdSheetUpoadUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+        setloader(true);
+        e.preventDefault();
+        console.log(file, update)
+
+        const formData = new FormData();
+        formData.append("file", file as File);
+
+        await fetch('/api/product/products/import/', {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if (res.status === 200) {
+                    setloader(false);
+                    toast.success(res.message);
+                }
+                else {
+                    setloader(false);
+                    toast.success(res.message);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
     return (
-        <div className='inner-pages-base-div'>
+        <div className='inner-pages-base-div form-page-list'>
             <div className="head">
                 <h2 className='font-semibold'>
                     Product Export and Import
@@ -86,7 +114,7 @@ export default function ProductExport() {
                             </div>
                             <div>
                                 <h4 className='mb-2'>Update Product</h4>
-                                <form className='' onSubmit={onProdSheetUpoad} encType="multipart/form-data" >
+                                <form className='' onSubmit={onProdSheetUpoadUpdate} encType="multipart/form-data" >
                                     <input type="file" name="file" className="form-ctrl mb-3"
                                         onChange={(e) => setfile(e.target.files?.[0] as File)} />
                                     <button type='submit' className='dashboard-btn'>Upload</button>

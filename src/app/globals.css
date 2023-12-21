@@ -345,7 +345,9 @@ span.cart-icon-div-quantity {
   0% { transform: translateY(0); }
   100% { transform: translateY(-10px); }
 }
-
+.form-part-contact{
+  margin-top: -60px;
+}
 @media only screen and (max-width: 991.99px) {
 
   /* product filter */
@@ -365,5 +367,30 @@ span.cart-icon-div-quantity {
   .content-part h2 {
     font-size: 1.2rem;
     line-height: 100%;
+  }
+
+
+
+  /* responsive-menu */
+
+  .responsive-menu {
+    @apply fixed sm:w-96 w-full z-20 h-screen bg-[#191919] top-0 transition-all ease-in-out border-l border-gray-400;
+  }
+  
+  .responsive-menu.open {
+    @apply left-0;
+  }
+  
+  .responsive-menu.close {
+    @apply -left-full;
+  }
+  .responsive-menu ul{
+    flex-direction: column;
+    align-items: start;
+  }
+  .responsive-menu ul li{
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
   }
 }

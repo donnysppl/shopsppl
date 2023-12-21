@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import Banner from "@/models/banner";
-import fs from "fs";
+import { writeFile } from 'fs/promises'
 
 export async function POST(req: NextRequest) {
     try {

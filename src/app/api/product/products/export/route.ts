@@ -41,8 +41,6 @@ export async function GET(req: NextRequest) {
 
         const customPoductData = [];
         for (let i = 0; i < productData.length; i++) {
-            // const id = productData[i]._id;
-            // const replaceID = id.replace(/^"|"$/g, '');
             const categString = productData[i].category.toString();
             const productimgString = productData[i].productimg.toString();
             const productRPDString = productData[i].productrpd.toString();
@@ -90,7 +88,11 @@ export async function GET(req: NextRequest) {
         });
 
     } catch (error: any) {
-        console.log(error.message)
+        console.log(error)
+        return NextResponse.json({
+            status: 500,
+            message: 'Somthing went wrong ' + error,
+        }, { status: 500 })
     }
 
 }

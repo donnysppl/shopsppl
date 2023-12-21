@@ -7,7 +7,7 @@ async function fetchtermPer(slug:string) {
     method: 'GET',
   })
   if (fetchApi.status !== 200) return notFound();
-  const data = fetchApi.json();
+  const data = await fetchApi.json();
   return data;
 }
 

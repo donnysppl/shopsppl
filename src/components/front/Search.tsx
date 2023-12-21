@@ -49,7 +49,7 @@ export default function Search() {
 
     return (
         <>
-            <div onClick={() => openDialogHandle()} className=' cursor-pointer'><BsSearch className='w-5 h-5' /></div>
+            <li onClick={() => openDialogHandle()} className=' cursor-pointer'><BsSearch className='w-5 h-5' /></li>
             {
                 openDialog ?
                     <div className="search-dialog fixed w-[30rem] p-1.5 rounded-md bg-white top-[70px] z-10 left-1/2 -translate-x-1/2 shadow-md">

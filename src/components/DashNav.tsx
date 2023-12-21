@@ -118,6 +118,24 @@ const dashNavList = [
             {
                 innernavname: "Pages List",
                 innernavlink: "/backend/backend-dashboard/pages/pages-list"
+            },
+            {
+                innernavname: "Custom Product Pages Add",
+                innernavlink: "/backend/backend-dashboard/pages/custom-product/add"
+            },
+            {
+                innernavname: "Custom Product Pages List",
+                innernavlink: "/backend/backend-dashboard/pages/custom-product/list"
+            }
+        ]
+    },
+    {
+        id: 9,
+        navhead: "Contact Data",
+        navlink: [
+            {
+                innernavname: "Contact Form List",
+                innernavlink: "/backend/backend-dashboard/contact/list"
             }
         ]
     },

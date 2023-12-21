@@ -2,13 +2,14 @@ import FrontLayout from '@/components/layout/FrontLayout'
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next'
+import { Suspense } from 'react';
 
 // either Static metadata
 export const metadata: Metadata = {
   title: 'Terms Policy',
   description: 'Terms Policy',
   alternates: {
-      canonical: `/terms-policy`
+    canonical: `/terms-policy`
   }
 }
 
@@ -17,7 +18,7 @@ async function fetchterm() {
     method: 'GET',
   })
   if (fetchApi.status !== 200) return notFound();
-  const data = fetchApi.json();
+  const data = await fetchApi.json();
   return data;
 }
 
@@ -29,22 +30,24 @@ const TermsPolicyList = async () => {
       <div className='container px-8 mx-auto xl:px-5  max-w-screen-lg py-5 lg:py-8'>
         <div className="mx-auto max-w-screen-md ">
           <div className="flex flex-wrap -m-2">
-            {
-              fetchTermPolicy && fetchTermPolicy.result.map((item: any, index: number) => (
+            <Suspense>
+              {
+                fetchTermPolicy && fetchTermPolicy.result.map((item: any, index: number) => (
 
-                <div key={index} className="p-2 w-1/2">
-                  <Link href={`/terms-policy/${item.slug}`}>
-                    <div className="h-full flex items-center border-gray-200 border p-2.5 rounded-lg bg-white">
-                      <img alt="team" className="w-16 h-16 p-1.5 bg-gray-100 object-contain object-center flex-shrink-0 rounded-md mr-4"
-                        src={item.icon} />
-                      <div className="flex-grow">
-                        <h4 className="text-gray-900 title-font font-medium">{item.pagename}</h4>
+                  <div key={index} className="p-2 w-1/2">
+                    <Link href={`/${item.slug}`}>
+                      <div className="h-full flex items-center border-gray-200 border p-2.5 rounded-lg bg-white">
+                        <img alt="team" className="w-16 h-16 p-1.5 bg-gray-100 object-contain object-center flex-shrink-0 rounded-md mr-4"
+                          src={item.icon} />
+                        <div className="flex-grow">
+                          <h4 className="text-gray-900 title-font font-medium">{item.pagename}</h4>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                </div>
-              ))
-            }
+                    </Link>
+                  </div>
+                ))
+              }
+            </Suspense>
           </div>
         </div>
       </div>
