@@ -1,7 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['cloud.shopsppl.com', 'shopsppl.in','assets.website-files.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cloud.shopsppl.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'shopsppl.in',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.website-files.com',
+        pathname: '**',
+      },
+    ],
   },
 }
 
