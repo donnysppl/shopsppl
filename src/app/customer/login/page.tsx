@@ -76,9 +76,9 @@ export default function CustomerLogin() {
           else {
             window.localStorage.setItem("customer-admin", res.token)
           }
-          toast.success(res.message)
-          router.push('/customer/dashboard')
-          setloader(false)
+          toast.success(res.message);
+          router.push('/customer/dashboard');
+          setloader(false);
         }
       })
       .catch(err => {
@@ -152,7 +152,7 @@ export default function CustomerLogin() {
           </div>
 
           <div className='flex items-center justify-center mt-2'>
-            <h5 className='text-gray-200 text-sm'>Don't have a account? <Link className='underline font-semibold' href={'/customer/signup'}>Sign Up Now</Link></h5>
+            <h5 className='text-gray-200 text-sm'>Don&apos;t have a account? <Link className='underline font-semibold' href={'/customer/signup'}>Sign Up Now</Link></h5>
           </div>
         </main>
       </section>
