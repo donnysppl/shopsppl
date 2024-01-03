@@ -86,7 +86,7 @@ export default function BlogListBK() {
   ]
 
   return (
-    <div className='inner-pages-base-div'>
+    <div className='inner-pages-base-div form-page-list'>
       <div className="head">
         <h2 className='font-medium'>
           Blog List

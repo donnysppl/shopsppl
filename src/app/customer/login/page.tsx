@@ -1,7 +1,7 @@
 "use client";
 
 import LoaderFront from '@/components/front/Loader';
-import GoogleLoginbtn from '@/helpers/GoogleLoginbtn';
+import GoogleBtnLogin from '@/helpers/GoogleBtnLogin';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
@@ -90,57 +90,72 @@ export default function CustomerLogin() {
 
   return (
     <>
-      {/* <CustomerProv/> */}
-      <main className='py-20'>
-        <div className="max-w-xl mx-auto bg-white p-10 rounded-xl drop-shadow-2xl relative overflow-hidden">
-          {
-            loader ? <LoaderFront /> : null
-          }
 
-          <h2 className='text-gray-900 text-2xl title-font font-bold mb-4 leading-normal'>LOGIN</h2>
+      <section className='bg-indigo-900 h-screen '>
+        <main className='py-20 px-1.5'>
+          <div className='flex items-center justify-center mb-4'>
+            <img src="/img/logo.png" alt='logo' className='w-32' />
+          </div>
+          <div className="max-w-xl mx-auto bg-white md:p-10 p-5 rounded-xl relative overflow-hidden">
+            {
+              loader ? <LoaderFront /> : null
+            }
 
-          <form className='front-form relative' onSubmit={onLoginSubmit}  >
+            <h2 className='text-gray-900 text-center text-2xl title-font font-bold mb-4 leading-normal'>LOGIN</h2>
 
-            <div className="mb-4">
-              <label htmlFor="email" className="form-label">Email address</label>
-              <input type="email" name='email' className="form-control" placeholder='Email address'
-                onChange={(e) => setcusLoginInp({ ...cusLoginInp, email: e.target.value })} />
+            <div className="">
+              <GoogleBtnLogin title='Sign In' />
             </div>
-            <div className="mb-4">
-              <div className='flex justify-between'>
-                <label htmlFor="password" className="form-label" >Password</label>
-                <Link className="form-label" href={'/customer/forgot-password'}>Forgot Password ?</Link>
+
+            <div className="sperator flex items-center justify-center gap-1 my-5">
+              <span className="md:w-[150px] w-full border-b h-[1px] border-slate-200 border-opacity-50"></span>
+              <span className="md:w-[150px] w-full text-center text-slate-500 text-[0.8rem] font-semibold">Or</span>
+              <span className="md:w-[150px] w-full border-b h-[1px] border-slate-200 border-opacity-50"></span>
+            </div>
+
+            <form className='front-form relative' onSubmit={onLoginSubmit}  >
+
+              <div className="mb-4">
+                <label htmlFor="email" className="form-label">Email address</label>
+                <input type="email" name='email' className="form-control" placeholder='Email address'
+                  onChange={(e) => setcusLoginInp({ ...cusLoginInp, email: e.target.value })} />
               </div>
-              <input type="password" name='password' className="form-control" placeholder='password' required
-                onChange={(e) => setcusLoginInp({ ...cusLoginInp, password: e.target.value })} />
-            </div>
+              <div className="mb-4">
+                <div className='flex justify-between'>
+                  <label htmlFor="password" className="form-label" >Password</label>
+                  <Link className="form-label" href={'/customer/forgot-password'}>Forgot Password ?</Link>
+                </div>
+                <input type="password" name='password' className="form-control" placeholder='password' required
+                  onChange={(e) => setcusLoginInp({ ...cusLoginInp, password: e.target.value })} />
+              </div>
 
 
-            <button type="submit" className='btn-prim'>Submit</button>
-          </form>
+              <button type="submit" className='btn-prim w-full'>Submit</button>
+            </form>
 
-          <div className="">
-            <GoogleLoginbtn />
+
+            {
+              otpOption ?
+                <form onSubmit={onOtpVerify} className='front-form mt-4'>
+                  <h4 className='text-gray-900 text-lg title-font font-bold mb-4 leading-normal'>OTP sent on {cusLoginInp?.email}. Please check your mail.</h4>
+                  <div className="mb-3">
+                    <label htmlFor="otp" className="form-label">OTP</label>
+                    <input type="text" name='otp' className="form-control" placeholder='otp'
+                      onChange={(e) => setotpInp(e.target.value)} />
+                  </div>
+
+                  <button type="submit" className='btn-prim'>Submit</button>
+
+                </form>
+                : null
+            }
           </div>
 
-          {
-            otpOption ?
-              <form onSubmit={onOtpVerify} className='front-form mt-4'>
-                <h4 className='text-gray-900 text-lg title-font font-bold mb-4 leading-normal'>OTP sent on {cusLoginInp?.email}. Please check your mail.</h4>
-                <div className="mb-3">
-                  <label htmlFor="otp" className="form-label">OTP</label>
-                  <input type="text" name='otp' className="form-control" placeholder='otp'
-                    onChange={(e) => setotpInp(e.target.value)} />
-                </div>
-
-                <button type="submit" className='btn-prim'>Submit</button>
-
-              </form>
-              : null
-          }
-        </div>
-
-      </main>
+          <div className='flex items-center justify-center mt-2'>
+            <h5 className='text-gray-200 text-sm'>Don't have a account? <Link className='underline font-semibold' href={'/customer/signup'}>Sign Up Now</Link></h5>
+          </div>
+        </main>
+      </section>
     </>
   )
 }

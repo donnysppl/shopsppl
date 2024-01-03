@@ -82,7 +82,7 @@ export default function ListPagesBackend() {
             header: 'Action',
             cell: cell => (
                 <div className="flex gap-5">
-                    <Link href={`/backend/backend-dashboard/pages/pages-edit/${cell.row.original._id}`}><button className="text-green-400">Edit</button></Link>
+                    <Link href={`/backend/backend-dashboard/pages/edit/${cell.row.original._id}`}><button className="text-green-400">Edit</button></Link>
                     <button onClick={(e) => onDeletePages(e, cell.row.original._id)} className="text-red-400">Delete</button>
                 </div>
             )
@@ -90,7 +90,7 @@ export default function ListPagesBackend() {
     ]
 
     return (
-        <div className='inner-pages-base-div'>
+        <div className='inner-pages-base-div form-page-list'>
             <div className="head">
                 <h2 className='font-medium'>
                     Pages List

@@ -2,6 +2,16 @@ import ContactForm from '@/components/front/form/ContactForm'
 import FrontLayout from '@/components/layout/FrontLayout'
 import React from 'react'
 
+export async function generateMetadata() {
+  return {
+    title: 'Contact US',
+    description: 'Contact US',
+    alternates: {
+      canonical: `/contact`
+    }
+  }
+}
+
 export default function Contact() {
   return (
     <FrontLayout innercol={'bg-gray-100'}>

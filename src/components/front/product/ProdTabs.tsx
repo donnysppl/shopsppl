@@ -35,18 +35,18 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
     return (
         <>
             <section className="bg-black text-gray-100 py-4">
-                <div className="container p-5 mx-auto">
+                <div className="container lg:p-5 py-5 px-1 mx-auto">
                     {
                         discription ?
                             <div className="prod-spec mb-4">
-                                <Disclosure defaultOpen as="div" className="border border-gray-400 p-6 rounded-xl bg-[#191919]">
+                                <Disclosure defaultOpen as="div" className="border border-gray-400 lg:p-6 py-3 px-1.5 rounded-xl bg-[#191919]">
                                     {({ open }) => (
                                         <>
                                             <Disclosure.Button className="font-semibold text-xl w-full text-left">
                                                 <div className="flex justify-between items-center">
-                                                    <span>Product Showcase</span>
+                                                    <span className="lg:p-0 ps-1.5">Product Showcase</span>
                                                     <span>
-                                                        {open ? <AiOutlineMinus className="w-5 h-5" /> : <GoPlus className="w-5 h-5" /> } 
+                                                        {open ? <AiOutlineMinus className="w-5 h-5" /> : <GoPlus className="w-5 h-5" />}
                                                     </span>
                                                 </div>
                                             </Disclosure.Button>
@@ -81,15 +81,15 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
                     {
                         specification ?
                             <div className="spec">
-                                <Disclosure as="div" className="border border-gray-400 p-6 rounded-xl bg-[#191919]">
+                                <Disclosure as="div" className="border border-gray-400 lg:p-6 py-3 px-1.5 rounded-xl bg-[#191919]">
                                     {({ open }) => (
                                         <>
                                             <Disclosure.Button className="font-semibold text-xl w-full text-left">
-                                                
+
                                                 <div className="flex justify-between items-center">
-                                                    <span>Specifications</span>
+                                                    <span className="lg:p-0 ps-1.5">Specifications</span>
                                                     <span>
-                                                        {open ? <AiOutlineMinus className="w-5 h-5" /> : <GoPlus className="w-5 h-5" /> } 
+                                                        {open ? <AiOutlineMinus className="w-5 h-5" /> : <GoPlus className="w-5 h-5" />}
                                                     </span>
                                                 </div>
                                             </Disclosure.Button>
@@ -103,7 +103,7 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
                                                 leaveTo="opacity-0"
                                             >
                                                 <Disclosure.Panel className="mt-3">
-                                                    <div className={`${specFull ? 'h-auto' : 'h-[50vh]'} tab-content-two specification text-gray-400`}>
+                                                    <div className={`${specFull ? 'h-auto' : 'h-[50vh]'} overflow-hidden tab-content-two specification text-gray-400`}>
                                                         <div dangerouslySetInnerHTML={{ __html: specification }} />
                                                     </div>
                                                     <div className="sec-full-view flex justify-center">

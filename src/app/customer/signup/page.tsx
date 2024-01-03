@@ -1,5 +1,6 @@
 "use client";
 import LoaderFront from '@/components/front/Loader';
+import GoogleBtnLogin from '@/helpers/GoogleBtnLogin';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
@@ -51,35 +52,51 @@ export default function CustomerSignup() {
         e.preventDefault()
         setloader(true)
         await fetch('/api/customeruser/verifyotp?customerfunc=signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            customerID: signres, otp: otpInp
-          })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                customerID: signres, otp: otpInp
+            })
         }).then(res => res.json())
-          .then(res => {
-            console.log(res);
-            if (res.status === 200) {
-              toast.success(res.message)
-              router.push('/customer/login')
-              setloader(false)
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          })
+            .then(res => {
+                console.log(res);
+                if (res.status === 200) {
+                    toast.success(res.message)
+                    router.push('/customer/login')
+                    setloader(false)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     return (
-            <main className='py-20'>
-                <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl drop-shadow-2xl relative overflow-hidden">
+        <section className='bg-indigo-900 h-screen '>
+            <main className='py-20 px-1.5'>
+                <div className='flex items-center justify-center mb-4'>
+                    <img src="/img/logo.png" alt='logo' className='w-32' />
+                </div>
+                <div className="max-w-xl mx-auto bg-white md:p-10 p-5 rounded-xl relative overflow-hidden">
                     {
                         loader ? <LoaderFront /> : null
                     }
 
-                    <h2 className='text-gray-900 text-2xl title-font font-bold mb-4 leading-normal'>Sign Up</h2>
+                    <h2 className='text-gray-900 text-center text-2xl title-font font-bold mb-4 leading-normal'>Sign Up</h2>
+
+
+
+                    <div className="">
+                        <GoogleBtnLogin title='Sign Up' />
+                    </div>
+
+                    <div className="sperator flex items-center justify-center gap-1 my-5">
+                        <span className="md:w-[150px] w-full border-b h-[1px] border-slate-200 border-opacity-50"></span>
+                        <span className="md:w-[150px] w-full text-center text-slate-500 text-[0.8rem] font-semibold">Or</span>
+                        <span className="md:w-[150px] w-full border-b h-[1px] border-slate-200 border-opacity-50"></span>
+                    </div>
 
                     <form className='front-form relative' onSubmit={onSignupSubmit}  >
 
@@ -106,8 +123,10 @@ export default function CustomerSignup() {
                         </div>
 
 
-                        <button type="submit" className='btn-prim'>Submit</button>
+                        <button type="submit" className='btn-prim w-full'>Submit</button>
                     </form>
+
+
 
                     {
                         otpOption ?
@@ -125,7 +144,10 @@ export default function CustomerSignup() {
                             : null
                     }
                 </div>
-
+                <div className='flex items-center justify-center mt-2'>
+                    <h5 className='text-gray-200 text-sm'>Have a account? <Link className='underline font-semibold' href={'/customer/login'}>Login Now</Link></h5>
+                </div>
             </main>
+        </section>
     )
 }

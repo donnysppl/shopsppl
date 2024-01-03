@@ -312,7 +312,7 @@ export default function Checkout() {
     }
 
     return (
-        <main className='max-w-screen-xl mx-auto py-20'>
+        <main className='max-w-screen-xl mx-auto lg:py-20 py-0'>
             {
                 razorpayLoader ?
                     <div className="razor-loader bg-gray-900 bg-opacity-25 w-screen h-full absolute inset-0
@@ -320,8 +320,8 @@ export default function Checkout() {
                         <div className="spinner"></div>
                     </div> : null
             }
-            <div className="flex gap-10">
-                <div className="p-10 md:w-[65%] bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
+            <div className="flex lg:gap-10 gap-0 lg:flex-nowrap flex-wrap">
+                <div className="lg:p-10 p-4 md:w-[65%] bg-white flex flex-col md:ml-auto w-full md:py-8 mt-0 md:mt-0 md:rounded-xl shadow-xl lg:order-1 order-2">
                     <h2 className='font-semibold mb-3'>Checkout</h2>
 
                     <form onSubmit={oncheckout} className='front-form relative'>
@@ -431,11 +431,11 @@ export default function Checkout() {
 
 
                         </div>
-                        <button type='submit' className='btn-prim'>Order Now</button>
+                        <button type='submit' className='btn-prim lg:w-auto w-full'>Order Now</button>
                     </form>
                 </div>
-                <div className="md:w-[35%] p-5 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
-                    <h3 className='mb-2.5'>Choose Product</h3>
+                <div className="md:w-[35%] p-5 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-0 md:mt-0 md:rounded-xl shadow-xl lg:order-2 order-1 lg:border-none border-b border-gray-200">
+                    <h3 className='font-semibold mb-3'>Choose Product</h3>
                     <ul>
                         {
                             prodLoading ?

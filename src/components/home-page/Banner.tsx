@@ -17,6 +17,7 @@ export default function Banner() {
 
     const [bannerData, setbannerData] = useState<bannerType[]>([]);
     const [loading, setloading] = useState<boolean>(true);
+    const [width, setwidth] = useState<number>(0);
 
     useEffect(() => {
         const bannerFetch = async () => {
@@ -34,7 +35,7 @@ export default function Banner() {
                     else if (res.status === 400) {
 
                     }
-                    else if (res.status === 500) {
+                     else if (res.status === 500) {
 
                     }
                 })
@@ -43,6 +44,8 @@ export default function Banner() {
                 })
         }
         bannerFetch();
+        const width = window.innerWidth;
+        setwidth(width)
     }, [])
 
     return (
@@ -57,7 +60,7 @@ export default function Banner() {
                 delay: 2500,
             }}
             modules={[Pagination, Autoplay]}
-            className="banner-slider mt-2"
+            className="banner-slider"
         >
             {
                 loading ?
@@ -68,7 +71,7 @@ export default function Banner() {
                     bannerData.map((item, index) => (
                         <SwiperSlide key={index} className=' '>
                             <div className='' >
-                                <Image src={item.bannerimg} width={1920} height={600}
+                                <Image src={(width > 990) ? item.bannerimg : item.bannermobimg} width={1920} height={600}
                                     className='object-cover object-center'
                                     alt={item.name} />
                             </div>

@@ -46,7 +46,7 @@ export default function ProductListLayout() {
 
     const productFetch = async () => {
         setloading(true);
-        await fetch(`/api/product/products/front?page=${page ? page : 1}&limit=${limit ? limit : 10}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`, {
+        await fetch(`/api/product/products/front?page=${page ? page : 1}&limit=${limit ? limit : 12}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`, {
             method: 'GET',
             next: { revalidate: 10 }
         }).then(res => res.json())

@@ -27,6 +27,11 @@ const TermsPolicyList = async () => {
 
   return (
     <FrontLayout innercol='bg-gray-200'>
+      <div className='h-40 bg-prim'>
+        <div className="max-w-2xl mx-auto text-center flex justify-center items-end h-full pb-5">
+          <h1 className='font-bold text-4xl text-white uppercase'>Terms Policy</h1>
+        </div>
+      </div>
       <div className='container px-8 mx-auto xl:px-5  max-w-screen-lg py-5 lg:py-8'>
         <div className="mx-auto max-w-screen-md ">
           <div className="flex flex-wrap -m-2">

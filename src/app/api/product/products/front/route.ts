@@ -12,8 +12,8 @@ interface MyResultType {
         page: number;
         limit: number;
     };
-    totalPosts:number;
-    totalPages:number;
+    totalPosts: number;
+    totalPages: number;
 }
 
 export const dynamic = 'force-dynamic';
@@ -43,12 +43,9 @@ export async function GET(req: NextRequest) {
                 filter.category = categoryParams;
             }
 
-
-            console.log(filter , pagesParams,limitParams)
             const startIndex = (pages - 1) * limit;
             const ensIndex = pages * limit;
             const data = await Product.find(filter)
-
 
             if (!data) {
                 return NextResponse.json({

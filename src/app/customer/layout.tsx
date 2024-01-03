@@ -1,21 +1,23 @@
-import CustomerProv from "@/components/front/CustomerProv"
-import FrontLayout from "@/components/layout/FrontLayout"
+"use client";
+import { GoogleOAuthProvider } from "@react-oauth/google"
 import { Toaster } from "react-hot-toast"
 
-export default function CustomerLayout({
+export default function ProductLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
 
 
+
     return (
-        <FrontLayout innercol={'bg-gray-100'}>
+        <GoogleOAuthProvider clientId="605622970388-jos89fmacattlrgj1pu7ultb95beiu1s.apps.googleusercontent.com">
             <Toaster
                 position="bottom-center"
                 reverseOrder={false}
             />
-            <CustomerProv>{children}</CustomerProv>
-        </FrontLayout>
+            {children}
+        </GoogleOAuthProvider>
+
     )
 }

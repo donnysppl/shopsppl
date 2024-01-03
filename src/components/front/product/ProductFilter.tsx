@@ -40,6 +40,8 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
   const limitParam = limit ? limit : '10';
   const brandParam = brand ? brand : 'all';
   const categoryParam = category ? category : 'all';
+
+  console.log(page, brand, limit, category)
   return (
     <>
       <div className="filter-head flex justify-between items-center p-3 mt-2">
@@ -69,7 +71,7 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
         <div className="flex flex-col pt-2 ">
           <h4 className="font-bold py-1.5 px-1">Categories</h4>
           {Categories.map((item: any, index: number) => (
-            <Link className={`${(brand === item.name) ? 'active' : null} filter-item`} key={index} href={`?${new URLSearchParams({
+            <Link className={`${(category === item.name) ? 'active' : null} filter-item`} key={index} href={`?${new URLSearchParams({
               page: pageParams, limit: limitParam,
               brand: brandParam, category: item.name
             })}`}>{item.name}</Link>

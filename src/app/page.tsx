@@ -52,9 +52,8 @@ export default function Home() {
 
     <FrontLayout innercol={'bg-gray-100'}>
       <Banner/>
-      <div>Home</div>
 
-      <ScrollCard/>
+      {/* <ScrollCard/> */}
       <Category/>
       <CateSlid />
 

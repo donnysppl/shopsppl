@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import * as XLSX from 'xlsx';
 import Product from "@/models/product";
 import { connect } from "@/dbConfig/dbConfig";
+import Category from "@/models/category";
+import Brand from "@/models/brand";
 
 export async function POST(req: NextRequest) {
 
@@ -25,8 +27,18 @@ export async function POST(req: NextRequest) {
 
         const sheetData = [];
 
-        const bulkOperations = jsonData.map((record:any) => {
+        const bulkOperations = await Promise.all(jsonData.map(async (record: any) => {
             const simplifiedString = record.Product_ID.replace(/"/g, '');
+            const listCat = record.Product_Category;
+            const productimgSplit = record.Product_Images;
+            const productRPSSplit = record.Product_RPD_Images;
+            const catArr = listCat.split(",");
+            const productimgArr = productimgSplit.split(",");
+            const productRPDArr = productRPSSplit.split(",");
+            const categoryData = await Category.find({ name: { $in: catArr } });
+            const brandData = await Brand.find({ name: { $in: record.Product_Brand } });
+            const priceDiffData = record.Product_Regular_Price - record.Product_Sale_Price;
+            const priceDiffPercentData = (priceDiffData / record.Product_Regular_Price) * 100;
 
             const filter = { _id: simplifiedString };
             const update = {
@@ -37,16 +49,25 @@ export async function POST(req: NextRequest) {
                     metadiscrip: record.Product_Meta_Discription,
                     metakeyword: record.Product_Meta_Keyword,
                     model: record.Product_Model,
-                    category: record.Product_Category,
+                    category: catArr,
+                    categoryArr: categoryData,
                     discription: record.Product_Discription,
                     mainproductimg: record.Product_Main_Img,
-                    productimg: record.Product_Images,
-                    productrpd: record.Product_RPD_Images,
+                    productimg: productimgArr,
+                    productrpd: productRPDArr,
                     productNormalPrice: record.Product_Regular_Price,
                     productSalePrice: record.Product_Sale_Price,
                     isPublish: record.Publish,
                     isStatus: record.Status,
                     isFeatured: record.Featured,
+                    productPriceDiffAmt: priceDiffData,
+                    productPriceDiffpercent: priceDiffPercentData,
+                    brand: record.Product_Brand,
+                    weight: record.Product_weight,
+                    lenght: record.Product_lenght,
+                    width: record.Product_width,
+                    height: record.Product_height,
+                    brandArr: brandData,
                 },
             };
 
@@ -56,7 +77,7 @@ export async function POST(req: NextRequest) {
                     update,
                 },
             };
-        });
+        }));
         try {
             const bulkWriteResult = await Product.bulkWrite(bulkOperations);
             console.log(bulkWriteResult)

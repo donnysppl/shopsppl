@@ -37,21 +37,17 @@ export default function Header() {
                             <li><Link href={'/about'}>About Us</Link></li>
                             <li><Link href={'/product'}>Product</Link></li>
                             <li><Link href={'/contact'}>Contact</Link></li>
-                            {
-                                !menuOpen ? <>
-                                    <Search />
-                                    <CartCompo /></> : null
-                            }
+                            {/* <Search />
+                            <CartCompo /> */}
                         </ul>
                     </div>
-                    <div className='md:hidden block res-menu'>
+                    <div className='ms-2'>
+                    {/* <div className='md:hidden block res-menu'> */}
+
                         <ul className='flex gap-2.5'>
-                            {
-                                !menuOpen ? <>
-                                    <Search />
-                                    <CartCompo /></> : null
-                            }
-                            <li onClick={() => setmenuOpen(!menuOpen)}><ResponMeny /></li>
+                            <Search />
+                            <CartCompo />
+                            <li className='md:hidden block res-menu' onClick={() => setmenuOpen(!menuOpen)}><ResponMeny /></li>
                         </ul>
                     </div>
                 </div>

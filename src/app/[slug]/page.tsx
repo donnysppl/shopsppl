@@ -28,6 +28,11 @@ const TermPolicyPerPage = async ({ params }: { params: { slug: string }}) => {
 
   return (
     <FrontLayout innercol='bg-gray-200'>
+      <div className='h-40 bg-prim'>
+        <div className="max-w-2xl mx-auto text-center flex justify-center items-end h-full pb-5">
+          <h1 className='font-bold text-4xl text-white uppercase'>{fetchTermPolicy.result[0].pagename}</h1>
+        </div>
+      </div>
       <PolicyPage data={fetchTermPolicy.result[0].pagedata} classname={params.slug} title={fetchTermPolicy.result[0].pagename} />
     </FrontLayout>
   )

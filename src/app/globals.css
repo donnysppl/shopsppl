@@ -132,6 +132,10 @@ body {
   }
 }
 
+.google-btn {
+  @apply px-4 py-2 border w-full flex items-center justify-center gap-2 text-sm border-slate-200 rounded-full text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150;
+}
+
 /* product */
 .filter-item {
   @apply hover:bg-gray-100 py-1.5 px-2 text-sm rounded-md capitalize;
@@ -165,7 +169,6 @@ body {
 /* product specification amazon */
 
 .specification {
-  width: 80%;
   margin: 0 auto;
 }
 
@@ -286,6 +289,7 @@ span.cart-icon-div-quantity {
   height: 0;
   display: none;
 }
+
 .cateslide-pagination {
   color: #fff;
   display: inline !important;
@@ -293,13 +297,16 @@ span.cart-icon-div-quantity {
   border-radius: 50px !important;
   font-size: 14px;
 }
-.cateslide .swiper-pagination-bullet-active{
+
+.cateslide .swiper-pagination-bullet-active {
   @apply bg-act text-black font-semibold;
 }
-.cateslide .swiper-pagination{
+
+.cateslide .swiper-pagination {
   top: 60px !important;
   height: 100px;
 }
+
 /* front form */
 .input {
   @apply w-full rounded-full border-gray-200 bg-gray-100 p-2 text-sm font-medium text-gray-700 placeholder:text-gray-700;
@@ -338,16 +345,32 @@ span.cart-icon-div-quantity {
   scale: 1.05;
   transition: 0.3s ease-in-out;
 }
-.blog-down-arrow{
-  animation: blogArrow 1s infinite  alternate;
+
+.blog-down-arrow {
+  animation: blogArrow 1s infinite alternate;
 }
+
 @keyframes blogArrow {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-10px); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
 }
-.form-part-contact{
+
+.form-part-contact {
   margin-top: -60px;
 }
+
+
+/* footer */
+footer {
+  background: url('/img/footer-bg.webp');
+}
+
+
 @media only screen and (max-width: 991.99px) {
 
   /* product filter */
@@ -363,6 +386,17 @@ span.cart-icon-div-quantity {
     @apply left-0;
   }
 
+  /* product table */
+  .specification figure.table table tbody tr{
+    width: 100%;
+  }
+  .specification figure.table table tbody tr td,.specification figure.table table ul li{
+    font-size: 12px;
+  }
+  .specification figure.table table tbody tr{
+    padding: 8px;
+  }
+
   /* content-part */
   .content-part h2 {
     font-size: 1.2rem;
@@ -376,19 +410,21 @@ span.cart-icon-div-quantity {
   .responsive-menu {
     @apply fixed sm:w-96 w-full z-20 h-screen bg-[#191919] top-0 transition-all ease-in-out border-l border-gray-400;
   }
-  
+
   .responsive-menu.open {
     @apply left-0;
   }
-  
+
   .responsive-menu.close {
     @apply -left-full;
   }
-  .responsive-menu ul{
+
+  .responsive-menu ul {
     flex-direction: column;
     align-items: start;
   }
-  .responsive-menu ul li{
+
+  .responsive-menu ul li {
     font-size: 18px;
     padding: 10px;
     width: 100%;

@@ -10,6 +10,7 @@ import QuantyPart from '@/components/front/product/QuantyPart';
 async function fetchSingleProd(slug: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
     method: 'GET',
+    cache: 'no-cache',
   })
   if (fetchApi.status !== 200) return notFound();
   const data = fetchApi.json();
@@ -36,10 +37,10 @@ export default async function ProductSingle({ params }: { params: { slug: string
   return (
     <>
       <section className="text-gray-600 body-font overflow-hidden">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 md:py-24 py-5 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
 
-            <div className="w-2/4">
+            <div className="lg:w-2/4 w-full">
               {
                 loading ?
                   <div className="w-full h-[500px] bg-gray-300 rounded-lg border border-gray-200 animate-pulse">
@@ -51,10 +52,10 @@ export default async function ProductSingle({ params }: { params: { slug: string
             </div>
             <div className={`lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 
                   ${loading ? "space-y-3.5" : null}`}>
-              <h2 className={`text-sm title-font text-gray-500 tracking-widest 
+              <h2 className={`text-sm title-font text-gray-500 tracking-widest mb-1.5
                     ${loading ? "animate-pulse bg-gray-300 rounded-md h-3 w-1/5" : null}`}>
                 {prodDetailData?.brand}</h2>
-              <h1 className={`text-gray-900 text-2xl title-font font-medium mb-1 leading-normal
+              <h1 className={`text-gray-900 lg:text-2xl text-lg title-font font-semibold mb-1 leading-normal
                     ${loading ? "animate-pulse bg-gray-300 rounded-md h-28 w-full" : null}`}>
                 {prodDetailData?.name}</h1>
               <div className={`price mt-2 ${loading ?

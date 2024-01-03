@@ -73,48 +73,53 @@ export default function CustomerForgotPassword() {
     }
 
     return (
-        <main className='py-20'>
-            <div className="max-w-2xl mx-auto bg-white p-8 rounded-xl drop-shadow-2xl relative overflow-hidden">
-                {
-                    loader ? <LoaderFront /> : null
-                }
+        <section className='bg-indigo-900 h-screen '>
+            <main className='py-20 px-1.5'>
+                <div className='flex items-center justify-center mb-4'>
+                    <img src="/img/logo.png" alt='logo' className='w-32' />
+                </div>
+                <div className="max-w-xl mx-auto bg-white md:p-10 p-5 rounded-xl relative overflow-hidden">
+                    {
+                        loader ? <LoaderFront /> : null
+                    }
 
-                <h2 className='text-gray-900 text-2xl title-font font-bold mb-4 leading-normal'>Forgot Password</h2>
+                    <h2 className='text-gray-900 text-2xl title-font font-bold mb-4 leading-normal'>Forgot Password</h2>
 
-                <form className='front-form relative' onSubmit={onForgotPassSubmit}  >
+                    <form className='front-form relative' onSubmit={onForgotPassSubmit}  >
 
-                    <div className="mb-4">
-                        <label htmlFor="email" className="form-label">Email address</label>
-                        <input type="email" name='email' className="form-control" placeholder='Email address'
-                            onChange={(e) => setcusForgotInp({ ...cusForgotInp, email: e.target.value })} />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="password" className="form-label" >New Password</label>
-                        <input type="password" name='password' className="form-control" placeholder='password' required
-                            onChange={(e) => setcusForgotInp({ ...cusForgotInp, password: e.target.value })} />
-                    </div>
+                        <div className="mb-4">
+                            <label htmlFor="email" className="form-label">Email address</label>
+                            <input type="email" name='email' className="form-control" placeholder='Email address'
+                                onChange={(e) => setcusForgotInp({ ...cusForgotInp, email: e.target.value })} />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="password" className="form-label" >New Password</label>
+                            <input type="password" name='password' className="form-control" placeholder='password' required
+                                onChange={(e) => setcusForgotInp({ ...cusForgotInp, password: e.target.value })} />
+                        </div>
 
 
-                    <button type="submit" className='btn-prim'>Submit</button>
-                </form>
+                        <button type="submit" className='btn-prim'>Submit</button>
+                    </form>
 
-                {
-                    otpOption ?
-                        <form onSubmit={onOtpVerify} className='front-form mt-4'>
-                            <h4 className='text-gray-900 text-lg title-font font-bold mb-4 leading-normal'>OTP sent on {cusForgotInp?.email}. Please check your mail.</h4>
-                            <div className="mb-3">
-                                <label htmlFor="otp" className="form-label">OTP</label>
-                                <input type="text" name='otp' className="form-control" placeholder='otp'
-                                    onChange={(e) => setotpInp(e.target.value)} />
-                            </div>
+                    {
+                        otpOption ?
+                            <form onSubmit={onOtpVerify} className='front-form mt-4'>
+                                <h4 className='text-gray-900 text-lg title-font font-bold mb-4 leading-normal'>OTP sent on {cusForgotInp?.email}. Please check your mail.</h4>
+                                <div className="mb-3">
+                                    <label htmlFor="otp" className="form-label">OTP</label>
+                                    <input type="text" name='otp' className="form-control" placeholder='otp'
+                                        onChange={(e) => setotpInp(e.target.value)} />
+                                </div>
 
-                            <button type="submit" className='btn-prim'>Submit</button>
+                                <button type="submit" className='btn-prim'>Submit</button>
 
-                        </form>
-                        : null
-                }
-            </div>
+                            </form>
+                            : null
+                    }
+                </div>
 
-        </main>
+            </main>
+        </section>
     )
 }

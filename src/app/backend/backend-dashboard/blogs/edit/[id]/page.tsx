@@ -7,7 +7,7 @@ export default function BlogEditBk({ params }: { params: { id: string } }) {
     id:params.id,
   }
   return (
-    <div className='inner-pages-base-div'>
+    <div className='inner-pages-base-div form-page'>
       <div className="head">
         <h2 className='font-medium'>
           Edit Blog

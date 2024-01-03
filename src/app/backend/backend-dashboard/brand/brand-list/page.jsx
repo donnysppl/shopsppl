@@ -96,7 +96,7 @@ export default function BrandList() {
     return (
 
 
-        <div className='inner-pages-base-div'>
+        <div className='inner-pages-base-div form-page-list'>
             <div className="head">
                 <h2 className='font-medium'>
                     Brand List
