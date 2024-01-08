@@ -18,7 +18,7 @@ export default function ProductCard(item:Product) {
             <Link href={`/product/${item.slug}`}>
 
                 <div className="relative">
-                    <Image src={item.mainproductimg} width={300} height={275} alt={item.name} className="object-contain object-center mx-auto" />
+                    <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${item.mainproductimg}`} width={300} height={275} alt={item.name} className="object-contain object-center mx-auto" />
                     <span className="absolute top-2 left-2 rounded-full bg-black px-1.5 py-1.5 text-center text-[0.5rem] font-medium text-white">
                         {typeof item.productPriceDiffpercent === 'number'
                             ? `${Math.floor(item.productPriceDiffpercent)}% OFF`

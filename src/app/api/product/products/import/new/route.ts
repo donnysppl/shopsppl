@@ -64,6 +64,7 @@ export async function POST(req: NextRequest) {
                 width: jsonData[i].Product_width,
                 height: jsonData[i].Product_height,
                 brandArr : brandData,
+                inStock:jsonData[i].InStock
             })
 
         }

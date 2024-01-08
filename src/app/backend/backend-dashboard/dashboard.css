@@ -91,6 +91,9 @@
 .delete-btn{
     @apply text-red-600 bg-red-400 bg-opacity-25 p-1.5 rounded-md;
 }
+.view-btn{
+    @apply text-blue-600 bg-blue-400 bg-opacity-25 p-1.5 rounded-md;
+}
 
 /* ckeditor */
 .ckeditor-bg{

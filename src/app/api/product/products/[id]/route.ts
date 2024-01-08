@@ -74,10 +74,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         const categoryData = await Category.find({ name: { $in: category } });
         const brandData = await Brand.find({ name: { $in: brand } });
 
-        console.log(typeof(productimg),typeof(productrpd))
-
         const productimgStr = productimg.toString();
-        const productRPDStr = productimg.toString();
+        const productRPDStr = productrpd.toString();
 
         const productimgArr = productimgStr.split(",");
         const productRPDArr = productRPDStr.split(",");

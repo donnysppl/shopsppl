@@ -62,7 +62,7 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
                                                     <ul className={`${prodSpecFull ? 'h-auto' : 'h-[50vh]'} overflow-hidden mb-4 rounded-lg`}>
                                                         {discription.map((item, index) => (
                                                             <li key={index}>
-                                                                <Image src={item} alt={item} width={1600} height={500} />
+                                                                <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${item}`} alt={item} width={1600} height={500} />
                                                             </li>
                                                         ))}
                                                     </ul>

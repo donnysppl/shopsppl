@@ -93,13 +93,15 @@ export default function ProductForm({ method, id }: ProdFormProps) {
     const [selectedOption, setSelectedOption] = useState<any>(null);
     const [selectedbrand, setSelectedbrand] = useState<any>(null);
     useEffect(() => {
+        
         const fetchPrevProd = async () => {
+            setloader(true)
             await fetch(`/api/product/products/${id}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
                         setproductinp(res.result);
@@ -118,7 +120,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                     else if (res.status === 500) {
                         toast.error(res.message);
                     }
-                    // setloader(false);
+                    setloader(false);
                 })
                 .catch(err => {
                     console.log(err);
@@ -135,13 +137,13 @@ export default function ProductForm({ method, id }: ProdFormProps) {
 
     useEffect(() => {
         const fetchCateData = async () => {
-            // setloader(true);
+            setloader(true);
             await fetch('/api/product/category', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
                         setallCate(res.result);
@@ -152,20 +154,20 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                     else if (res.status === 500) {
                         toast.error(res.message);
                     }
-                    // setloader(false);
+                    setloader(false);
                 })
                 .catch(err => {
                     console.log(err);
                 })
         }
         const fetchBrandData = async () => {
-            // setloader(true);
+            setloader(true);
             await fetch('/api/product/brand', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
                         allBetbanner(res.result);
@@ -176,7 +178,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                     else if (res.status === 500) {
                         toast.error(res.message);
                     }
-                    // setloader(false);
+                    setloader(false);
                 })
                 .catch(err => {
                     console.log(err);
@@ -296,7 +298,6 @@ export default function ProductForm({ method, id }: ProdFormProps) {
             alignItems: 'center',
         }),
     };
-    console.log(shortDisInp, longDisInp)
 
     return (
         <form onSubmit={onProductSubmit} className="relative items-center">

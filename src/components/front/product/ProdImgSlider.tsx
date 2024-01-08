@@ -34,7 +34,8 @@ export default function ProdImgSlider(productData:Product) {
                     <SwiperSlide className=" ">
                         {
                             productData &&
-                            <Image src={productData.mainproductimg} width={400} height={400}
+                            
+                            <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${productData.mainproductimg}`} width={400} height={400}
                                 alt="ecommerce"
                                 className="lg:w-1/2 w-full lg:h-auto h-[400px] mx-auto object-contain object-center rounded" />
                         }
@@ -43,7 +44,7 @@ export default function ProdImgSlider(productData:Product) {
                         productData?.productimg.map((item, index) => {
                             return (
                                 <SwiperSlide className="" key={index}>
-                                    <Image src={`${item}`} width={400} height={400}
+                                    <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${item}`} width={400} height={400}
                                         alt="ecommerce"
                                         className="lg:w-1/2 w-full lg:h-auto h-[400px] mx-auto object-contain object-center rounded" />
                                 </SwiperSlide>
@@ -66,7 +67,7 @@ export default function ProdImgSlider(productData:Product) {
                 <SwiperSlide>
                     {
                         productData &&
-                        <Image src={productData.mainproductimg} width={400} height={400}
+                        <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${productData.mainproductimg}`} width={400} height={400}
                             alt="ecommerce"
                             className="lg:w-1/2 w-full lg:h-auto h-[400px] object-contain object-center rounded" />
                     }
@@ -75,7 +76,7 @@ export default function ProdImgSlider(productData:Product) {
                     productData?.productimg.map((item, index) => {
                         return (
                             <SwiperSlide key={index}>
-                                <Image src={`${item}`} width={100} height={100}
+                                <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${item}`} width={100} height={100}
                                     alt="ecommerce"
                                     className="lg:w-1/2 w-full lg:h-auto h-[100px] object-contain object-center rounded" />
                             </SwiperSlide>

@@ -17,7 +17,6 @@ export default function ListProduct() {
                 method: 'GET',
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
                         setcatetableData(res.result);
@@ -79,6 +78,10 @@ export default function ListProduct() {
             accessorKey: 'model',
         },
         {
+            header: 'Brand',
+            accessorFn: (row, index) => row.brand,
+        },
+        {
             header: 'Product Category',
             accessorFn: (row, index) => row.category.toString(),
         },
@@ -89,9 +92,10 @@ export default function ListProduct() {
         {
             header: 'Action',
             cell: cell => (
-                <div className="flex gap-5">
-                    <Link href={`/backend/backend-dashboard/product/edit-product/${cell.row.original._id}`}><button className="text-green-400">Edit</button></Link>
-                    <button onClick={(e) => onDeleteProduct(e, cell.row.original._id)} className="text-red-400">Delete</button>
+                <div className="flex gap-3">
+                    <Link href={`/product/${cell.row.original.slug}`}><button className="view-btn">View</button></Link>
+                    <Link href={`/backend/backend-dashboard/product/edit-product/${cell.row.original._id}`}><button className="edit-btn">Edit</button></Link>
+                    <button onClick={(e) => onDeleteProduct(e, cell.row.original._id)} className="delete-btn">Delete</button>
                 </div>
             )
         }
