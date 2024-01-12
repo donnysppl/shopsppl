@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverRuntimeConfig: {
+    // Increase the timeout for API routes (in milliseconds)
+    apiTimeout: 300000, // 300 seconds
+  },
   images: {
     remotePatterns: [
       {
