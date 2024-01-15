@@ -103,7 +103,7 @@ export default function ListProduct() {
 
     return (
 
-        <div className='inner-pages-base-div'>
+        <div className='inner-pages-base-div dark'>
             <div className="head">
                 <div className="flex gap-5">
                     <h2 className='font-medium'>

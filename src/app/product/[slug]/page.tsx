@@ -58,6 +58,9 @@ export default async function ProductSingle({ params }: { params: { slug: string
               <h1 className={`text-gray-900 lg:text-2xl text-lg title-font font-semibold mb-1 leading-normal
                     ${loading ? "animate-pulse bg-gray-300 rounded-md h-28 w-full" : null}`}>
                 {prodDetailData?.name}</h1>
+                <div className={`text-gray-800 text-base title-font font-semibold mb-1 leading-normal
+                    ${loading ? "animate-pulse bg-gray-300 rounded-md h-28 w-full" : null}`}>Model/SKU : {prodDetailData?.model}</div>
+
               <div className={`price mt-2 ${loading ?
                 "animate-pulse bg-gray-300 rounded-md h-3 w-full" : null}`}>
                 {
