@@ -2,7 +2,6 @@ import FrontLayout from '@/components/layout/FrontLayout'
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next'
-import { Suspense } from 'react';
 
 // either Static metadata
 export const metadata: Metadata = {
@@ -35,7 +34,7 @@ const TermsPolicyList = async () => {
       <div className='container px-8 mx-auto xl:px-5  max-w-screen-lg py-5 lg:py-8'>
         <div className="mx-auto max-w-screen-md ">
           <div className="flex flex-wrap -m-2">
-            <Suspense>
+            {/* <Suspense> */}
               {
                 fetchTermPolicy && fetchTermPolicy.result.map((item: any, index: number) => (
 
@@ -52,7 +51,7 @@ const TermsPolicyList = async () => {
                   </div>
                 ))
               }
-            </Suspense>
+            {/* </Suspense> */}
           </div>
         </div>
       </div>
