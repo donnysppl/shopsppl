@@ -49,7 +49,7 @@ export default async function ProductList({ searchParams }: {
         <div className="product-part lg:col-span-3">
           <div className="mx-auto max-w-screen-xl">
             <div className='flex justify-between p-4'>
-              <h2>product List</h2>
+              <h2>Product List</h2>
               <div>
                 <LimitSelect brand={brandParams} category={categoryParams} page={pageParams} />
               </div>

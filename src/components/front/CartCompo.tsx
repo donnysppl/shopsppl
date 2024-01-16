@@ -72,8 +72,8 @@ export default function CartCompo() {
                                             </> :
                                             cartProd && cartProd.map((item: Product, index: number) => (
                                                 <li key={index} className="flex py-6">
-                                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                        <Image src={item.mainproductimg} width={100} height={100} alt={item.name} className="h-full w-full object-cover object-center" />
+                                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 bg-gray-200">
+                                                        <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${item.mainproductimg}`} width={100} height={100} alt={item.name} className="h-full w-full object-contain object-center" />
                                                     </div>
 
                                                     <div className="ml-4 flex flex-1 flex-col">

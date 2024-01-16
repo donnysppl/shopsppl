@@ -455,7 +455,7 @@ export default function Checkout() {
                                 checkoutProd && checkoutProd.map((item, index) => (
                                     <li key={index} className="">
                                         <div className='cart-product flex gap-2.5 border border-gray-400 mb-2.5 rounded-xl overflow-hidden'>
-                                            <Image src={item.mainproductimg} width={100} height={100} alt={item.name} />
+                                            <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${item.mainproductimg}`} width={100} height={100} alt={item.name} className='w-[125px] object-contain object-center' />
                                             <div className="prod-data p-1.5">
                                                 <div className="name text-[0.8rem] line-clamp-2">
                                                     {item.name}</div>
