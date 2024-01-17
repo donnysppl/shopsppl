@@ -275,6 +275,7 @@ export default function Checkout() {
                     razorpay_order_id: response.razorpay_order_id,
                     razorpay_signature: response.razorpay_signature,
                     userid: orderid,
+                    email:orderInp.email,
                 }
                 await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/razorpay/paymentverification`, {
                     method: 'POST',

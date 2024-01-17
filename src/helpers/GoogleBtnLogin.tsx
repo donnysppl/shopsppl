@@ -2,8 +2,11 @@ import LoaderFront from '@/components/front/Loader';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export default function GoogleBtnLogin({ title }: { title: string }) {
+
+    const router = useRouter();
 
     const [loading, setloading] = useState<boolean>(false)
     const login = useGoogleLogin({
@@ -30,18 +33,19 @@ export default function GoogleBtnLogin({ title }: { title: string }) {
         }).then(res => res.json())
             .then(res => {
                 console.log(res)
-                if (res.data.status === 200) {
-
-                  setloading(false);
+                if (res.status === 200) {
+                    
+                    setloading(false);
                 }
-                else if (res.data.status === 404) {
-                  toast.error(res.data.message);
-                  setloading(false);
+                else if (res.status === 404) {
+                    toast.error(res.message);
+                    setloading(false);
                 }
-                else if (res.data.status === 401) {
-                  toast.error(res.data.message);
-                  setloading(false);
+                else if (res.status === 401) {
+                    toast.error(res.message);
+                    setloading(false);
                 }
+                router.push('/customer/dashboard');
             })
             .catch(err => {
                 console.log(err);
@@ -52,9 +56,9 @@ export default function GoogleBtnLogin({ title }: { title: string }) {
     return (
 
         <>
-        {
-            loading ? <LoaderFront /> : null
-        }
+            {
+                loading ? <LoaderFront /> : null
+            }
             <button onClick={() => login()} className="google-btn">
                 <img className="w-6 h-6" src="/google.svg" alt="google logo" />
                 <span>{title} with Google</span>

@@ -74,7 +74,7 @@ export default function CustomerSignup() {
     }
 
     return (
-        <section className='bg-indigo-900 h-screen '>
+        <section className='bg-prim h-screen '>
             <main className='py-20 px-1.5'>
                 <div className='flex items-center justify-center mb-4'>
                     <img src="/img/logo.png" alt='logo' className='w-32' />

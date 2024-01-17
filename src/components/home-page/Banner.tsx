@@ -23,6 +23,7 @@ export default function Banner() {
         const bannerFetch = async () => {
             await fetch('/api/banner/list', {
                 method: 'GET',
+                next:{revalidate: 10,}
             }).then(res => res.json())
                 .then(res => {
                     console.log(res);

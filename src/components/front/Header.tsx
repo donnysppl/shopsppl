@@ -6,6 +6,8 @@ import CartCompo from './CartCompo'
 import ResponMeny from './ResponMeny';
 import Search from './Search';
 import { AiOutlineClose } from "react-icons/ai";
+import { MdOutlineLogin } from "react-icons/md";
+
 export default function Header() {
     const [menuOpen, setmenuOpen] = useState<boolean>(false);
 
@@ -37,6 +39,7 @@ export default function Header() {
                             <li><Link href={'/about'}>About Us</Link></li>
                             <li><Link href={'/product'}>Product</Link></li>
                             <li><Link href={'/contact'}>Contact</Link></li>
+                            <li><Link href={'/customer/login'}>Login/Signup</Link></li>
                             {/* <Search />
                             <CartCompo /> */}
                         </ul>
@@ -47,6 +50,8 @@ export default function Header() {
                         <ul className='flex gap-2.5'>
                             <Search />
                             <CartCompo />
+                            
+
                             <li className='md:hidden block res-menu' onClick={() => setmenuOpen(!menuOpen)}><ResponMeny /></li>
                         </ul>
                     </div>

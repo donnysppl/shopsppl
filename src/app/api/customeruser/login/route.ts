@@ -11,7 +11,6 @@ export async function POST(req: NextRequest) {
         const { email, password } = await req.json();
         console.log({ email, password })
         const customerExist = await Customer.findOne({ email });
-        console.log(customerExist)
         if (!customerExist) {
             return NextResponse.json({
                 status: 400,
@@ -38,7 +37,7 @@ export async function POST(req: NextRequest) {
                         status: 200,
                         message: 'Check the mail for otp',
                         mail: sendOTP,
-                        result: customerExist
+                        result: customerExist._id
                     }, { status: 200 })
                 }
             }

@@ -39,7 +39,7 @@ export default function CustomerLogin() {
         console.log(res);
         if (res.status === 200) {
           setotpOption(true);
-          setcusLoginRes(res.result._id);
+          setcusLoginRes(res.result);
           setloader(false)
         }
         else if (res.status === 400) {
@@ -91,7 +91,7 @@ export default function CustomerLogin() {
   return (
     <>
 
-      <section className='bg-indigo-900 h-screen '>
+      <section className='bg-prim h-full min-h-screen '>
         <main className='py-20 px-1.5'>
           <div className='flex items-center justify-center mb-4'>
             <img src="/img/logo.png" alt='logo' className='w-32' />

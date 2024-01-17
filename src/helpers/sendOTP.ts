@@ -2,6 +2,8 @@ import CustomerOTPVerification from "@/models/customerOTPVerify";
 import bcryptjs from 'bcryptjs';
 import Nodemailer from 'nodemailer';
 import { mailTransport } from '@/helpers/common';
+import { render } from '@react-email/render';
+import {OTPEmail} from "@/helpers/Email/email";
 
 export const sendOtp = async (email: string, id?:string) => {
 
@@ -9,13 +11,14 @@ export const sendOtp = async (email: string, id?:string) => {
     const transporter = Nodemailer.createTransport(mailTransport);
 
     const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
+    const emailHtml = render(OTPEmail({ url: "/img/logo.png", otp:otp }));
 
     // mail option
     const mailOption = {
         from: process.env.MAIL_SMTP_USER,
         to: email,
         subject: "Verify Your Email",
-        html: `<p>${otp}</p>`
+        html: emailHtml
     };
 
     const hashedOTP = await bcryptjs.hash(otp, salt);

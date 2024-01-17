@@ -17,6 +17,12 @@ export default function CustomerLayout({
                     position="bottom-center"
                     reverseOrder={false}
                 />
+
+
+{/* <main className="max-w-screen-2xl mx-auto flex sm:flex-nowrap flex-wrap gap-10 bg-white">
+
+</main> */}
+
                 <main className="max-w-screen-2xl px-5 py-20 mx-auto flex sm:flex-nowrap flex-wrap gap-10">
                     <div className="lg:w-1/4 md:w-1/3 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
                         <div className="dashboard-nav p-6">
