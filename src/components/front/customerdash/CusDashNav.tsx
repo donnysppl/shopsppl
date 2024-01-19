@@ -4,7 +4,7 @@ import { LuLayoutDashboard, LuLogOut } from "react-icons/lu";
 import { BsCart4 } from "react-icons/bs";
 import Link from 'next/link';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import { useRouter,usePathname } from 'next/navigation';
 
 const customerDashboardNav = [
     {
@@ -21,6 +21,8 @@ const customerDashboardNav = [
 
 export default function CusDashNav() {
     const router = useRouter();
+    const pathname = usePathname();
+    
 
     const custLogout = async () => {
         await fetch('/api/customeruser/logout', {
@@ -30,6 +32,7 @@ export default function CusDashNav() {
                 console.log(res);
                 if (res.status === 200) {
                     toast.success(res.message);
+                    window.localStorage.clear();
                     router.push('/customer/login')
                 }
             })
@@ -43,7 +46,7 @@ export default function CusDashNav() {
             {
                 customerDashboardNav.map((item, index) => (
                     <li key={index}>
-                        <Link href={item.link} className='flex font-medium items-center gap-3 py-2 px-2 hover:bg-gray-100 active:bg-gray-100 rounded-lg'>{item.icon} {item.name}</Link>
+                        <Link href={item.link} className={`dashboard-nav ${(pathname === item.link) ? 'active' : '' } `}>{item.icon} {item.name}</Link>
                     </li>
 
                 ))

@@ -1,8 +1,6 @@
 import CusDashNav from "@/components/front/customerdash/CusDashNav"
 import FrontLayout from "@/components/layout/FrontLayout"
 import { Toaster } from "react-hot-toast"
-import { BiSolidUserCircle } from "react-icons/bi";
-import { LuLogOut } from "react-icons/lu";
 
 export default function CustomerLayout({
     children,
@@ -19,21 +17,9 @@ export default function CustomerLayout({
                 />
 
 
-{/* <main className="max-w-screen-2xl mx-auto flex sm:flex-nowrap flex-wrap gap-10 bg-white">
-
-</main> */}
-
-                <main className="max-w-screen-2xl px-5 py-20 mx-auto flex sm:flex-nowrap flex-wrap gap-10">
-                    <div className="lg:w-1/4 md:w-1/3 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
-                        <div className="dashboard-nav p-6">
-                            <div className="usericon">
-                                <BiSolidUserCircle className='w-[75px] h-[75px] rounded-full opacity-70' />
-
-                                <ul className='pb-4 mb-3 border-b border-gray-300'>
-                                    <li>Customer name</li>
-                                    <li>Customer email</li>
-                                </ul>
-                            </div>
+                <main className="max-w-screen-2xl mx-auto flex sm:flex-nowrap flex-wrap gap-10 bg-white">
+                    <div className="lg:w-1/4 md:w-1/3 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl ">
+                        <div className="dashboard-nav-div p-6">
                             <ul>
                                 <CusDashNav />
                             </ul>
@@ -41,11 +27,12 @@ export default function CustomerLayout({
 
                     </div>
 
-                    <div className="lg:w-3/4 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl shadow-xl">
+                    <div className="lg:w-3/4 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 rounded-xl ">
                         {children}
                     </div>
-
                 </main>
+
+
             </FrontLayout>
         </>
     )

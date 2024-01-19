@@ -96,7 +96,7 @@ export const OrderCompleteEmail = ({ url,otp }) => (
         <Section style={box}>
           <Section style={header}>
             <Img
-              src={'https://thomson.shopsppl.net/img/logo.png'}
+              src={'/img/logo.png'}
               width="180"
               alt="SPPL-logo" style={logo}
             />

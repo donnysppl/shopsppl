@@ -7,6 +7,7 @@ import ResponMeny from './ResponMeny';
 import Search from './Search';
 import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineLogin } from "react-icons/md";
+import LoginSign from './LoginSign';
 
 export default function Header() {
     const [menuOpen, setmenuOpen] = useState<boolean>(false);
@@ -39,7 +40,7 @@ export default function Header() {
                             <li><Link href={'/about'}>About Us</Link></li>
                             <li><Link href={'/product'}>Product</Link></li>
                             <li><Link href={'/contact'}>Contact</Link></li>
-                            <li><Link href={'/customer/login'}>Login/Signup</Link></li>
+                            <li><LoginSign/></li>
                             {/* <Search />
                             <CartCompo /> */}
                         </ul>

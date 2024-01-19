@@ -34,8 +34,10 @@ export default function GoogleBtnLogin({ title }: { title: string }) {
             .then(res => {
                 console.log(res)
                 if (res.status === 200) {
-                    
+                    window.localStorage.setItem("customer-admin", res.token)
+                    router.push('/customer/dashboard');
                     setloading(false);
+
                 }
                 else if (res.status === 404) {
                     toast.error(res.message);
@@ -45,7 +47,7 @@ export default function GoogleBtnLogin({ title }: { title: string }) {
                     toast.error(res.message);
                     setloading(false);
                 }
-                router.push('/customer/dashboard');
+                
             })
             .catch(err => {
                 console.log(err);

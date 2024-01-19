@@ -133,3 +133,8 @@ export interface HomeCateSlider {
   ]
 
 }
+export interface CustTokenDecode {
+    id: string,
+    username: string,
+    email: string,
+}
