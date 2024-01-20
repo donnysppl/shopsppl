@@ -4,33 +4,34 @@ import { orderInptype } from "@/helpers/interFace";
 import { decode } from "jsonwebtoken";
 import { useEffect, useState } from "react";
 import moment from 'moment';
-import Invoice from "@/components/front/product/invoice/Invoice";
+// import Invoice from "@/components/front/product/invoice/Invoice";
+import Link from "next/link";
 
 type DecodeToken = {
   id: string | undefined;
 }
 
-const RenderInvoice = (data:orderInptype) => {
+// const RenderInvoice = (data:orderInptype) => {
 
-  const [toggle, settoggle] = useState(false);
+//   const [toggle, settoggle] = useState(false);
   
-  return (
-    <>
-      <button onClick={() => settoggle(!toggle)} className="btn-prim">Invoice</button>
+//   return (
+//     <>
+//       <button onClick={() => settoggle(!toggle)} className="btn-prim">Invoice</button>
 
-      {
-        toggle ?
-          <>
-            <div className="fixed w-screen h-full top-0 left-0 z-10">
-              <Invoice {...data} />
-            </div>
-          </> : null
+//       {
+//         toggle ?
+//           <>
+//             <div className="fixed w-screen h-full top-0 left-0 z-10">
+//               <Invoice {...data} />
+//             </div>
+//           </> : null
 
-      }
-    </>
+//       }
+//     </>
 
-  )
-}
+//   )
+// }
 
 
 export default function CustomerOrder() {
@@ -118,7 +119,9 @@ export default function CustomerOrder() {
                         <td className="px-6 py-3">
                           {
                             (item.status === 'payment completed') ?
-                              <RenderInvoice {...item} /> : null
+                              // <RenderInvoice {...item} /> 
+                              <Link target="_blank" href={`/customer/invoice?custID=${item.customerid}&ordID=${item._id}`}>Invoice</Link>
+                              : null
 
                           }
                         </td>

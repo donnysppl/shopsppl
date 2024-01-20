@@ -1,7 +1,7 @@
 import { orderInptype } from "@/helpers/interFace"
 import Image from "next/image"
 
-export default function Invoice(data: orderInptype) {
+export default function Invoice() {
 
     return (
         <>
@@ -16,7 +16,7 @@ export default function Invoice(data: orderInptype) {
 
                                 <div className="text-right">
                                     <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">Invoice #</h2>
-                                    <span className="mt-1 block text-gray-500">{data.sppl_orderid}</span>
+                                    <span className="mt-1 block text-gray-500">data.sppl_orderid</span>
 
                                     <address className="mt-4 not-italic text-gray-800 dark:text-gray-200">
                                         B-30 & 31,<br />
@@ -30,11 +30,11 @@ export default function Invoice(data: orderInptype) {
                             <div className="mt-8 grid sm:grid-cols-2 gap-3">
                                 <div>
                                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Bill to:</h3>
-                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{data.name}</h3>
+                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">data.name</h3>
                                     <address className="mt-2 not-italic text-gray-500">
-                                        {data.address}<br />
-                                        {data.city} {data.state}<br />
-                                        {data.pincode}<br />
+                                        data.address<br />
+                                        data.city data.state<br />
+                                        data.pincode<br />
                                     </address>
                                 </div>
 
@@ -42,7 +42,7 @@ export default function Invoice(data: orderInptype) {
                                     <div className="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
                                         <dl className="grid sm:grid-cols-5 gap-x-3">
                                             <dt className="col-span-3 font-semibold text-gray-800 dark:text-gray-200">Invoice date:</dt>
-                                            <dd className="col-span-2 text-gray-500">{data.paymentdate}</dd>
+                                            <dd className="col-span-2 text-gray-500">data.paymentdate</dd>
                                         </dl>
                                     </div>
                                 </div>
@@ -60,26 +60,26 @@ export default function Invoice(data: orderInptype) {
                                     <div className="hidden sm:block border-b border-gray-200 dark:border-gray-700"></div>
 
                                     {
-                                        data.orderprod.map((item: any, index: number) => (
-                                            <div key={index} className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                                        // data.orderprod.map((item: any, index: number) => (
+                                            <div  className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                                                 <div className="col-span-full sm:col-span-2">
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase">Item</h5>
-                                                    <p className="font-medium text-gray-800 dark:text-gray-200">{item.productname}</p>
+                                                    <p className="font-medium text-gray-800 dark:text-gray-200">item.productname</p>
                                                 </div>
                                                 <div>
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase">Qty</h5>
-                                                    <p className="text-gray-800 dark:text-gray-200">{item.quantity}</p>
+                                                    <p className="text-gray-800 dark:text-gray-200">item.quantity</p>
                                                 </div>
                                                 <div>
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase">Rate</h5>
-                                                    <p className="text-gray-800 dark:text-gray-200">{item.productsaleprice}</p>
+                                                    <p className="text-gray-800 dark:text-gray-200">item.productsaleprice</p>
                                                 </div>
                                                 <div>
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase">Amount</h5>
                                                     <p className="sm:text-right text-gray-800 dark:text-gray-200">$500</p>
                                                 </div>
                                             </div>
-                                        ))
+                                        // ))
                                     }
 
                                 </div>

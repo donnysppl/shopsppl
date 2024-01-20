@@ -97,7 +97,7 @@ export default function Checkout() {
                         setcheckoutProd(res.result);
                         const totalSalePrice = res.result.reduce((acc: any, product: Product) => {
                             const prodQuant = getItemQuantity(product._id)
-                            return (acc + product.productSalePrice) * prodQuant;
+                            return (product.productSalePrice * prodQuant) + acc;
                         }, 0);
                         settotalPrice(totalSalePrice);
                         settotalProdPrice(totalSalePrice);

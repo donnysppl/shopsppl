@@ -1,29 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import Nodemailer from 'nodemailer';
-import { mailTransport } from '@/helpers/common';
-import { render } from '@react-email/render';
-import {OTPEmail} from "@/helpers/Email/email";
+import htmlToPdf from '@/helpers/htmptopdf/htmltopdf';
 
 export async function GET(req: NextRequest) {
     try {
+       const buffer = await htmlToPdf('<html><body><h1>text sec</h1></body></html>');
+    //    console.log(buffer)
 
-        const transporter = Nodemailer.createTransport(mailTransport);
-
-        const emailHtml = render(OTPEmail({ url: "/img/logo.png", otp:"568923" }));
-
-        const mailOption = {
-            from: process.env.MAIL_SMTP_USER,
-            to: ['donny@sppl.ind.in','donnybangaji@gmail.com'],
-            subject: "Verify Your Email",
-            html: emailHtml
-        };
-
-        const sendMail = await transporter.sendMail(mailOption);
-        console.log("Message sent: %s", sendMail.messageId);
-        return NextResponse.json({
-            status: 200,
-            message: `Message sent: %s ${sendMail.messageId}`,
-        }, { status: 200 })
+       return new NextResponse(buffer, {
+        headers: {
+            'Content-Type': 'application/pdf',
+            // 'Content-Disposition': 'attachment; filename=invoice.pdf'
+        }
+    });
 
     } catch (error) {
         console.log(error)
