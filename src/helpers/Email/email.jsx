@@ -1,7 +1,7 @@
 
 import {
   Body, Heading,
-  Button,
+  Button, Row, Column,
   Container,
   Head,
   Hr,
@@ -36,22 +36,22 @@ export const Email = ({ url }) => (
             <Section style={codeContainer}>
               <Text style={code}>{'123456'}</Text>
             </Section>
-            
+
             <Hr style={hr} />
-          <Text style={footer}>
-            — The Super Plastronics Pvt Ltd team , S-24, Pocket S, Okhla Phase II, Okhla, New Delhi, Delhi 110020
-          </Text>
+            <Text style={footer}>
+              — The Super Plastronics Pvt Ltd team , S-24, Pocket S, Okhla Phase II, Okhla, New Delhi, Delhi 110020
+            </Text>
 
 
           </Section>
-          
+
         </Section>
       </Container>
     </Body>
   </Html>
 );
 
-export const OTPEmail = ({ url,otp }) => (
+export const OTPEmail = ({ url, otp }) => (
   <Html>
     <Head />
     <Body style={main}>
@@ -73,22 +73,22 @@ export const OTPEmail = ({ url,otp }) => (
             <Section style={codeContainer}>
               <Text style={code}>{otp}</Text>
             </Section>
-            
+
             <Hr style={hr} />
-          <Text style={footer}>
-            — The Super Plastronics Pvt Ltd team , S-24, Pocket S, Okhla Phase II, Okhla, New Delhi, Delhi 110020
-          </Text>
+            <Text style={footer}>
+              — The Super Plastronics Pvt Ltd team , S-24, Pocket S, Okhla Phase II, Okhla, New Delhi, Delhi 110020
+            </Text>
 
 
           </Section>
-          
+
         </Section>
       </Container>
     </Body>
   </Html>
 );
 
-export const OrderCompleteEmail = ({ url,otp }) => (
+export const OrderCompleteEmail = ({ orderData }) => (
   <Html>
     <Head />
     <Body style={main}>
@@ -96,29 +96,51 @@ export const OrderCompleteEmail = ({ url,otp }) => (
         <Section style={box}>
           <Section style={header}>
             <Img
-              src={'/img/logo.png'}
+              src={'https://thomson.shopsppl.net/img/logo.png'}
               width="180"
               alt="SPPL-logo" style={logo}
             />
           </Section>
           <Section style={innerbox}>
 
-            <Text style={paragraph}>Verify Your Identity</Text>
             <Heading style={paragraph}>
-              Enter the following code to verify your account.
+              Thank you for purchasing
             </Heading>
-            <Section style={codeContainer}>
-              <Text style={code}>{otp}</Text>
-            </Section>
-            
+
             <Hr style={hr} />
-          <Text style={footer}>
-            — The Super Plastronics Pvt Ltd team , S-24, Pocket S, Okhla Phase II, Okhla, New Delhi, Delhi 110020
-          </Text>
+
+            <Section
+              style={{  }}
+            >
+              {
+                orderData.orderprod.map((item, index) => (
+                  <Row key={index}>
+                    <Column style={{ verticalAlign: "top", paddingLeft: "12px" }}>
+                      <Text style={{ ...paragraph, fontWeight: "500" }}>
+                        {orderData.orderprod[0].productname}
+                      </Text>
+                      <Text style={{...global.text, marginBottom:'0',}}>Model : {item.productmodel}</Text>
+                      <Text style={{...global.text, marginBottom:'0',}}>Quantity : {item.quantity} & Price : ₹{item.productsaleprice}</Text>
+                    </Column>
+                  </Row>
+                ))
+              }
+
+              <Hr style={hr} />
+              <Text style={{ fontWeight: "500", margin: "0", textAlign: 'right' }}>Total Product Price :  ₹{orderData.totalprodprice}</Text>
+              <Text style={{ fontWeight: "500", margin: "0", textAlign: 'right' }}>Total Discount :  ₹{orderData.discountammount}</Text>
+              <Text style={{ fontWeight: "600", margin: "0", textAlign: 'right', borderTop: '1px solid #000', borderBottom: '1px solid #000', display: "inline-block", float: 'right', fontSize: '16px' }}>Total Bill :  ₹{orderData.totalbill}</Text>
+            </Section>
+
+
+            <Hr style={hr} />
+            <Text style={footer}>
+              — The Super Plastronics Pvt Ltd team , S-24, Pocket S, Okhla Phase II, Okhla, New Delhi, Delhi 110020
+            </Text>
 
 
           </Section>
-          
+
         </Section>
       </Container>
     </Body>
@@ -126,6 +148,15 @@ export const OrderCompleteEmail = ({ url,otp }) => (
 );
 
 export default Email;
+const paddingX = {
+  paddingLeft: "40px",
+  paddingRight: "40px",
+};
+
+const paddingY = {
+  paddingTop: "22px",
+  paddingBottom: "22px",
+};
 
 const main = {
   backgroundColor: '#f6f9fc',
@@ -151,7 +182,7 @@ const hr = {
 };
 const header = {
   backgroundColor: '#013088',
-  width:'100%',
+  width: '100%',
 }
 const logo = {
   margin: '0 auto',

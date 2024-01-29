@@ -15,6 +15,7 @@ export default function ListProduct() {
             setloading(true);
             await fetch('/api/product/products', {
                 method: 'GET',
+                cache: 'no-cache',
             }).then(res => res.json())
                 .then(res => {
                     if (res.status === 200) {

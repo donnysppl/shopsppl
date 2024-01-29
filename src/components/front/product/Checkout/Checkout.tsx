@@ -92,7 +92,7 @@ export default function Checkout() {
                 method: 'GET',
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     if (res.status === 200) {
                         setcheckoutProd(res.result);
                         const totalSalePrice = res.result.reduce((acc: any, product: Product) => {
@@ -138,7 +138,7 @@ export default function Checkout() {
             headers: { 'Content-Type': 'application/json' },
         }).then(res => res.json())
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 if (res.status === 200) {
                     setdiscountAmt(res.result.discountAmount)
                     setafterCoupProc(res.result.afterCouponPrice);
@@ -167,6 +167,7 @@ export default function Checkout() {
             const prodQuant = getItemQuantity(checkoutProd[i]._id)
             checkoutData.push({
                 productname: checkoutProd[i].name,
+                productimg: checkoutProd[i].mainproductimg,
                 productId: checkoutProd[i]._id,
                 productslug: checkoutProd[i].slug,
                 productmodel: checkoutProd[i].model,
@@ -204,7 +205,7 @@ export default function Checkout() {
                 companyname: orderShipInp.companyname,
             }
         }
-        console.log(orderData)
+        // console.log(orderData)
 
         // order data save
         await fetch(`/api/order`, {
@@ -215,7 +216,7 @@ export default function Checkout() {
             body: JSON.stringify(orderData)
         }).then(res => res.json())
             .then(res => {
-                console.log(res)
+                // console.log(res)/
                 if (res.status === 200) {
                     toast.success(res.message);
                     setuserData(res.result._id)
@@ -244,7 +245,7 @@ export default function Checkout() {
                 })
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     if (res.status === 200) {
                         setrazorOrderRes(res.result)
                         if (res.result) {
@@ -285,7 +286,7 @@ export default function Checkout() {
                     body: JSON.stringify(resData)
                 }).then(res => res.json())
                     .then(res => {
-                        console.log(res)
+                        // console.log(res)
                         if (res.status === 200) {
                             setrazorpayLoader(false);
                             router.push(`/product/checkout/thankyou?reference=${res.razorpay_payment_id}`)

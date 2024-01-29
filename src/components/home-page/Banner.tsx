@@ -26,7 +26,7 @@ export default function Banner() {
                 next:{revalidate: 10,}
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.status === 200) {
                         const data = res.result
                         const newData = data.concat(data)

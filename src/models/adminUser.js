@@ -18,6 +18,10 @@ const adminSchema = new Schema({
     isAdmin:{
         type: Boolean,
         default: false,
+    },
+    adminRole:{
+        type: String,
+        required: [true, "Please provide a adminRole"],
     }
 },{ timestamps: true })
 

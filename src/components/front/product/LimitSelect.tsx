@@ -16,9 +16,9 @@ export default function LimitSelect({page,brand,category}:pageType) {
         router.push(`?page=${page ? page : null}&limit=${value}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`);
     }
     return (
-        <select className="form-select" defaultValue={'10'} onChange={(e) => prodLimitChange(e)}>
-            <option  value="10">10</option>
-            <option value="20">20</option>
+        <select className="form-select" defaultValue={'12'} onChange={(e) => prodLimitChange(e)}>
+            <option  value="12">12</option>
+            <option value="24">24</option>
             <option value="30">30</option>
         </select>
     )

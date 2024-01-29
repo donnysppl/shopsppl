@@ -37,11 +37,10 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
 
   const [filterOpen, setfilterOpen] = useState<boolean>(false)
   const pageParams = page ? page : '1';
-  const limitParam = limit ? limit : '10';
+  const limitParam = limit ? limit : '12';
   const brandParam = brand ? brand : 'all';
   const categoryParam = category ? category : 'all';
 
-  console.log(page, brand, limit, category)
   return (
     <>
       <div className="filter-head flex justify-between items-center p-3 mt-2">

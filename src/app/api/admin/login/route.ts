@@ -8,9 +8,6 @@ export async function POST(req: NextRequest) {
     try {
         await connect();
         const { email, password } = await req.json();
-
-        console.log({ email, password })
-
         const userExist = await Admin.findOne({ email })
         if (!userExist) {
             return NextResponse.json({
@@ -32,7 +29,8 @@ export async function POST(req: NextRequest) {
                 const tokenData = {
                     id: userExist._id,
                     username: userExist.username,
-                    email: userExist.email
+                    email: userExist.email,
+                    adminrole: userExist.adminRole
                 }
                 const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {expiresIn: "1d"})
 

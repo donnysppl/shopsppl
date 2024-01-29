@@ -138,3 +138,44 @@ export interface CustTokenDecode {
     username: string,
     email: string,
 }
+
+export interface AdminTokenDecode {
+  id: string,
+  username: string,
+  email: string,
+  adminrole: string,
+  iat: number,
+  exp: number
+}
+
+export const postRoutes = [
+  "/backend/backend-dashboard",
+  "/backend/backend-dashboard/blogs/add",
+  "/backend/backend-dashboard/blogs/list",
+  "/backend/backend-dashboard/banner/add",
+  "/backend/backend-dashboard/banner/list",
+  "/backend/backend-dashboard/brand/add-brand",
+  "/backend/backend-dashboard/brand/list-brand",
+  "/backend/backend-dashboard/category/add-category",
+  "/backend/backend-dashboard/category/list-category",
+  "/backend/backend-dashboard/product/add-product",
+  "/backend/backend-dashboard/product/list-product",
+  "/backend/backend-dashboard/coupon/add",
+  "/backend/backend-dashboard/coupon/list",
+  "/backend/backend-dashboard/order/order-list",
+  "/backend/backend-dashboard/pages/pages-add",
+  "/backend/backend-dashboard/pages/pages-list",
+  "/backend/backend-dashboard/pages/custom-product/add",
+  "/backend/backend-dashboard/pages/custom-product/list",
+];
+
+export const serviceRoutes = [
+  "/backend/backend-dashboard",
+  "/backend/backend-dashboard/contact/list",
+];
+
+export const superAdminRoutes = [
+  ...serviceRoutes, ...postRoutes,
+  "/backend/backend-dashboard/admin/add",
+  "/backend/backend-dashboard/admin/list",
+];

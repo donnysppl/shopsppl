@@ -5,14 +5,11 @@ import bcryptjs from 'bcryptjs';
 
 export async function POST(req : NextRequest) {
 
-    const { username, email, password } = await req.json();
+    const { username, email, password, adminRole } = await req.json();
     try {
-        await connect()
-        console.log({ username, email, password });
-
+        await connect();
         // check the user 
         const userExist = await Admin.findOne({ email });
-
         if (userExist) {
             return NextResponse.json({
                 status: 400,
@@ -25,9 +22,8 @@ export async function POST(req : NextRequest) {
         const hashedPassword = await await bcryptjs.hash(password, salt);
 
         // add user
-        const newUser = new Admin({ username, email, password : hashedPassword })
+        const newUser = new Admin({ username, email, password : hashedPassword, adminRole })
         const saveUser = await newUser.save();
-        console.log(saveUser)
 
         return NextResponse.json({
             status: 200,

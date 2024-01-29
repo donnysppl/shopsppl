@@ -33,19 +33,19 @@ const support = [
 const quick = [
     {
         titlt: 'Televisions',
-        link: '/',
+        link: '/product?category=Televisions',
     },
     {
         titlt: 'Washing Machine',
-        link: '/',
+        link: '/product?category=Washing+Machines',
     },
     {
         titlt: 'Air Conditioner',
-        link: '/',
+        link: '/product?category=Air+Conditioners',
     },
     {
         titlt: 'Coolers',
-        link: '/warranty-detials',
+        link: '/product?category=Cooler',
     }
 ]
 
