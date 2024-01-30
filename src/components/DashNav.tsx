@@ -204,6 +204,9 @@ export default function DashNav() {
             setadminRoleArr(dashNavSort);
             setloader(false);
         }
+        else{
+            logout();
+        }
     }, []);
 
 
@@ -216,9 +219,6 @@ export default function DashNav() {
                 console.log(res);
                 if (res.status === 200) {
                     router.push("/backend/backend-login");
-                }
-                else if (res.status === 400) {
-
                 }
             })
             .catch(err => {

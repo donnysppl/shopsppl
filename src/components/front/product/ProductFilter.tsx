@@ -1,11 +1,11 @@
 "use client";
-
+import { Disclosure } from '@headlessui/react'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsFilter } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter, useSearchParams } from 'next/navigation';
-
+import { FaCaretDown } from "react-icons/fa";
 const Categories = [
   { name: 'all', slug: 'all', href: '#' },
   { name: 'Air Conditioners', slug: 'air-conditioners', href: '#' },
@@ -35,6 +35,31 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
   const router = useRouter();
   const searchparams = useSearchParams()
 
+  const [categoryData, setcategoryData] = useState([]);
+  const [loading, setloading] = useState<boolean>(true)
+
+  useEffect(() => {
+    setloading(true)
+    const allCate = async () => {
+      await fetch(`/api/product/products/front/category`, {
+        method: 'GET',
+        cache: 'no-cache',
+      }).then(res => res.json())
+        .then(res => {
+          console.log(res);
+          if (res.status === 200) {
+            setcategoryData(res.result)
+            setloading(false);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+    allCate();
+  }, [])
+
+
   const [filterOpen, setfilterOpen] = useState<boolean>(false)
   const pageParams = page ? page : '1';
   const limitParam = limit ? limit : '12';
@@ -59,23 +84,76 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
         </div>
         <div className="flex flex-col border-b border-gray-200 pb-2">
           <h4 className="font-bold py-1.5 px-1">Brand</h4>
-          {Brand.map((item: any, index: number) => (
-            <Link className={`${(brand === item.name) ? 'active' : null} filter-item`} key={index} href={`?${new URLSearchParams({
-              page: pageParams, limit: limitParam,
-              brand: item.name, category: categoryParam
-            })}`}>{item.name}</Link>
-          ))}
+          {loading ?
+            [1, 2, 3, 4].map((item: any, index: number) => (
+              <div key={index} className='filter-item relative overflow-hidden animate-pulse'>
+                <div className="dash-nav-head-link w-full bg-gray-500 h-[24px] mb-0.5 rounded-lg"></div>
+              </div>)) :
+            Brand.map((item: any, index: number) => (
+              <Link className={`${(brand === item.name) ? 'active' : null} filter-item`} key={index} href={`?${new URLSearchParams({
+                page: pageParams, limit: limitParam,
+                brand: item.name, category: categoryParam
+              })}`}>{item.name}</Link>
+            ))}
         </div>
 
         <div className="flex flex-col pt-2 ">
           <h4 className="font-bold py-1.5 px-1">Categories</h4>
-          {Categories.map((item: any, index: number) => (
-            <Link className={`${(category === item.name) ? 'active' : null} filter-item`} key={index} href={`?${new URLSearchParams({
-              page: pageParams, limit: limitParam,
-              brand: brandParam, category: item.name
-            })}`}>{item.name}</Link>
-          ))}
+          {
+            loading ?
+              [1, 2, 3, 4].map((item: any, index: number) => (
+                <div key={index} className='filter-item relative overflow-hidden animate-pulse'>
+                  <div className="dash-nav-head-link w-full bg-gray-500 h-[24px] mb-0.5 rounded-lg"></div>
+                </div>)) :
+
+              <>
+                <Link className={`${(category === 'all') ? 'active' : null} filter-item`} href={`?${new URLSearchParams({
+                  page: pageParams, limit: limitParam,
+                  brand: brandParam, category: 'all'
+                })}`}>All</Link>
+                {/* <Disclosure> */}
+                {
+                  categoryData && categoryData.map((item: any, index: number) => (
+                    <Disclosure as="div" key={index} className='flex flex-col'>
+                      {({ open }) => (
+                        <>
+                          <Link className={`${(category === item.parentCateName) ? 'active' : null} filter-item flex justify-between`} href={`?${new URLSearchParams({
+                            page: pageParams, limit: limitParam,
+                            brand: brandParam, category: item.parentCateName
+                          })}`}>
+                            <div className="">
+                              {item.parentCateName}
+                            </div>
+                            <Disclosure.Button className="">
+                              <FaCaretDown />
+                            </Disclosure.Button>
+                          </Link>
+                          <Disclosure.Panel className="text-gray-500">
+                            <ul>
+                              {
+                                item.childCate?.map((item: any, index: number) => (
+                                  <li key={index} className='filter-item'>
+                                    <Link className={`${(category === item.childCateName) ? 'active' : null} filter-item`} href={`?${new URLSearchParams({
+                                      page: pageParams, limit: limitParam,
+                                      brand: brandParam, category: item.childCateName
+                                    })}`}>{item.childCateName}</Link></li>
+                                ))
+                              }
+                            </ul>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+
+                  ))
+                }
+
+
+              </>
+          }
+
         </div>
+
       </div>
     </>
   )

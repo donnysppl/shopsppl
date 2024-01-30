@@ -38,7 +38,7 @@ export default function CategoryForm({ method, id }: CateFormProps) {
                 headers: { 'Content-Type': 'application/json' },
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.status === 200) {
                         setcateState(res.result);
                         setchildCatVal(res.result.isChild)
@@ -71,7 +71,7 @@ export default function CategoryForm({ method, id }: CateFormProps) {
                 headers: { 'Content-Type': 'application/json' },
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
                         setallCate(res.result);
@@ -112,7 +112,7 @@ export default function CategoryForm({ method, id }: CateFormProps) {
             body: JSON.stringify(data),
         }).then(res => res.json())
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 if (res.status === 200) {
                     toast.success(res.message);
                     window.location.reload();
@@ -172,14 +172,20 @@ export default function CategoryForm({ method, id }: CateFormProps) {
                 childCatVal ?
                     <div className="mb-4 form-inp">
                         <label htmlFor="img" className="form-label">Choose Parent Category</label>
-                        <select className="form-ctrl" defaultValue={'DEFAULT'} value={'' || cateState.parentCategorys} onChange={(e) => setcateState({ ...cateState, parentCategorys: e.target.value })}>
-                            <option value="DEFAULT" disabled>Choose a category...</option>
-                            {
-                                allCate && allCate.map((item, index) => (
-                                    <option key={index} value={item._id}>{item.name}</option>
-                                ))
-                            }
-
+                        <select
+                            className="form-ctrl"
+                            value={cateState.parentCategorys || ''}
+                            onChange={(e) => setcateState({ ...cateState, parentCategorys: e.target.value })}
+                        >
+                            <option value="" disabled>
+                                Choose a category...
+                            </option>
+                            {allCate &&
+                                allCate.map((item, index) => (
+                                    <option key={index} value={item._id}>
+                                        {item.name}
+                                    </option>
+                                ))}
                         </select>
                     </div>
                     : null

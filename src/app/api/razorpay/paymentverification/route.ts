@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
 
     const isValid = expectedSignature === razorpay_signature;
     
-
     await ProductOrder.findByIdAndUpdate(userid, {
         paymentid: razorpay_payment_id, orderid: razorpay_order_id, status: 'payment completed', paymentdate: new Date()
     })

@@ -103,7 +103,7 @@ export default function CartCompo() {
                         {
                             cartProd.length ?
                                 <div className="cart-checkout-btn">
-                                    <Link href={'/product/checkout'}>
+                                    <Link href={'/product/checkout'} onClick={onCartDrow}>
                                         <button className='btn-prim w-full'>Checkout</button>
                                     </Link>
                                 </div> : null

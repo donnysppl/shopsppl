@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useShoppingCart } from '@/hooks/ShoppingCartContext';
 import { AiOutlineClose } from "react-icons/ai";
 import { RiCoupon4Line } from "react-icons/ri";
+import { stateJson } from '@/helpers/dommyjson/json';
 
 interface orderInptype {
     email: string,
@@ -205,7 +206,7 @@ export default function Checkout() {
                 companyname: orderShipInp.companyname,
             }
         }
-        // console.log(orderData)
+        console.log(orderData)
 
         // order data save
         await fetch(`/api/order`, {
@@ -276,7 +277,7 @@ export default function Checkout() {
                     razorpay_order_id: response.razorpay_order_id,
                     razorpay_signature: response.razorpay_signature,
                     userid: orderid,
-                    email:orderInp.email,
+                    email: orderInp.email,
                 }
                 await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/razorpay/paymentverification`, {
                     method: 'POST',
@@ -332,22 +333,22 @@ export default function Checkout() {
                             <div className="grid grid-cols-2 gap-x-4">
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">Name</label>
-                                    <input type="text" name='name' className="form-control" placeholder='Name'
+                                    <input type="text" name='name' className="form-control" placeholder='Name' required
                                         onChange={(e) => setorderInp({ ...orderInp, name: e.target.value })} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="email" className="form-label">Email address</label>
-                                    <input type="email" name='email' className="form-control" placeholder='Email address'
+                                    <input type="email" name='email' className="form-control" placeholder='Email address' required
                                         onChange={(e) => setorderInp({ ...orderInp, email: e.target.value })} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="phone" className="form-label">Phone No.</label>
-                                    <input type="tel" pattern="[0-9]{10}" name='phone' className="form-control" placeholder='Phone No.'
+                                    <input type="tel" pattern="[0-9]{10}" name='phone' className="form-control" placeholder='Phone No.' required
                                         onChange={(e) => setorderInp({ ...orderInp, phone: parseInt(e.target.value) })} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="address" className="form-label">Address</label>
-                                    <input type="text" name='address' className="form-control" placeholder='Address'
+                                    <input type="text" name='address' className="form-control" placeholder='Address' required
                                         onChange={(e) => setorderInp({ ...orderInp, address: e.target.value })} />
                                 </div>
                                 <div className="mb-3">
@@ -356,18 +357,26 @@ export default function Checkout() {
                                         onChange={(e) => setorderInp({ ...orderInp, companyname: e.target.value })} />
                                 </div>
                                 <div className="mb-3">
+                                    <label htmlFor="state" className="form-label">State</label>
+                                    <select className="form-control"  name='state' required
+                                        onChange={(e) => setorderInp({ ...orderInp, state: e.target.value })}>
+                                        <option value="">Choose State</option>
+                                        {
+                                            stateJson.map((item, index) => (
+                                                <option key={index} value={item.name}>{item.name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <div className="mb-3">
                                     <label htmlFor="city" className="form-label">City</label>
-                                    <input type="text" name='city' className="form-control" placeholder='City'
+                                    <input type="text" name='city' className="form-control" placeholder='City' required
                                         onChange={(e) => setorderInp({ ...orderInp, city: e.target.value })} />
                                 </div>
-                                <div className="mb-3">
-                                    <label htmlFor="state" className="form-label">State</label>
-                                    <input type="text" name='state' className="form-control" placeholder='state'
-                                        onChange={(e) => setorderInp({ ...orderInp, state: e.target.value })} />
-                                </div>
+
                                 <div className="mb-3">
                                     <label htmlFor="pincode" className="form-label">PIN Code</label>
-                                    <input type="number" pattern="[0-9]{6}" maxLength={6} name='pincode' className="form-control" placeholder='pincode'
+                                    <input type="number" pattern="[0-9]{6}" maxLength={6} name='pincode' required className="form-control" placeholder='pincode'
                                         onChange={(e) => setorderInp({ ...orderInp, pincode: parseInt(e.target.value) })} />
                                 </div>
 
@@ -387,7 +396,7 @@ export default function Checkout() {
                                     <div className="grid grid-cols-2 gap-x-4">
                                         <div className="mb-3">
                                             <label htmlFor="name" className="form-label">Name</label>
-                                            <input type="text" name='name' className="form-control" placeholder='Name'
+                                            <input type="text" name='name' className="form-control" placeholder='Name' 
                                                 onChange={(e) => setorderShipInp({ ...orderShipInp, name: e.target.value })} />
                                         </div>
                                         <div className="mb-3">
@@ -417,8 +426,17 @@ export default function Checkout() {
                                         </div>
                                         <div className="mb-4">
                                             <label htmlFor="state" className="form-label">State</label>
-                                            <input type="text" name='state' className="form-control" placeholder='state'
-                                                onChange={(e) => setorderShipInp({ ...orderShipInp, state: e.target.value })} />
+                                            {/* <input type="text" name='state' className="form-control" placeholder='state'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, state: e.target.value })} /> */}
+                                            <select className="form-control" aria-label="Choose State" name='state'
+                                                onChange={(e) => setorderShipInp({ ...orderShipInp, state: e.target.value })}>
+                                                <option selected>Choose State</option>
+                                                {
+                                                    stateJson.map((item, index) => (
+                                                        <option key={index} value={item.name}>{item.name}</option>
+                                                    ))
+                                                }
+                                            </select>
                                         </div>
                                         <div className="mb-4">
                                             <label htmlFor="pincode" className="form-label">PIN Code</label>

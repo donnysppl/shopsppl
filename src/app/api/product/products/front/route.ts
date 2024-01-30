@@ -19,6 +19,13 @@ interface MyResultType {
 export const dynamic = 'force-dynamic';
 // page=undefined&limit=10&brand=thomson&category=all
 
+function shuffleArray(array:any) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
 export async function GET(req: NextRequest) {
     try {
         await connect();
@@ -46,7 +53,7 @@ export async function GET(req: NextRequest) {
             const startIndex = (pages - 1) * limit;
             const ensIndex = pages * limit;
             const data = await Product.find(filter)
-
+            await shuffleArray(data);
             if (!data) {
                 return NextResponse.json({
                     status: 400,

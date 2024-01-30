@@ -10,53 +10,69 @@ import Link from "next/link";
 const sliderDataTV = [
     {
         title: 'HD', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/tv-3.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/tv-3.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/tv-3.webp',
+        buylink:'/product/?category=HD+TV'
     },
     {
         title: 'FHD', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/tv-2.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/tv-2.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/tv-2.webp',
+        buylink:'/product/?category=FHD+TV'
     },
     {
         title: '4K', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/tv-1.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/tv-1.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/tv-1.webp',
+        buylink:'/product/?category=UHD+TV'
     },
     {
         title: 'QLED', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/tv-4.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/tv-4.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/tv-4.webp',
+        buylink:'/product/?category=QLED+TVs'
     },
 ]
 const sliderDataAC = [
     {
-        title: 'AC 1', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/ac-2.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/ac-2.webp'
+        title: 'Fixed', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/ac-2.webp',
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/ac-2.webp',
+        buylink:'/product/?category=Air+Conditioners'
+    },
+    {
+        title: 'Inverter', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/ac-2.webp',
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/ac-2.webp',
+        buylink:'/product/?category=Air+Conditioners'
     }
 ]
 const sliderDataWC = [
     {
         title: 'Front Load', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/wc-1.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/wc-1.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/wc-1.webp',
+        buylink:'/product/?category=Fully+Automatic+Front+Load+Washing+Machine'
     },
     {
         title: 'Semi', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/wc-2.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/wc-2.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/wc-2.webp',
+        buylink:'/product/?category=Semi+Automatic+Washing+Machine'
     },
     {
         title: 'Top Load', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/wc-4.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/wc-4.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/wc-4.webp',
+        buylink:'/product/?category=Fully+Automatic+Top+Load+Washing+Machine'
     },
 ]
 const sliderDataCol = [
     {
         title: 'DESERT', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/col-1.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/col-1.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/col-1.webp',
+        buylink:'/product/?category=Desert+Cooler'
     },
     {
         title: 'PERSONAL', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/col-2.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/col-2.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/col-2.webp',
+        buylink:'/product/?category=Personal+Cooler'
     },
     {
         title: 'WINDOW', img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/col-3.webp',
-        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/col-3.webp'
+        mob_img: 'https://cloud.shopsppl.com/wp-content/uploads/sppl/shop/cat-banner-slider/mob/col-3.webp',
+        buylink:'/product/?category=Window+Cooler'
     },
 ]
 
@@ -113,7 +129,7 @@ export default function CateSlid() {
                                     <div className=' relative w-full h-full' >
                                         <div className="home-cate-slider" style={{ backgroundImage: `url(${(width > 990) ? item.img : item.mob_img})` }}>
                                         </div>
-                                        <Link className="btn-prim absolute bottom-3 left-1/2 -translate-x-1/2 z-20" href={'/product'}>Buy Now</Link>
+                                        <Link className="btn-prim absolute bottom-3 left-1/2 -translate-x-1/2 z-20" href={`${item.buylink}`}>Buy Now</Link>
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -133,7 +149,7 @@ export default function CateSlid() {
                                     <div className=' relative w-full h-full' >
                                         <div className="home-cate-slider" style={{ backgroundImage: `url(${(width > 990) ? item.img : item.mob_img})` }}>
                                         </div>
-                                        <Link className="btn-prim absolute bottom-3 left-1/2 -translate-x-1/2 z-20" href={'/product'}>Buy Now</Link>
+                                        <Link className="btn-prim absolute bottom-3 left-1/2 -translate-x-1/2 z-20" href={`${item.buylink}`}>Buy Now</Link>
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -153,7 +169,7 @@ export default function CateSlid() {
                                     <div className=' relative w-full h-full' >
                                         <div className="home-cate-slider" style={{ backgroundImage: `url(${(width > 990) ? item.img : item.mob_img})` }}>
                                         </div>
-                                        <Link className="btn-prim absolute bottom-3 left-1/2 -translate-x-1/2 z-20" href={'/product'}>Buy Now</Link>
+                                        <Link className="btn-prim absolute bottom-3 left-1/2 -translate-x-1/2 z-20" href={`${item.buylink}`}>Buy Now</Link>
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -173,7 +189,7 @@ export default function CateSlid() {
                                     <div className=' relative w-full h-full' >
                                         <div className="home-cate-slider" style={{ backgroundImage: `url(${(width > 990) ? item.img : item.mob_img})` }}>
                                         </div>
-                                        <Link className="btn-prim absolute bottom-3 left-1/2 -translate-x-1/2 z-20" href={'/product'}>Buy Now</Link>
+                                        <Link className="btn-prim absolute bottom-3 left-1/2 -translate-x-1/2 z-20" href={`${item.buylink}`}>Buy Now</Link>
                                     </div>
                                 </SwiperSlide>
                             ))}
