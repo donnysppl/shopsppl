@@ -1,11 +1,11 @@
 import ProdImgSlider from '@/components/front/product/ProdImgSlider';
-import { Product } from '@/helpers/interFace';
 import { notFound } from 'next/navigation';
 import React from 'react'
 import OnBuyFunct from "@/helpers/onBuyFunct";
 import OnCartFunct from '@/helpers/onCartFunct';
 import ProdTabs from '@/components/front/product/ProdTabs';
 import QuantyPart from '@/components/front/product/QuantyPart';
+import ProductRecommed from '@/components/front/product/ProductRecommed';
 
 async function fetchSingleProd(slug: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
@@ -58,7 +58,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
               <h1 className={`text-gray-900 lg:text-2xl text-lg title-font font-semibold mb-1 leading-normal
                     ${loading ? "animate-pulse bg-gray-300 rounded-md h-28 w-full" : null}`}>
                 {prodDetailData?.name}</h1>
-                <div className={`text-gray-800 text-base title-font font-semibold mb-1 leading-normal
+              <div className={`text-gray-800 text-base title-font font-semibold mb-1 leading-normal
                     ${loading ? "animate-pulse bg-gray-300 rounded-md h-28 w-full" : null}`}>Model/SKU : {prodDetailData?.model}</div>
 
               <div className={`price mt-2 ${loading ?
@@ -100,6 +100,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
         </div>
       </section>
       <ProdTabs discription={prodDetailData?.productrpd} specification={prodDetailData.discription} />
+        <ProductRecommed id={prodDetailData?._id} />
     </>
   )
 }

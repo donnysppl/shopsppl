@@ -9,10 +9,8 @@ export async function GET(req: NextRequest) {
         await connect();
         const searchParams = req.nextUrl.searchParams;
         const searchQ = searchParams.get('q');
-        console.log(searchQ)
 
         const data = await Product.find({"name":{$regex : ".*" + searchQ + ".*",$options:'i'}}).select('name _id slug');
-        console.log(data)
         if(!data){
             return NextResponse.json({
                 status: 400,
