@@ -54,16 +54,7 @@ export async function GET(req: NextRequest) {
     try {
         await connect();
 
-        // check admin token
-        const cookie = cookies()
-        const adminTokenExist = adminToken(cookie);
-
-        if (!adminTokenExist) {
-            return NextResponse.json({
-                status: 400,
-                message: 'Unauthorized',
-            }, { status: 400 })
-        }
+     
 
         const data = await BlogsModal.find();
         if(!data){

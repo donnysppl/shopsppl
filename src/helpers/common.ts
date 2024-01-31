@@ -16,3 +16,11 @@ export function shuffleArray(array: Product[]) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+export function priceFormat(price:number){
+  const formattedPrice = new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR'
+    }).format(price);
+    return formattedPrice
+}

@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image';
 import { Fragment, useState } from 'react'
 import ContactForm from './form/ContactForm';
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function Modal() {
   let [isOpen, setIsOpen] = useState(true)
@@ -42,7 +43,10 @@ export default function Modal() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full h-[400px] transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all flex">
+                <Dialog.Panel className="w-full h-[400px] relative transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all flex">
+                  <div className="modal-close-btn absolute bg-white rounded-full right-0 w-6 h-6 mt-1 me-1 cursor-pointer flex items-center justify-center" onClick={() => closeModal()}>
+                    <AiOutlineClose className='w-5 h-5' />
+                  </div>
                   <div className="w-[50%] h-full">
                     <div className="modal-left-part h-full">
                       <img src="/img/modal.webp" alt="modal.webp" className='w-full h-full object-cover object-center' />
@@ -53,7 +57,7 @@ export default function Modal() {
                       <div className='p-3'>
                         <h2 className='text-center mb-0.5 mt-1'>Grab the offer</h2>
                         <div className='scale-[0.88]'>
-                        <ContactForm type={'modal'} />
+                          <ContactForm type={'modal'} />
                         </div>
                       </div>
                     </div>

@@ -206,7 +206,7 @@ export default function Checkout() {
                 companyname: orderShipInp.companyname,
             }
         }
-        console.log(orderData)
+        // console.log(orderData)
 
         // order data save
         await fetch(`/api/order`, {
@@ -235,7 +235,7 @@ export default function Checkout() {
     const createRazorpayOrder = async (price: number, id: string) => {
 
         if (price) {
-            console.log(price)
+            // console.log(price)
             await fetch('/api/razorpay/ordercreate', {
                 method: 'POST',
                 headers: {
@@ -309,7 +309,7 @@ export default function Checkout() {
                 color: "#3399cc"
             }
         };
-        console.log(options)
+        // console.log(options)
         var rzp1 = new window.Razorpay(options);
         rzp1.open();
     }

@@ -1,21 +1,62 @@
+"use client";
 
-import OrderDetailComp from "@/components/form-compo/OrderDetailComp";
+import { priceFormat } from "@/helpers/common";
+import { Product, orderInptype } from "@/helpers/interFace";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+
+export default function OrderDetailComp({id}:{id:string}) {
+  const [orderListData, setorderListData] = useState<orderInptype>();
+  const [loading, setloading] = useState(true);
+  const [subTotal, setsubTotal] = useState<number>(0);
+
+  useEffect(() => {
+
+    const orderListFetch = async () => {
 
 
-export default function OrderDetail({ params }: { params: { id: string } }) {
-
+      await fetch(`/api/order/${id}`, {
+        method: 'GET',
+        cache: 'no-store',
+      }).then(res => res.json())
+        .then(res => {
+          console.log(res);
+          if (res.status === 200) {
+            toast.success(res.message);
+            setorderListData(res.result);
+            if (res.result.orderprod) {
+              const prodData = res.result.orderprod;
+              const subTotoal = prodData.reduce((acc: any, product: any) => {
+                return (acc + product.productsaleprice) * product.quantity;
+              }, 0);
+              setsubTotal(subTotoal);
+            }
+          }
+          else if (res.status === 400) {
+            toast.error(res.message);
+          }
+          else if (res.status === 500) {
+            toast.error(res.message);
+          }
+          setloading(false);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+    orderListFetch();
+  }, [id])
   
   return (
-    <>
-      {/* {
+    <div>
+      {
         loading ? 'Loading ...' :
           <>
-            <div>OrderDetail {params.id}</div>
             <div className="container mx-auto border border-gray-600 rounded-xl p-2.5">
-              <div className="flex gap-[2%]">
-                <div className="customer-billing-data w-[30%] p-1.5 border-r border-gray-600">
+              <div className="grid grid-cols-2">
+                <div className="customer-billing-data p-1.5 border-r border-gray-600">
                   <h3 className="mb-2.5 text-base" >Customer Billing Details</h3>
-                  <div className="text-[0.85rem] text-gray-400">
+                  <div className="text-[0.85rem] text-gray-600">
                     <div className="mb-1.5">
                       {orderListData?.name}<br />
                       {orderListData?.address}<br />
@@ -24,21 +65,21 @@ export default function OrderDetail({ params }: { params: { id: string } }) {
                     </div>
 
                     <div className="mb-1.5">
-                      <strong>Email:</strong><br />
+                      <strong>Email: </strong>
                       {orderListData?.email}<br />
                     </div>
 
                     <div className="mb-1.5">
-                      <strong>Phone :</strong><br />
+                      <strong>Phone : </strong>
                       {orderListData?.phone}<br />
                     </div>
                   </div>
                 </div>
                 {
                   orderListData?.ship_add ?
-                    <div className="customer-shipping-data w-[30%] p-1.5 gap-[1%] border-r border-gray-600">
+                    <div className="customer-shipping-data p-1.5 gap-[1%] border-r border-gray-600">
                       <h3 className="mb-2.5 text-base" >Customer Shipping Details</h3>
-                      <div className="text-[0.85rem] text-gray-400">
+                      <div className="text-[0.85rem] text-gray-600">
                         <div className="mb-1.5">
                           {orderListData?.ship_address?.name}<br />
                           {orderListData?.ship_address?.address}<br />
@@ -47,21 +88,21 @@ export default function OrderDetail({ params }: { params: { id: string } }) {
                         </div>
 
                         <div className="mb-1.5">
-                          <strong>Email:</strong><br />
+                          <strong>Email: </strong>
                           {orderListData?.ship_address?.email}<br />
                         </div>
 
                         <div className="mb-1.5">
-                          <strong>Phone :</strong><br />
+                          <strong>Phone : </strong>
                           {orderListData?.ship_address?.phone}<br />
                         </div>
                       </div>
                     </div> : null
                 }
 
-                <div className="customer-order  w-[30%] p-1.5">
+                <div className="customer-order p-1.5">
                   <h3 className="mb-2.5 text-base" >Order Details</h3>
-                  <ul className="text-[0.85rem] text-gray-400">
+                  <ul className="text-[0.85rem] text-gray-600">
                     <li>Order Status : <strong>{orderListData?.status}</strong></li>
                     <li>Order ID : <strong>{orderListData?.sppl_orderid}</strong></li>
                     <li>Razorpay Order ID : <strong>{orderListData?.orderid}</strong></li>
@@ -80,23 +121,23 @@ export default function OrderDetail({ params }: { params: { id: string } }) {
                 <h3 className="mb-2.5 text-base" >Order Product Details</h3>
                 <table className="w-full table-fixed border-collapse border border-gray-500 " >
                   <thead className="w-full text-xs text-gray-300 uppercase bg-gray-900">
-                    <tr className="w-full border-b border-gray-500 hover:bg-gray-800">
-                      <th className="w-[5%] p-3 border-r border-gray-500 last:border-none">Index</th>
+                    <tr className="w-full border-b border-gray-500 hover:bg-gray-400">
+                      <th className=" p-3 border-r border-gray-500 last:border-none">Index</th>
                       <th className="w-[50%] p-3 border-r border-gray-500 last:border-none">Item</th>
-                      <th className="w-[15%] p-3 border-r border-gray-500 last:border-none">Cost</th>
-                      <th className="w-[15%] p-3 border-r border-gray-500 last:border-none">Quantity</th>
-                      <th className="w-[15%] p-3 border-r border-gray-500 last:border-none">Total</th>
+                      <th className=" p-3 border-r border-gray-500 last:border-none">Cost</th>
+                      <th className=" p-3 border-r border-gray-500 last:border-none">Quantity</th>
+                      <th className=" p-3 border-r border-gray-500 last:border-none">Total</th>
                     </tr>
                   </thead>
                   <tbody>
                     {
                       orderListData?.orderprod?.map((item: any, index: number) => (
-                        <tr key={index} className="w-full border-b border-gray-500 hover:bg-gray-800 text-center">
-                          <td className="w-[5%] p-3 border-r border-gray-500 last:border-none">{index + 1}</td>
+                        <tr key={index} className="w-full border-b border-gray-500 hover:bg-gray-400 text-center">
+                          <td className=" p-3 border-r border-gray-500 last:border-none">{index + 1}</td>
                           <td className="w-[50%] p-3 border-r border-gray-500 last:border-none">{item?.productname}</td>
-                          <td className="w-[15%] p-3 border-r border-gray-500 last:border-none">₹{item?.productsaleprice}</td>
-                          <td className="w-[15%] p-3 border-r border-gray-500 last:border-none">× {item?.quantity}</td>
-                          <td className="w-[15%] p-3 border-r border-gray-500 last:border-none">₹{item?.productsaleprice * item?.quantity}</td>
+                          <td className=" p-3 border-r border-gray-500 last:border-none">{priceFormat(item?.productsaleprice)}</td>
+                          <td className=" p-3 border-r border-gray-500 last:border-none">× {item?.quantity}</td>
+                          <td className=" p-3 border-r border-gray-500 last:border-none">{priceFormat(item?.productsaleprice * item?.quantity)}</td>
                         </tr>
                       ))
                     }
@@ -105,7 +146,7 @@ export default function OrderDetail({ params }: { params: { id: string } }) {
                 </table>
                 <div className="subtotal-part p-3">
                   <ul className="flex justify-end flex-col items-end">
-                    <li>SubItems Total : <strong>₹{subTotal}</strong></li>
+                    <li>SubItems Total : <strong>{priceFormat(subTotal)}</strong></li>
                     {
                       (orderListData?.coupon !== '') ?
                         <>
@@ -121,25 +162,7 @@ export default function OrderDetail({ params }: { params: { id: string } }) {
               </div>
             </div>
           </>
-      } */}
-
-
-      <div className='inner-pages-base-div form-page-list'>
-        <div className="head">
-          <h2 className='font-medium'>
-            Order Details
-          </h2>
-        </div>
-
-        <div className="form-part mt-4">
-
-
-          <OrderDetailComp id={params.id} />
-
-        </div>
-
-      </div>
-
-    </>
+      }
+    </div>
   )
 }

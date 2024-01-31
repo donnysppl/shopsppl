@@ -46,7 +46,7 @@ export default function ProductFilter({ page, brand, limit, category }: pageType
         cache: 'no-cache',
       }).then(res => res.json())
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.status === 200) {
             setcategoryData(res.result)
             setloading(false);

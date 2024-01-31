@@ -30,13 +30,12 @@ export default async function BlogList({ searchParams }: {
         page: string, limit: string
     }
 }) {
-    console.log(searchParams)
+    // console.log(searchParams)
 
     const page = parseInt(searchParams.page);
     const limit = parseInt(searchParams.limit);
 
     const fetchBlog = await fetchBlogData(page, limit);
-    console.log(fetchBlog)
 
     return (
         <FrontLayout innercol={'bg-white'}>
