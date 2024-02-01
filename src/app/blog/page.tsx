@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 async function fetchBlogData(page: number, limit: number) {
     console.log(page, limit)
-    const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog/front?page=${page ? page : 1}&limit=${limit ? limit : 12}`, {
+    const fetchApi = await fetch(`/api/blog/front?page=${page ? page : 1}&limit=${limit ? limit : 12}`, {
         method: 'GET',
         next: { revalidate: 10 },
     })

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { BsArrowDownShort } from "react-icons/bs";
 
 async function fetchSingleBlog(slug: string) {
-    const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog/front/${slug}`, {
+    const fetchApi = await fetch(`/api/blog/front/${slug}`, {
         method: 'GET',
         next: { revalidate: 10 },
     })
