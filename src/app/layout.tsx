@@ -30,12 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={libre.className}>
-          {children}
+        {children}
       </body>
       <GoogleAnalytics gaId="G-RFYKYCY9PW" />
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       <Script src="https://embed.tawk.to/6586dfe707843602b8050e1d/1hibdl8av" async />
-<FacebookPixel />
+      <FacebookPixel />
     </html>
   )
 }

@@ -3,7 +3,7 @@ import FrontLayout from '@/components/layout/FrontLayout'
 import { notFound } from 'next/navigation';
 
 async function fetchtermPer(slug:string) {
-  const fetchApi = await fetch(`/api/terms-policy/front/${slug}`, {
+  const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/terms-policy/front/${slug}`, {
     method: 'GET',
   })
   if (fetchApi.status !== 200) return notFound();
@@ -25,7 +25,6 @@ export async function generateMetadata({ params }: { params: { slug: string }}) 
 
 const TermPolicyPerPage = async ({ params }: { params: { slug: string }}) => {
   const fetchTermPolicy = await fetchtermPer(params.slug);
-  console.log(fetchTermPolicy)
 
   return (
     <FrontLayout innercol='bg-gray-200'>

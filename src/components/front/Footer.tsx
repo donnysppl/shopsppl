@@ -53,17 +53,17 @@ const quick = [
 const social = [
     {
         titlt: 'Facebook',
-        link: '/',
+        link: 'https://www.facebook.com/ShopSPPL/',
         icon: React.createElement(FaFacebook),
     },
     {
         titlt: 'Instagram',
-        link: '/',
+        link: 'https://www.instagram.com/shopsppl/',
         icon: React.createElement(FaInstagram),
     },
     {
         titlt: 'Twitter',
-        link: '/',
+        link: 'https://twitter.com/SPlastronics',
         icon: React.createElement(FaXTwitter),
     }
 ]

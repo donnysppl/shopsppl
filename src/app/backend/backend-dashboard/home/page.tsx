@@ -98,7 +98,7 @@ export default function HomeData() {
                                 </div> : null
                             }
 
-                            <img src={itemb.file} alt={itemb.slide} />
+                            {/* <img src={itemb.file} alt={itemb.slide} /> */}
                           </div>
                         </li>
                       ))
