@@ -51,18 +51,18 @@ export default function ContactForm({type}:{type:string}) {
         }
         <form  onSubmit={contactDataSubmit} >
             <input className="w-full bg-gray-100 text-gray-900 mb-4 px-3 py-2 rounded-lg focus:outline-none focus:shadow-outline"
-                type="text" placeholder="Name*" onChange={(e) => setconstFormInp({ ...constFormInp, name: e.target.value })}
+                type="text" placeholder="Name*" onChange={(e) => setconstFormInp({ ...constFormInp, name: e.target.value })} required
                 value={'' || constFormInp.name} />
 
             <input className="w-full bg-gray-100 text-gray-900 mb-4 px-3 py-2 rounded-lg focus:outline-none focus:shadow-outline"
-                type="text" placeholder="Email*" onChange={(e) => setconstFormInp({ ...constFormInp, email: e.target.value })}
+                type="text" placeholder="Email*" onChange={(e) => setconstFormInp({ ...constFormInp, email: e.target.value })} required
                 value={'' || constFormInp.email} />
 
             <input className="w-full bg-gray-100 text-gray-900 mb-4 px-3 py-2 rounded-lg focus:outline-none focus:shadow-outline"
-                type="text" placeholder="Phone no*" onChange={(e) => setconstFormInp({ ...constFormInp, phone: e.target.value })}
+                type="text" placeholder="Phone no*" onChange={(e) => setconstFormInp({ ...constFormInp, phone: e.target.value })} required
                 value={'' || constFormInp.phone} />
 
-            <textarea placeholder="Message*" className="w-full h-32 bg-gray-100 text-gray-900 mb-3 p-3 rounded-lg focus:outline-none focus:shadow-outline" onChange={(e) => setconstFormInp({ ...constFormInp, message: e.target.value })}
+            <textarea placeholder="Message*" required className="w-full h-32 bg-gray-100 text-gray-900 mb-3 p-3 rounded-lg focus:outline-none focus:shadow-outline" onChange={(e) => setconstFormInp({ ...constFormInp, message: e.target.value })}
                 value={'' || constFormInp.message} ></textarea>
 
             <button className='btn-prim' type='submit'>Submit</button>
