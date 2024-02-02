@@ -67,6 +67,7 @@ export function ShoppingCardProvider({ children }: ShoppingCardProviderProps) {
         }
         setcartItem(newCartData)
         window.localStorage.setItem("shipment-cart", JSON.stringify(newCartData));
+        router.push('/product/checkout');
         setCartToState();
     }
     function decreaseCartQuantity(id: string) {

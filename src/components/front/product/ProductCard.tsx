@@ -1,4 +1,5 @@
 import { Product } from '@/helpers/interFace'
+import OnBuyFunct from '@/helpers/onBuyFunct'
 import OnCartFunct from '@/helpers/onCartFunct'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -46,6 +47,7 @@ export default function ProductCard(item:Product) {
                     </Link>
                     <div className="btn-part ">
                         <OnCartFunct id={item._id} />
+                        <OnBuyFunct id={item?._id} />
                     </div>
                 
             </div>

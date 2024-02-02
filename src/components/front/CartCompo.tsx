@@ -6,6 +6,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { AiOutlineClose } from "react-icons/ai";
 import { BsCart3 } from "react-icons/bs";
+import QuantyPart from './product/QuantyPart';
 
 export default function CartCompo() {
     const { cartQuantity, cartItem, getItemQuantity } = useShoppingCart();
@@ -79,18 +80,15 @@ export default function CartCompo() {
                                                     <div className="ml-4 flex flex-1 flex-col">
                                                         <div>
                                                             <div className="flex justify-between text-sm font-medium text-gray-300">
-                                                                <h3 className='text-sm'>
+                                                                <h3 className='text-xs'>
                                                                     <a href="#">{item.name}</a>
                                                                 </h3>
                                                                 <p className="ml-4"> {`₹${item.productSalePrice}`}</p>
                                                             </div>
                                                         </div>
-                                                        <div className="flex flex-1 items-end justify-between text-sm">
-                                                            <p className="text-gray-500">Qty {getItemQuantity(item._id)}</p>
-
-                                                            <div className="flex">
-                                                                <button type="button" onClick={() => removeFromQuantity(item._id)} className="remove-btn">Remove</button>
-                                                            </div>
+                                                        <div className='flex justify-between mt-1'>
+                                                            <QuantyPart id={item?._id} />
+                                                            <div className="remove-btn "><button onClick={() => removeFromQuantity(item._id)} className="btn-prim scale-75">Remove</button></div>
                                                         </div>
                                                     </div>
                                                 </li>

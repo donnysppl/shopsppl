@@ -8,6 +8,7 @@ import { useShoppingCart } from '@/hooks/ShoppingCartContext';
 import { AiOutlineClose } from "react-icons/ai";
 import { RiCoupon4Line } from "react-icons/ri";
 import { stateJson } from '@/helpers/dommyjson/json';
+import QuantyPart from '../QuantyPart';
 
 interface orderInptype {
     email: string,
@@ -358,7 +359,7 @@ export default function Checkout() {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="state" className="form-label">State</label>
-                                    <select className="form-control"  name='state' required
+                                    <select className="form-control" name='state' required
                                         onChange={(e) => setorderInp({ ...orderInp, state: e.target.value })}>
                                         <option value="">Choose State</option>
                                         {
@@ -396,7 +397,7 @@ export default function Checkout() {
                                     <div className="grid grid-cols-2 gap-x-4">
                                         <div className="mb-3">
                                             <label htmlFor="name" className="form-label">Name</label>
-                                            <input type="text" name='name' className="form-control" placeholder='Name' 
+                                            <input type="text" name='name' className="form-control" placeholder='Name'
                                                 onChange={(e) => setorderShipInp({ ...orderShipInp, name: e.target.value })} />
                                         </div>
                                         <div className="mb-3">
@@ -479,10 +480,14 @@ export default function Checkout() {
                                             <div className="prod-data p-1.5">
                                                 <div className="name text-[0.8rem] line-clamp-2">
                                                     {item.name}</div>
-                                                <div className="inline-flex gap-2 items-center text-[0.8rem]">
+                                                <div className="inline-flex gap-2 items-center text-[0.8rem] me-1">
                                                     {getItemQuantity(item._id)} <AiOutlineClose /> ₹ {item.productSalePrice}</div>
-                                                <div className="remove-btn flex justify-end"><button onClick={() => removeFromQuantity(item._id)} className="btn-prim scale-75">Remove</button></div>
+                                                <div className='flex justify-between mt-1'>
+                                                    <QuantyPart id={item?._id} />
+                                                    <div className="remove-btn "><button onClick={() => removeFromQuantity(item._id)} className="btn-prim scale-75">Remove</button></div>
+                                                </div>
                                             </div>
+
                                         </div>
                                     </li>
                                 ))
