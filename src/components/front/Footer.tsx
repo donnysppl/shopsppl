@@ -7,27 +7,27 @@ import Modal from './Modal';
 const support = [
     {
         titlt: 'Return And Refund Policy',
-        link: '/return-and-refund-policy',
+        link: 'policy/return-and-refund-policy',
     },
     {
         titlt: 'Shipping Policy',
-        link: '/shipping-policy',
+        link: 'policy/shipping-policy',
     },
     {
         titlt: 'Terms And Conditions',
-        link: '/terms-and-conditions',
+        link: 'policy/terms-and-conditions',
     },
     {
         titlt: 'Warranty Detials',
-        link: '/warranty-detials',
+        link: 'policy/warranty-detials',
     },
     {
         titlt: 'Privacy Policy',
-        link: '/privacy-policy',
+        link: 'policy/privacy-policy',
     },
     {
         titlt: 'FAQ',
-        link: '/faq',
+        link: 'policy/faq',
     },
 ]
 

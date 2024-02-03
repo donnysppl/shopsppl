@@ -268,7 +268,7 @@ export default function Checkout() {
             currency: "INR",
             name: "SHOPSPPL",
             description: "SHOPSPPL product payment",
-            image: `${process.env.NEXT_PUBLIC_BASE_URL}/img/logo.png`,
+            image: `${process.env.NEXT_PUBLIC_BASE_URL}/img/sppl-razorpay.jpg`,
             order_id: res.id,
             // callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/razorpay/paymentverification`,
             // userid is a order id
@@ -307,7 +307,7 @@ export default function Checkout() {
                 address: "Razorpay Corporate Office"
             },
             theme: {
-                color: "#3399cc"
+                color: "#013088"
             }
         };
         // console.log(options)
