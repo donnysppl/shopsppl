@@ -70,6 +70,9 @@ const orderProdSchema = new Schema({
     discountammount:{
         type: Number,
     },
+    ekartData:{
+        type: Array,
+    }
 },{ timestamps: true })
 
 const ProductOrder = models.ProductOrder || model("ProductOrder", orderProdSchema);

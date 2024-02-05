@@ -33,3 +33,46 @@ export async function GET(req: NextRequest,{ params }: { params: { id: string } 
         }, { status: 500 })
     }
 }
+
+
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+    try {
+        await connect();
+
+        const ekartData = await req.json();
+        const orderData = await ProductOrder.findOne({ _id: params.id });
+
+        if (!orderData) {
+            return NextResponse.json({
+                status: 404,
+                message: 'Order not found',
+            }, { status: 404 });
+        }
+
+        // Ensure 'ekartData' is initialized as an array
+        orderData.ekartData = orderData.ekartData || [];
+
+        orderData.ekartData.push(ekartData);
+        const savedOrder = await orderData.save();
+
+        if (!savedOrder) {
+            return NextResponse.json({
+                status: 500,
+                message: 'Error saving order data',
+            }, { status: 500 });
+        }
+
+
+        return NextResponse.json({
+            status: 200,
+            message: 'Data Found',
+            result: orderData,savedOrder
+        }, { status: 200 });
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({
+            status: 500,
+            message: 'Something went wrong ' + error,
+        }, { status: 500 });
+    }
+}

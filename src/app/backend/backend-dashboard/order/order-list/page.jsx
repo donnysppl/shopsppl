@@ -17,10 +17,11 @@ export default function OrderList() {
                 cache:'no-store',
             }).then(res => res.json())
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 if (res.status === 200) {
                     toast.success(res.message);
-                    setorderListData(res.result);
+                    const arrangeData = res.result.reverse();
+                    setorderListData(arrangeData);
                 }
                 else if (res.status === 400) {
                     toast.error(res.message);

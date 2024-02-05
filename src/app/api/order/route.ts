@@ -15,10 +15,15 @@ export async function POST(req: NextRequest) {
     try {
         await connect();
         const { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,ship_add,ship_address, totalprodprice,coupon,discountammount} = await req.json();
-        const oldOrderData = await ProductOrder.count();
+        
+        const oldOrderData = (await ProductOrder.find().select('sppl_orderid')).reverse();
+
+        const lattestOrderid = oldOrderData[0].sppl_orderid;
+        const numericalValue = (parseInt(lattestOrderid.match(/\d+/)[0]) + 1);
+        
 
         const newData = { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,status: 'payment_pending', totalprodprice,coupon,discountammount,
-        sppl_orderid: `SPPLW${oldOrderData + 1} `} as orderInptype;
+        sppl_orderid: `SPPLW${numericalValue + 1} `} as orderInptype;
 
         // checking shipping address exist
         if (ship_add === true) {

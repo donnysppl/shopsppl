@@ -11,6 +11,7 @@ export default function ContactList() {
     const [conttableData, setconttableData] = useState([]);
     const [loading, setloading] = useState(false);
 
+
     useEffect(() => {
         const fetchContTableData = async () => {
             setloading(true);
@@ -22,7 +23,8 @@ export default function ContactList() {
                     console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
-                        setconttableData(res.result);
+                        const result = res.result.reverse();
+                        setconttableData(result);
                     }
                     else if (res.status === 400) {
                         toast.error(res.message);
@@ -82,10 +84,11 @@ export default function ContactList() {
 
     return (
         <div className='inner-pages-base-div form-page-list'>
-            <div className="head">
+            <div className="head grid grid-cols-5">
                 <h2 className='font-medium'>
                     Contact List
                 </h2>
+
             </div>
 
             <div>
