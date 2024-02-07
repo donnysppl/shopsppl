@@ -51,7 +51,8 @@ export default function OrderDetailComp({ id }: { id: string }) {
     }
     orderListFetch();
   }, [id])
-
+  const trackinh = orderListData?.ekartData[0]
+  console.log(orderListData?.ekartData[0])
 
   return (
     <div className="relative text-gray-950">
@@ -80,7 +81,14 @@ export default function OrderDetailComp({ id }: { id: string }) {
                       <li className="flex justify-center">
                         <img src="/img/logistics.gif" alt="logistics" className="w-24 h-24" />
                       </li>
-                      <li className="text-center text-sm">Tracking ID : <strong>{orderListData?.ekartData[0].trackingID}</strong>
+                      {/* <li className="text-center text-sm">Tracking ID : <strong>{orderListData?.ekartData[0].trackingID}</strong> */}
+                      <li className="text-center text-sm">Tracking ID : <strong>
+                        { Array.isArray(orderListData?.ekartData[0]) ?
+                          orderListData?.ekartData[0].map((item, index) => (
+                            <span className="block" key={index}>{item.trackingid},</span>
+                          )) : orderListData?.ekartData[0].trackingID
+                        }
+                      </strong>
                       </li>
                     </ul>
                   </div>

@@ -12,28 +12,28 @@ export default function OrderList() {
 
     useEffect(() => {
         const orderListFetch = async () => {
-            await fetch('/api/order',{
-                method:'GET',
-                cache:'no-store',
+            await fetch('/api/order', {
+                method: 'GET',
+                cache: 'no-store',
             }).then(res => res.json())
-            .then(res => {
-                console.log(res);
-                if (res.status === 200) {
-                    toast.success(res.message);
-                    const arrangeData = res.result.reverse();
-                    setorderListData(arrangeData);
-                }
-                else if (res.status === 400) {
-                    toast.error(res.message);
-                }
-                else if (res.status === 500) {
-                    toast.error(res.message);
-                }
-                setloading(false);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                .then(res => {
+                    console.log(res);
+                    if (res.status === 200) {
+                        toast.success(res.message);
+                        const arrangeData = res.result.reverse();
+                        setorderListData(arrangeData);
+                    }
+                    else if (res.status === 400) {
+                        toast.error(res.message);
+                    }
+                    else if (res.status === 500) {
+                        toast.error(res.message);
+                    }
+                    setloading(false);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         }
         orderListFetch();
     }, [])
@@ -69,7 +69,17 @@ export default function OrderList() {
         },
         {
             header: 'Shipment Tracking',
-            accessorFn: (row, index) => row.ekartData[0]?.trackingID,
+            cell: cell => (
+                <div>
+                    {
+                        Array.isArray(cell.row.original.ekartData[0]) ? cell.row.original.ekartData[0].map((item, index) => (
+                            <span className="block" key={index}>{item.trackingid},</span>
+                        ))
+                            : cell.row.original.ekartData[0]?.trackingID
+                    }
+
+                </div>
+            )
         },
         {
             header: 'Action',

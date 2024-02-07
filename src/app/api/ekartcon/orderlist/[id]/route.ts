@@ -40,6 +40,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         await connect();
 
         const ekartData = await req.json();
+
+        console.log(ekartData)
         const orderData = await ProductOrder.findOne({ _id: params.id });
 
         if (!orderData) {
@@ -66,7 +68,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         return NextResponse.json({
             status: 200,
             message: 'Data Found',
-            result: orderData,savedOrder
+            // result: orderData,savedOrder
         }, { status: 200 });
     } catch (error) {
         console.log(error);
