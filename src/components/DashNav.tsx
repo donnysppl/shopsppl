@@ -199,7 +199,6 @@ export default function DashNav() {
 
         if (decodeToken && decodeToken.adminrole) {
             setadminRole(decodeToken.adminrole);
-            console.log(decodeToken.adminrole)
             const dashNavSort = dashNavList.filter(item => item.accessRole.includes(decodeToken.adminrole));
             setadminRoleArr(dashNavSort);
             setloader(false);

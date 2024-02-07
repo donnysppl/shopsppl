@@ -478,4 +478,20 @@ footer {
     background-size: cover;
     background-position: center;
   } */
+
+  form.modal-form input:nth-child(1){
+    width: 49%;
+    float: left;
+  }
+  form.modal-form input:nth-child(2){
+    width: 49%;
+    float: right;
+  }
+  form.modal-form textarea{
+    height: auto;
+  }
+  form.modal-form{
+    scale: 0.85;
+    transform: translateY(-30px)
+  }
 }

@@ -12,8 +12,12 @@ import {
   Section,
   Text,
 } from '@react-email/components';
+import moment from 'moment';
 import * as React from 'react';
+import { priceFormat } from '../common';
 
+
+const logourl = "https://shopsppl.in/img/logo.png"
 export const Email = ({ url }) => (
   <Html>
     <Head />
@@ -22,7 +26,7 @@ export const Email = ({ url }) => (
         <Section style={box}>
           <Section style={header}>
             <Img
-              src={'https://thomson.shopsppl.net/img/logo.png'}
+              src={logourl}
               width="180"
               alt="SPPL-logo" style={logo}
             />
@@ -59,7 +63,7 @@ export const OTPEmail = ({ url, otp }) => (
         <Section style={box}>
           <Section style={header}>
             <Img
-              src={'https://thomson.shopsppl.net/img/logo.png'}
+              src={logourl}
               width="180"
               alt="SPPL-logo" style={logo}
             />
@@ -96,44 +100,154 @@ export const OrderCompleteEmail = ({ orderData }) => (
         <Section style={box}>
           <Section style={header}>
             <Img
-              src={'https://thomson.shopsppl.net/img/logo.png'}
+              src={logourl}
               width="180"
               alt="SPPL-logo" style={logo}
             />
           </Section>
           <Section style={innerbox}>
 
-            <Heading style={paragraph}>
-              Thank you for purchasing
+
+            <Heading style={{
+              textAlign: 'center',
+              fontWeight: '600',
+              fontSize: '20px',
+              padding: "10px 0",
+            }}>
+              Your order has been placed
             </Heading>
 
+
+            <Heading style={{
+              textAlign: 'left',
+              fontWeight: '600',
+              fontSize: '16px',
+
+            }}>
+              Hey, {orderData?.name}
+            </Heading>
+            <Text style={{ fontWeight: "400", margin: "0", textAlign: 'left', fontSize: '14px' }}>
+              Your order has been confirmed and will be shipping soon.
+            </Text>
+            <Hr style={hr} />
+            <Section>
+              <Row >
+                <Column>
+                  <Heading style={{
+                    textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                    color: '#878a99', lineHeight: '200%',
+                  }}>
+                    Order Number
+                  </Heading>
+                  <Text style={{ fontWeight: "600", margin: "0", textAlign: 'left', fontSize: '12px' }}>
+                    {orderData?.sppl_orderid}
+                  </Text>
+
+                </Column>
+                <Column>
+                  <Heading style={{
+                    textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                    color: '#878a99', lineHeight: '200%',
+                  }}>
+                    Order Date
+                  </Heading>
+                  <Text style={{ fontWeight: "600", margin: "0", textAlign: 'left', fontSize: '12px' }}>
+                    {moment(orderData?.createdAt).format('ll')}
+                  </Text>
+
+                </Column>
+                <Column>
+                  <Heading style={{
+                    textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                    color: '#878a99', lineHeight: '200%',
+                  }}>
+                    Payment ID
+                  </Heading>
+                  <Text style={{ fontWeight: "600", margin: "0", textAlign: 'left', fontSize: '12px' }}>
+                    {orderData?.paymentid}
+                  </Text>
+
+                </Column>
+              </Row>
+            </Section>
             <Hr style={hr} />
 
             <Section
-              style={{  }}
+              style={{}}
             >
+              <Row style={{
+                borderBottom: '1px solid #e6ebf1',
+              }}>
+                <Column style={{ width: '60%', float: 'left', }}>
+                  <Heading style={{
+                    textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                    color: '#878a99', lineHeight: '250%',
+                  }}>
+                    Product Details
+                  </Heading>
+                </Column>
+                <Column style={{ width: '20%', float: 'left', }}>
+                  <Heading style={{
+                    textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                    color: '#878a99', lineHeight: '300%', textAlign: 'center'
+                  }}>
+                    Quantity
+                  </Heading>
+                </Column>
+                <Column style={{ width: '20%', float: 'right', }}>
+                  <Heading style={{
+                    textAlign: 'right', fontWeight: '500', fontSize: '12px',
+                    color: '#878a99', lineHeight: '300%',
+                  }}>
+                    Amount
+                  </Heading>
+                </Column>
+              </Row>
               {
                 orderData.orderprod.map((item, index) => (
-                  <Row key={index}>
-                    <Column style={{ verticalAlign: "top", paddingLeft: "12px" }}>
-                      <Text style={{ ...paragraph, fontWeight: "500" }}>
-                        {orderData.orderprod[0].productname}
-                      </Text>
-                      <Text style={{...global.text, marginBottom:'0',}}>Model : {item.productmodel}</Text>
-                      <Text style={{...global.text, marginBottom:'0',}}>Quantity : {item.quantity} & Price : ₹{item.productsaleprice}</Text>
+                  <Row key={index} >
+                    <Column style={{ width: '60%', float: 'left', paddingTop: '6px' }}>
+                      <Heading style={{
+                        textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                        color: '#000', lineHeight: '150%',
+                      }}>
+                        {item.productname}
+                      </Heading>
+                    </Column>
+                    <Column style={{ width: '20%', float: 'left', paddingTop: '6px' }}>
+                      <Heading style={{
+                        textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                        color: '#000', lineHeight: '150%', textAlign: 'center'
+                      }}>
+                        {item.quantity}
+                      </Heading>
+                    </Column>
+                    <Column style={{ width: '20%', float: 'right', paddingTop: '6px' }}>
+                      <Heading style={{
+                        textAlign: 'right', fontWeight: '500', fontSize: '12px',
+                        color: '#000', lineHeight: '150%',
+                      }}>
+                        {priceFormat(item.productsaleprice)}
+                      </Heading>
                     </Column>
                   </Row>
                 ))
               }
 
+
               <Hr style={hr} />
-              <Text style={{ fontWeight: "500", margin: "0", textAlign: 'right' }}>Total Product Price :  ₹{orderData.totalprodprice}</Text>
-              <Text style={{ fontWeight: "500", margin: "0", textAlign: 'right' }}>Total Discount :  ₹{orderData.discountammount}</Text>
-              <Text style={{ fontWeight: "600", margin: "0", textAlign: 'right', borderTop: '1px solid #000', borderBottom: '1px solid #000', display: "inline-block", float: 'right', fontSize: '16px' }}>Total Bill :  ₹{orderData.totalbill}</Text>
+              <Text style={{ fontWeight: "500", margin: "0", textAlign: 'right', paddingRight: '12px', }}>Total Product Price :  {priceFormat(orderData.totalprodprice)}</Text>
+              <Text style={{ fontWeight: "500", margin: "0", textAlign: 'right', paddingRight: '12px', }}>Total Discount :  {priceFormat(orderData.discountammount)}</Text>
+              <Section>
+                <Text style={{ fontWeight: "600", margin: "0", textAlign: 'right', paddingRight: '12px', borderTop: '1px solid #000', borderBottom: '1px solid #000', display: "inline-block", float: 'right', fontSize: '16px' }}>Total Bill :  {priceFormat(orderData.totalbill)}</Text>
+              </Section>
+
+              <Text style={{ fontWeight: "400", margin: "0", textAlign: 'left', fontSize: '12px', paddingTop: '10px', marginTop: '15px', borderTop: '1px solid #e6ebf1' }}>
+                Ww will send you shipping confirmation when your item(s) are on the way! We appreciate your business, and hope you enjoy your purchase.
+              </Text>
             </Section>
 
 
-            <Hr style={hr} />
             <Text style={footer}>
               — The Super Plastronics Pvt Ltd team , S-24, Pocket S, Okhla Phase II, Okhla, New Delhi, Delhi 110020
             </Text>
@@ -174,7 +288,7 @@ const box = {
   backgroundColor: '#fff',
 };
 const innerbox = {
-  padding: '0 40px',
+  padding: '0 10px',
 };
 const hr = {
   borderColor: '#e6ebf1',

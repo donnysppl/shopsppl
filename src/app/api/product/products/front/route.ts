@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
             const pages = parseInt(pagesParams);
             const limit = parseInt(limitParams);
 
-            const filter = {} as { brand: string, category: string };
+            const filter = {} as { brand: string, category: string, isStatus : boolean };
 
             if (brandParams && brandParams !== 'all') {
                 filter.brand = brandParams;
@@ -49,10 +49,10 @@ export async function GET(req: NextRequest) {
             if (categoryParams && categoryParams !== 'all') {
                 filter.category = categoryParams;
             }
-
             const startIndex = (pages - 1) * limit;
             const ensIndex = pages * limit;
             const data = await Product.find(filter)
+            
             await shuffleArray(data);
             if (!data) {
                 return NextResponse.json({

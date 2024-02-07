@@ -43,21 +43,26 @@ export default function Modal() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full h-[400px] relative transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all flex">
+                <Dialog.Panel className="w-full h-[400px] relative transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all flex md:flex-row flex-col">
                   <div className="modal-close-btn absolute bg-white rounded-full right-0 w-6 h-6 mt-1 me-1 cursor-pointer flex items-center justify-center" onClick={() => closeModal()}>
                     <AiOutlineClose className='w-5 h-5' />
                   </div>
-                  <div className="w-[50%] h-full">
+                  <div className="md:w-[50%] w-full md:h-full sm:h-[180px] h-[150px]">
                     <div className="modal-left-part h-full">
-                      <img src="/img/modal.webp" alt="modal.webp" className='w-full h-full object-cover object-center' />
+                      {/* <img src="/img/modal.webp" alt="modal.webp" className='w-full h-full object-cover object-center' /> */}
+                      <picture className='w-full h-full object-cover object-center '>
+                        <source media="(min-width:650px)" srcSet="/img/modal.webp" />
+                        <source media="(max-width:580px)" srcSet="/img/modal-res.webp" />
+                        <img src="/img/modal.webp" alt="Flowers" className='w-full h-full object-cover object-center' />
+                      </picture>
                     </div>
                   </div>
-                  <div className="w-[50%] h-full">
+                  <div className="md:w-[50%] w-full h-full">
                     <div className="modal-right-part w-full h-full">
                       <div className='p-3'>
                         <h2 className='text-center mb-0.5 mt-1'>Grab the offer</h2>
                         <div className='scale-[0.88]'>
-                          <ContactForm type={'modal'} />
+                          <ContactForm type={'modal'} clas={'modal-form'} />
                         </div>
                       </div>
                     </div>

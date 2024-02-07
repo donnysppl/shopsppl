@@ -4,7 +4,7 @@ import Loader from "@/components/Loader";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function ContactForm({type}:{type:string}) {
+export default function ContactForm({type,clas}:{type:string;clas?:string}) {
 
     const [constFormInp, setconstFormInp] = useState({
         name:'',
@@ -49,7 +49,7 @@ export default function ContactForm({type}:{type:string}) {
         {
             loading ? <Loader /> : null
         }
-        <form  onSubmit={contactDataSubmit} >
+        <form  onSubmit={contactDataSubmit} className={`${clas}`} >
             <input className="w-full bg-gray-100 text-gray-900 mb-4 px-3 py-2 rounded-lg focus:outline-none focus:shadow-outline"
                 type="text" placeholder="Name*" onChange={(e) => setconstFormInp({ ...constFormInp, name: e.target.value })} required
                 value={'' || constFormInp.name} />

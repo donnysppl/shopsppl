@@ -17,7 +17,7 @@ export default function OrderList() {
                 cache:'no-store',
             }).then(res => res.json())
             .then(res => {
-                // console.log(res);
+                console.log(res);
                 if (res.status === 200) {
                     toast.success(res.message);
                     const arrangeData = res.result.reverse();
@@ -69,13 +69,13 @@ export default function OrderList() {
         },
         {
             header: 'Shipment Tracking',
-            accessorFn: (row, index) => row.shipmenttracking,
+            accessorFn: (row, index) => row.ekartData[0]?.trackingID,
         },
         {
             header: 'Action',
             cell: cell => (
                 <div className="flex gap-5">
-                    <Link href={`/backend/backend-dashboard/order/order-detail/${cell.row.original._id}`}><button className="text-green-400">Detail</button></Link>
+                    <Link href={`/backend/backend-dashboard/order/order-detail/${cell.row.original._id}`}><button className="edit-btn">Detail</button></Link>
                     {/* <button onClick={(e) => onDeleteCategory(e, cell.row.original._id)} className="text-red-400">Delete</button> */}
                 </div>
             )

@@ -100,7 +100,10 @@ export interface orderInptype {
   paymentdate: string;
   coupon?: string,
   totalprodprice: number,
-  discountammount?: number
+  discountammount?: number,
+  ekartData: Array<{
+    trackingID: string;
+  }>;
 }
 
 export interface BlogInpProps {
@@ -134,9 +137,9 @@ export interface HomeCateSlider {
 
 }
 export interface CustTokenDecode {
-    id: string,
-    username: string,
-    email: string,
+  id: string,
+  username: string,
+  email: string,
 }
 
 export interface AdminTokenDecode {
