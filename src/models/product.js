@@ -93,6 +93,9 @@ const productSchema = new Schema({
     },
     stock:{
         type:Number,
+    },
+    tag:{
+        type:Array,
     }
 },{ timestamps: true })
 

@@ -30,9 +30,14 @@ export async function POST(req: NextRequest) {
             const listCat = jsonData[i].Product_Category;
             const productimgSplit = jsonData[i].Product_Images;
             const productRPSSplit = jsonData[i].Product_RPD_Images;
+            const productTagSplit = jsonData[i].Tag;
+
             const catArr = listCat.split(",");
             const productimgArr = productimgSplit.split(",");
             const productRPDArr = productRPSSplit.split(",");
+            const productTagArr = productTagSplit.split(",");
+
+
             const categoryData = await Category.find({ name: { $in: catArr } });
             const brandData = await Brand.find({name : {$in : jsonData[i].Product_Brand }});
             const priceDiffData = jsonData[i].Product_Regular_Price - jsonData[i].Product_Sale_Price;
@@ -64,7 +69,8 @@ export async function POST(req: NextRequest) {
                 width: jsonData[i].Product_width,
                 height: jsonData[i].Product_height,
                 brandArr : brandData,
-                inStock:jsonData[i].InStock
+                inStock:jsonData[i].InStock,
+                tag:productTagArr,
             })
 
         }

@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     try {
         await connect();
         const { name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg, productrpd, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, productPriceDiffAmt, productPriceDiffpercent, brand, weight
-            , lenght,inStock,stock
+            , lenght,inStock,stock,tag
             , width
             , height } = await req.json();
 
@@ -18,13 +18,15 @@ export async function POST(req: NextRequest) {
 
         const productimgStr = productimg.toString();
         const productRPDStr = productimg.toString();
+        const productTagStr = tag.toString();
 
         const productimgArr = productimgStr.split(",");
         const productRPDArr = productRPDStr.split(",");
+        const productTagArr = productTagStr.split(",");
 
         const prodData = await {
             name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg:productimgArr, productrpd:productRPDArr, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, categoryArr: categoryData, productPriceDiffAmt, productPriceDiffpercent, brand, weight, brandArr: brandData
-            , lenght
+            , lenght ,tag:productTagArr
             , width
             , height,inStock,stock
         };

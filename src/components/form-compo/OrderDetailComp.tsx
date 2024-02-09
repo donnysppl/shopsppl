@@ -9,8 +9,6 @@ import { CiMail } from "react-icons/ci";
 import { IoCallOutline } from "react-icons/io5";
 import Loader from "../Loader";
 
-
-
 export default function OrderDetailComp({ id }: { id: string }) {
   const [orderListData, setorderListData] = useState<orderInptype>();
   const [loading, setloading] = useState(true);
@@ -51,8 +49,6 @@ export default function OrderDetailComp({ id }: { id: string }) {
     }
     orderListFetch();
   }, [id])
-  const trackinh = orderListData?.ekartData[0]
-  console.log(orderListData?.ekartData[0])
 
   return (
     <div className="relative text-gray-950">
@@ -91,6 +87,10 @@ export default function OrderDetailComp({ id }: { id: string }) {
                       </strong>
                       </li>
                     </ul>
+                  </div>
+
+                  <div className="track-btn">
+                    <a href="https://shopspplekart.vercel.app/customer/tracking" className="bg-act px-2 py-1 rounded-md font-semibold block text-center">Track Now</a>
                   </div>
 
                 </div> : null

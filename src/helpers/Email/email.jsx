@@ -261,6 +261,107 @@ export const OrderCompleteEmail = ({ orderData }) => (
   </Html>
 );
 
+
+export const EkartDetailsEmail = ({ orderData }) => (
+  <Html>
+    <Head />
+    <Body style={main}>
+      <Container style={container}>
+        <Section style={box}>
+          <Section style={header}>
+            <Img
+              src={logourl}
+              width="180"
+              alt="SPPL-logo" style={logo}
+            />
+          </Section>
+          <Section style={innerbox}>
+
+
+            <Heading style={{
+              textAlign: 'center',
+              fontWeight: '600',
+              fontSize: '20px',
+              padding: "10px 0",
+            }}>
+              Your order has been shipped
+            </Heading>
+
+
+            <Heading style={{
+              textAlign: 'left',
+              fontWeight: '600',
+              fontSize: '16px',
+
+            }}>
+              Hey, {orderData?.name}
+            </Heading>
+            <Text style={{ fontWeight: "400", margin: "0", textAlign: 'left', fontSize: '14px' }}>
+              Your order has been shipped .
+            </Text>
+            <Hr style={hr} />
+            <Section>
+              <Row >
+                <Column style={{
+                  width: '40%'
+                }}>
+                  <Heading style={{
+                    textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                    color: '#878a99', lineHeight: '200%',
+                  }}>
+                    Order Number
+                  </Heading>
+                  <Text style={{ fontWeight: "600", margin: "0", textAlign: 'left', fontSize: '12px' }}>
+                    {orderData?.sppl_orderid}
+                  </Text>
+
+                </Column>
+                <Column style={{
+                  width: '60%'
+                }}>
+                  <Heading style={{
+                    textAlign: 'left', fontWeight: '500', fontSize: '12px',
+                    color: '#878a99', lineHeight: '200%',
+                  }}>
+                    Tracking ID
+                  </Heading>
+                  <Text style={{ fontWeight: "600", margin: "0", textAlign: 'left', fontSize: '12px' }}>
+                    {Array.isArray(orderData?.ekartData[0]) ?
+                      orderData?.ekartData[0].map((item, index) => (
+                        <span className="" key={index}>{item.trackingid}, </span>
+                      )) : orderData?.ekartData[0].trackingID
+                    }
+                  </Text>
+
+                </Column>
+              </Row>
+            </Section>
+            <Hr style={hr} />
+
+            <Section>
+              <Text style={{ fontWeight: "500", margin: "0", textAlign: 'center', fontSize: '16px', paddingBottom: '8px' }}>
+                Want to track your order
+              </Text>
+              <Button style={button} href={'https://shopspplekart.vercel.app/customer/tracking'}>
+                Track Now
+              </Button>
+            </Section>
+
+            <Hr style={hr} />
+
+            <Text style={footer}>
+              — The Super Plastronics Pvt Ltd team , S-24, Pocket S, Okhla Phase II, Okhla, New Delhi, Delhi 110020
+            </Text>
+
+
+          </Section>
+
+        </Section>
+      </Container>
+    </Body>
+  </Html>
+);
+
 export default Email;
 const paddingX = {
   paddingLeft: "40px",
@@ -312,11 +413,11 @@ const anchor = {
   color: '#556cd6',
 };
 const button = {
-  backgroundColor: '#656ee8',
-  borderRadius: '5px',
-  color: '#fff',
-  fontSize: '16px',
-  fontWeight: 'bold',
+  backgroundColor: '#F6AF17',
+  borderRadius: '20px',
+  color: '#000',
+  fontSize: '18px',
+  fontWeight: '600',
   textDecoration: 'none',
   textAlign: 'center',
   display: 'block',

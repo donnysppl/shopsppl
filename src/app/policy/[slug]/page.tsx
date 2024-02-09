@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 async function fetchtermPer(slug:string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/terms-policy/front/${slug}`, {
     method: 'GET',
+    cache:'no-cache',
   })
   if (fetchApi.status !== 200) return notFound();
   const data = await fetchApi.json();

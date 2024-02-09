@@ -67,7 +67,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         const id = params.id;
 
         const { name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg, productrpd, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, productPriceDiffAmt, productPriceDiffpercent, brand, weight
-            , lenght
+            , lenght ,tag
             , width,inStock,stock
             , height } = await req.json();
 
@@ -76,15 +76,15 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
         const productimgStr = productimg.toString();
         const productRPDStr = productrpd.toString();
+        const productTagStr = tag.toString();
 
         const productimgArr = productimgStr.split(",");
         const productRPDArr = productRPDStr.split(",");
-
-        console.log(productimgArr, productRPDArr)
+        const productTagArr = productTagStr.split(",");
 
         const updateProdData = await {
             name, slug, metatitle, metadiscrip, metakeyword, category, model, shortdiscrip, discription, mainproductimg, productimg:productimgArr, productrpd:productRPDArr, productNormalPrice, productSalePrice, isPublish, isStatus, isFeatured, categoryArr: categoryData, productPriceDiffAmt, productPriceDiffpercent, brand, weight, brandArr: brandData
-            , lenght,inStock,stock
+            , lenght,inStock,stock ,tag:productTagArr
             , width
             , height
         };

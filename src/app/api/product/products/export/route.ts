@@ -35,6 +35,7 @@ export async function GET(req: NextRequest) {
             { header: "Featured", key: "isFeatured" },
             { header: "InStock", key: "inStock" },
             { header: "Stock Number", key: "stock" },
+            { header: "Tag", key: "tag" },
         ];
 
         const productData = await Product.find();
@@ -44,6 +45,7 @@ export async function GET(req: NextRequest) {
             const categString = productData[i].category.toString();
             const productimgString = productData[i].productimg.toString();
             const productRPDString = productData[i].productrpd.toString();
+            const productTagString = productData[i].tag.toString();
             customPoductData.push({
                 _id: productData[i]._id,
                 name: productData[i].name,
@@ -67,6 +69,9 @@ export async function GET(req: NextRequest) {
                 isPublish: productData[i].isPublish,
                 isStatus: productData[i].isStatus,
                 isFeatured: productData[i].isFeatured,
+                tag:productTagString,
+                inStock:productData[i].inStock,
+                stock:productData[i].stock,
             })
         }
 

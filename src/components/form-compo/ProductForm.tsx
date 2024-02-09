@@ -45,6 +45,7 @@ interface ProdInp {
     width: Number;
     height: Number;
     stock: Number;
+    tag: string;
 }
 interface ProdFormProps {
     method: string,
@@ -78,6 +79,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
         width: 0,
         height: 0,
         stock: 0,
+        tag: '',
     })
 
     const [isPublish, setisPublish] = useState<boolean>(false);
@@ -93,7 +95,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
     const [selectedOption, setSelectedOption] = useState<any>(null);
     const [selectedbrand, setSelectedbrand] = useState<any>(null);
     useEffect(() => {
-        
+
         const fetchPrevProd = async () => {
             setloader(true)
             await fetch(`/api/product/products/${id}`, {
@@ -101,7 +103,7 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                 headers: { 'Content-Type': 'application/json' },
             }).then(res => res.json())
                 .then(res => {
-                    // console.log(res);
+                    console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
                         setproductinp(res.result);
@@ -226,8 +228,9 @@ export default function ProductForm({ method, id }: ProdFormProps) {
             lenght: productinp.lenght,
             width: productinp.width,
             height: productinp.height,
-            inStock:isInStock,
-            stock:productinp.stock,
+            inStock: isInStock,
+            stock: productinp.stock,
+            tag: productinp.tag,
         }
         console.log(prodData)
 
@@ -456,12 +459,24 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                 </div>
             </div>
 
-            <div className="mb-4 form-inp">
-                <label htmlFor="mainproductimg" className="form-label">Product Main Image</label>
-                <input type="text" name='mainproductimg' className="form-ctrl" placeholder='Product Main Image'
-                    onChange={(e) => setproductinp({ ...productinp, mainproductimg: e.target.value })}
-                    value={'' || productinp.mainproductimg}
-                />
+            <div className="grid grid-cols-2 gap-3">
+
+                <div className="mb-4 form-inp">
+                    <label htmlFor="tag" className="form-label">Product Tag</label>
+                    <input type="text" name='tag' className="form-ctrl" placeholder='Product Tag'
+                        onChange={(e) => setproductinp({ ...productinp, tag: e.target.value })}
+                        value={'' || productinp.tag}
+                    />
+                </div>
+
+                <div className="mb-4 form-inp">
+                    <label htmlFor="mainproductimg" className="form-label">Product Main Image</label>
+                    <input type="text" name='mainproductimg' className="form-ctrl" placeholder='Product Main Image'
+                        onChange={(e) => setproductinp({ ...productinp, mainproductimg: e.target.value })}
+                        value={'' || productinp.mainproductimg}
+                    />
+                </div>
+
             </div>
 
             <div className="mb-4 form-check">

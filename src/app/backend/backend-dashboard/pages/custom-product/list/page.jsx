@@ -76,7 +76,7 @@ export default function CustProdPageList() {
     },
     {
       header: 'Page Link',
-      accessorFn: (row, index) => process.env.NEXT_PUBLIC_BASE_URL + '/' + row.slug,
+      accessorFn: (row, index) => process.env.NEXT_PUBLIC_BASE_URL + '/product/sale/' + row.slug,
     },
     {
       header: 'Action',

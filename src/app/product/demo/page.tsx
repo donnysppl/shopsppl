@@ -1,14 +1,14 @@
 
 // import React from 'react'
 // import { render } from '@react-email/render';
-// import { OrderCompleteEmail } from "@/helpers/Email/email";
+// import { EkartDetailsEmail } from "@/helpers/Email/email";
 // import { notFound } from 'next/navigation';
 
 // export default async function Demo() {
 
 
 //   async function fetchSingleProd() {
-//     const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/65be0c803dc50cd77bbbe6de`, {
+//     const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/65c21d73500ab5707e72a508`, {
 //       method: 'GET',
 //       cache: 'no-cache',
 //     })
@@ -18,7 +18,7 @@
 //   }
 //   let data = await fetchSingleProd();
 //   console.log(data.result)
-//   const emailHtml = render(<OrderCompleteEmail orderData={data && data.result} />);
+//   const emailHtml = render(<EkartDetailsEmail orderData={data && data.result} />);
 
 //   return (
 //     <>
