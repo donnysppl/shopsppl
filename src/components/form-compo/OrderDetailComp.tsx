@@ -8,6 +8,7 @@ import { FaUser } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 import { IoCallOutline } from "react-icons/io5";
 import Loader from "../Loader";
+import sendTrackingCust from "@/helpers/Email/sendTrackingCust";
 
 export default function OrderDetailComp({ id }: { id: string }) {
   const [orderListData, setorderListData] = useState<orderInptype>();
@@ -68,7 +69,7 @@ export default function OrderDetailComp({ id }: { id: string }) {
             {/* Logistics  details */}
             {
               (orderListData?.ekartData?.length !== 0) ?
-                <div className="bg-white rounded-lg shadow-sm">
+                <div className="bg-white rounded-lg shadow-sm overflow-hidden">
                   <div className="cust-head border-b border-gray-400 p-3">
                     <h5 className="text-lg font-semibold">Logistics  Details</h5>
                   </div>
@@ -79,7 +80,7 @@ export default function OrderDetailComp({ id }: { id: string }) {
                       </li>
                       {/* <li className="text-center text-sm">Tracking ID : <strong>{orderListData?.ekartData[0].trackingID}</strong> */}
                       <li className="text-center text-sm">Tracking ID : <strong>
-                        { Array.isArray(orderListData?.ekartData[0]) ?
+                        {Array.isArray(orderListData?.ekartData[0]) ?
                           orderListData?.ekartData[0].map((item, index) => (
                             <span className="block" key={index}>{item.trackingid},</span>
                           )) : orderListData?.ekartData[0].trackingID
@@ -89,8 +90,9 @@ export default function OrderDetailComp({ id }: { id: string }) {
                     </ul>
                   </div>
 
-                  <div className="track-btn">
-                    <a href="https://shopspplekart.vercel.app/customer/tracking" className="bg-act px-2 py-1 rounded-md font-semibold block text-center">Track Now</a>
+                  <div className="track-btn flex ">
+                    <a href="https://shopspplekart.vercel.app/customer/tracking" className=" flex-1 bg-act px-2 py-1 font-semibold block text-center">Track Now</a>
+                    <button onClick={() => sendTrackingCust(orderListData)}  className="flex-1 bg-prim px-2 py-1 font-semibold block text-center text-white">Send Mail</button>
                   </div>
 
                 </div> : null
