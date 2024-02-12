@@ -30,11 +30,13 @@ export default function BannerForm({ method, id }: BannerFormProps) {
             setloader(true)
             await fetch(`/api/banner/list/${id}`, {
                 method: 'GET',
+                cache:'no-cache',
             }).then(res => res.json())
                 .then(res => {
                     console.log(res);
                     if (res.status === 200) {
                         toast.success(res.message);
+                        setbannerInp(res.result)
                     }
                     else if (res.status === 500) {
                         toast.error(res.message);

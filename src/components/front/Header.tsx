@@ -36,10 +36,16 @@ export default function Header() {
 
                                     </> : null
                             }
-                            <li><Link href={'/'}>Home</Link></li>
+
+                            <li><Link href={'/product?category=Televisions'}>TV</Link></li>
+                            <li><Link href={'/product?category=Washing+Machines'}>Washing Machine</Link></li>
+                            {/* <li><Link href={'/'}>Home</Link></li> */}
                             <li><Link href={'/about'}>About Us</Link></li>
-                            <li><Link href={'/product'}>Product</Link></li>
+                            {/* <li><Link href={'/product'}>Product</Link></li> */}
                             <li><Link href={'/contact'}>Contact</Link></li>
+
+
+
                             <li><LoginSign /></li>
                             {/* <Search />
                             <CartCompo /> */}

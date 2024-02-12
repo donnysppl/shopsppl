@@ -26,25 +26,32 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
+  // console.log(process.env.NODE_ENV)
   return (
     <html lang="en">
       <body className={libre.className}>
         {children}
       </body>
-      <GoogleAnalytics gaId='G-RFYKYCY9PW' />
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-      <Script src="https://embed.tawk.to/6586dfe707843602b8050e1d/1hibdl8av" async />
 
-      <Script async src='https://www.googletagmanager.com/gtag/js?id=G-EHE0S3ZKJR' />
-      <Script id="google-tag">{`
+      {
+        (process.env.NODE_ENV === 'production') ?
+          <>
+            <GoogleAnalytics gaId='G-RFYKYCY9PW' />
+            <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+            <Script src="https://embed.tawk.to/6586dfe707843602b8050e1d/1hibdl8av" async />
+
+            <Script async src='https://www.googletagmanager.com/gtag/js?id=G-EHE0S3ZKJR' />
+            <Script id="google-tag">{`
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-EHE0S3ZKJR');
       `}</Script>
-      <FacebookPixel />
+            <FacebookPixel />
+          </> : null
+      }
+
     </html>
   )
 }

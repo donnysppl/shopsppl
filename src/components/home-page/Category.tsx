@@ -61,8 +61,8 @@ export default function Category() {
     }, [])
 
     return (
-        <section className="pt-10 pb-12 px-2.5">
-            <div className="max-w-screen-xl mx-auto mb-10">
+        <section className="pt-10 pb-10 px-2.5">
+            <div className="max-w-screen-xl mx-auto mb-12">
                 <div className="section-head text-center mb-4">
                     <h2 className="font-semibold "><span className="text-act">Shop</span> By Brand</h2>
                 </div>

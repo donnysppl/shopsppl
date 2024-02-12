@@ -6,11 +6,13 @@ import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
+import Link from 'next/link';
 
 interface bannerType {
     name: string;
     bannerimg: string;
     bannermobimg: string;
+    link:string,
 }
 
 export default function Banner() {
@@ -71,11 +73,11 @@ export default function Banner() {
                     </SwiperSlide> :
                     bannerData.map((item, index) => (
                         <SwiperSlide key={index} className=' '>
-                            <div className='' >
+                            <Link href={item.link} className='' >
                                 <Image src={(width > 990) ? item.bannerimg : item.bannermobimg} width={1920} height={600}
                                     className='object-cover object-center'
                                     alt={item.name} />
-                            </div>
+                            </Link>
                         </SwiperSlide>
 
                     ))
