@@ -226,6 +226,9 @@ export default function Checkout() {
                         createRazorpayOrder(res.result.totalbill, res.result._id);
                     }
                 }
+                else if (res.status === 400){
+                    toast.error(res.message);
+                } 
             })
             .catch(err => {
                 console.log(err);

@@ -5,6 +5,7 @@ import CustomerAdmin from "@/models/customerUser";
 import { orderInptype } from "@/helpers/interFace";
 import { cookies } from 'next/headers';
 import { adminToken } from "@/helpers/fetchToken";
+import EkartPincode from "@/models/ekartpincode";
 
 interface CustomerAdminType {
     _id: string, username: string, email: string, password: string, phone: string, isWhatsappNo: boolean,
@@ -14,16 +15,26 @@ interface CustomerAdminType {
 export async function POST(req: NextRequest) {
     try {
         await connect();
-        const { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,ship_add,ship_address, totalprodprice,coupon,discountammount} = await req.json();
-        
-        const oldOrderData = (await ProductOrder.find().select('sppl_orderid')).reverse();
+        const { email, name, phone, address, city, state, pincode, orderprod, totalbill, companyname, ship_add, ship_address, totalprodprice, coupon, discountammount } = await req.json();
 
+        // checking ekart pincode availability
+        const EkartData = await EkartPincode.findOne({ pincode: pincode, status:true })
+
+        if (!EkartData) {
+            return NextResponse.json({
+                status: 400,
+                message: 'Sorry, we cannot deliver to this area.',
+            }, { status: 400 })
+        }
+
+
+        // checking lattest orderid and creating new orderid 
+        const oldOrderData = (await ProductOrder.find().select('sppl_orderid')).reverse();
         const lattestOrderid = oldOrderData[0].sppl_orderid;
         const numericalValue = (parseInt(lattestOrderid.match(/\d+/)[0]) + 1);
-        
 
         const newData = { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,status: 'payment_pending', totalprodprice,coupon,discountammount,
-        sppl_orderid: `SPPLW${numericalValue} `} as orderInptype;
+        sppl_orderid: `SPPLW${numericalValue}`} as orderInptype;
 
         // checking shipping address exist
         if (ship_add === true) {
@@ -74,7 +85,7 @@ export async function GET(req: NextRequest) {
         const cookie = cookies()
         const adminTokenExist = adminToken(cookie);
 
-        if(!adminTokenExist){
+        if (!adminTokenExist) {
             return NextResponse.json({
                 status: 400,
                 message: 'Unauthorized',
