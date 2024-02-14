@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
         
 
         const newData = { email, name, phone, address, city, state, pincode, orderprod, totalbill,companyname,status: 'payment_pending', totalprodprice,coupon,discountammount,
-        sppl_orderid: `SPPLW${numericalValue + 1} `} as orderInptype;
+        sppl_orderid: `SPPLW${numericalValue} `} as orderInptype;
 
         // checking shipping address exist
         if (ship_add === true) {
