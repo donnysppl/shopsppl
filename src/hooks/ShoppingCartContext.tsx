@@ -19,6 +19,7 @@ type ShopppingCartContext = {
     buyFromCart: (id: string) => void
     cartQuantity: number
     cartItem: cartItemtype[]
+    deliveryAvailab :boolean
 }
 
 const ShoppingCartContext = createContext({} as ShopppingCartContext)
@@ -30,11 +31,15 @@ export function useShoppingCart() {
 export function ShoppingCardProvider({ children }: ShoppingCardProviderProps) {
 
     const [isCartOpen, setisCartOpen] = useState<boolean>(false);
-    const [cartItem, setcartItem] = useState<cartItemtype[]>([])
+    const [cartItem, setcartItem] = useState<cartItemtype[]>([]);
+
+    const [deliveryAvailab, setdeliveryAvailab] = useState<boolean>(false);
+
     const router = useRouter();
 
     useEffect(() => {
         setCartToState();
+        fetchdeliveryAvai();
     }, []);
 
     const setCartToState = () => {
@@ -119,10 +124,21 @@ export function ShoppingCardProvider({ children }: ShoppingCardProviderProps) {
         setCartToState();
     }
 
+    // check delivery availablity session
+    function fetchdeliveryAvai(){
+        const delAvi = window.sessionStorage.getItem("deliveravle_pincode");
+        if(!delAvi){
+            return setdeliveryAvailab(false);
+        }
+        else{
+            return setdeliveryAvailab(true);
+        }
+    }
+
     return (
         <ShoppingCartContext.Provider value={{
             cartItem, getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromQuantity, openCart,
-            cartQuantity, closeCart, buyFromCart
+            cartQuantity, closeCart, buyFromCart ,deliveryAvailab
         }}>
             {children}
         </ShoppingCartContext.Provider>

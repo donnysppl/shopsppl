@@ -26,7 +26,7 @@ export default function CartCompo() {
                 method: 'GET',
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     if (res.status === 200) {
                         setcartProd(res.result)
                         setloader(false);
