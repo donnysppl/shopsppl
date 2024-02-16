@@ -96,6 +96,21 @@ const productSchema = new Schema({
     },
     tag:{
         type:Array,
+    },
+    sizeOF:{
+        type:String,
+    },
+    size:{
+        type:String,  
+    },
+    productSeries:{
+        type:String,
+    },
+    sizeAvai:{
+        type:Boolean,
+    },
+    availableSize:{
+        type:Array,
     }
 },{ timestamps: true })
 

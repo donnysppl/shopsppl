@@ -6,6 +6,7 @@ import OnCartFunct from '@/helpers/onCartFunct';
 import ProdTabs from '@/components/front/product/ProdTabs';
 import QuantyPart from '@/components/front/product/QuantyPart';
 import ProductRecommed from '@/components/front/product/ProductRecommed';
+import Link from 'next/link';
 
 async function fetchSingleProd(slug: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
@@ -19,7 +20,9 @@ async function fetchSingleProd(slug: string) {
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const pagesData = await fetchSingleProd(params.slug);
-  const dataResult = pagesData.result;
+  const pageRes = pagesData.result;
+  const dataResult = pageRes.product;
+
   return {
     title: dataResult.metatitle,
     description: dataResult.metadiscription,
@@ -31,7 +34,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function ProductSingle({ params }: { params: { slug: string } }) {
   const pagesData = await fetchSingleProd(params.slug);
-  const prodDetailData = pagesData.result;
+  const pageRes = pagesData.result;
+  const prodDetailData = pageRes.product;
+  const checkSizeAvai = pageRes.sizeAvai as Boolean;
+
   let loading = false;
 
   return (
@@ -77,6 +83,24 @@ export default async function ProductSingle({ params }: { params: { slug: string
                     : null
                 }
               </div>
+
+              {
+                checkSizeAvai ?
+                  <div className="mb-4 mt-2.5 flex items-center gap-2">
+                    <span className="font-bold text-gray-700 pt-1">Select Size : </span>
+                    <div className="flex items-center gap-2 mt-2">
+                      {
+                        pageRes?.sizes.map((item: any, index: any) => (
+                          <Link key={index} href={`/product/${item.slug}`} className={`${(prodDetailData?.size === item.size) ? 'bg-act' : 'bg-gray-300'} p-1.5 text-sm rounded-full w-10 h-10 text-black flex items-center justify-center`}>
+                            {item.size}
+                          </Link>
+                        ))
+                      }
+                    </div>
+                  </div> : null
+              }
+
+
               <div className="product-btn-part mt-3">
                 {
                   (prodDetailData?.inStock === false) ?
@@ -100,7 +124,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
         </div>
       </section>
       <ProdTabs discription={prodDetailData?.productrpd} specification={prodDetailData.discription} />
-        <ProductRecommed id={prodDetailData?._id} />
+      <ProductRecommed id={prodDetailData?._id} />
     </>
   )
 }
