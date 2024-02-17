@@ -135,6 +135,7 @@ export function ShoppingCardProvider({ children }: ShoppingCardProviderProps) {
         }
     }
 
+
     return (
         <ShoppingCartContext.Provider value={{
             cartItem, getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromQuantity, openCart,

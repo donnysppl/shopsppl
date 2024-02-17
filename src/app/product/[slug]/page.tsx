@@ -7,6 +7,7 @@ import ProdTabs from '@/components/front/product/ProdTabs';
 import QuantyPart from '@/components/front/product/QuantyPart';
 import ProductRecommed from '@/components/front/product/ProductRecommed';
 import Link from 'next/link';
+import { priceFormat } from '@/helpers/common';
 
 async function fetchSingleProd(slug: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
@@ -72,8 +73,8 @@ export default async function ProductSingle({ params }: { params: { slug: string
                 {
                   !loading ?
                     <>
-                      <span className="text-gray-900 text-xl title-font font-medium leading-normal">₹{prodDetailData?.productSalePrice} </span>
-                      <span className="line-through ps-2">₹{prodDetailData?.productNormalPrice}</span>
+                      <span className="text-gray-900 text-xl title-font font-medium leading-normal">{priceFormat(prodDetailData?.productSalePrice)} </span>
+                      <span className="line-through ps-2">{priceFormat(prodDetailData?.productNormalPrice)}</span>
                       <span className="border border-gray-500 p-1.5 rounded-lg text-sm ms-2">{
                         prodDetailData &&
                           typeof prodDetailData.productPriceDiffpercent === 'number'

@@ -9,6 +9,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { RiCoupon4Line } from "react-icons/ri";
 import { stateJson } from '@/helpers/dommyjson/json';
 import QuantyPart from '../QuantyPart';
+import { priceFormat } from '@/helpers/common';
 
 interface orderInptype {
     email: string,
@@ -118,7 +119,7 @@ export default function Checkout() {
             fetchCheckProdData();
         }
 
-    }, [prodID])
+    }, [prodID,cartItem])
 
     const onCouponSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -484,7 +485,7 @@ export default function Checkout() {
                                                 <div className="name text-[0.8rem] line-clamp-2">
                                                     {item.name}</div>
                                                 <div className="inline-flex gap-2 items-center text-[0.8rem] me-1">
-                                                    {getItemQuantity(item._id)} <AiOutlineClose /> ₹ {item.productSalePrice}</div>
+                                                    {getItemQuantity(item._id)} <AiOutlineClose /> {priceFormat(item.productSalePrice)}</div>
                                                 <div className='flex justify-between mt-1'>
                                                     <QuantyPart id={item?._id} />
                                                     <div className="remove-btn "><button onClick={() => removeFromQuantity(item._id)} className="btn-prim scale-75">Remove</button></div>
@@ -521,7 +522,7 @@ export default function Checkout() {
                             <li>
                                 <div className="flex justify-between text-[0.9rem]">
                                     <span>Total Product Price</span>
-                                    <span>₹ {totalProdPrice}</span>
+                                    <span>{priceFormat(totalProdPrice)}</span>
                                 </div>
                             </li>
                             {
