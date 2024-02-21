@@ -35,7 +35,7 @@ export default function FeatureProd() {
 
 
     return (
-        <section className="pt-6 pb-6 px-2.5">
+        <section className="pt-1 mb-10 px-2.5">
             <div className="max-w-screen-2xl mx-auto">
                 <div className="section-head text-center mb-4">
                     <h2 className="font-semibold "><span className="text-act">Feature</span> Product</h2>

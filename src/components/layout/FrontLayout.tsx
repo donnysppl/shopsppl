@@ -19,7 +19,7 @@ export default function FrontLayout({ children, innercol
                 </main>
                 <Footer />
             </ShoppingCardProvider>
-            <a href="tel:+917303192721" className='fixed right-6 md:bottom-24 tbottom-24 z-10 w-14 h-14 flex items-center justify-center bg-[#013088] rounded-full p-2.5 cursor-pointer'>
+            <a href="tel:+917303192721" className='fixed right-6 md:bottom-24 bottom-24 z-10 w-14 h-14 flex items-center justify-center bg-[#013088] rounded-full p-2.5 cursor-pointer'>
                 <IoIosCall  className='w-full h-full text-white' />
             </a>
         </>

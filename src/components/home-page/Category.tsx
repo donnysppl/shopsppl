@@ -11,6 +11,7 @@ import { FreeMode, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
+import FeatureProd from "./FeatureProd";
 
 const brand = [
     {
@@ -97,6 +98,7 @@ export default function Category() {
                     </Swiper>
                 </div>
             </div>
+            <FeatureProd />
             <div className="max-w-screen-2xl mx-auto">
                 <div className="section-head text-center">
                     <h2 className="font-semibold"><span className="text-act">Shop</span> By Category</h2>

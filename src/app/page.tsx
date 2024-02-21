@@ -4,7 +4,7 @@ import ScrollCard from '@/components/form-compo/ScrollCard';
 import Banner from '@/components/home-page/Banner';
 import Category from '@/components/home-page/Category';
 import CateSlid from '@/components/home-page/CateSlid';
-import FeatureProd from '@/components/home-page/FeatureProd';
+// import FeatureProd from '@/components/home-page/FeatureProd';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,7 +17,7 @@ export default function Home() {
 
       {/* <ScrollCard/> */}
       <Category/>
-      <FeatureProd />
+      {/* <FeatureProd /> */}
       <CateSlid />
 
     </FrontLayout>
