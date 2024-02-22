@@ -32,7 +32,7 @@ export interface Product {
   productPriceDiffpercent: number,
   productPriceDiffAmt: number
   inStock: boolean
-
+tag:Array<{}>;
 }
 
 export type ImportSheetArr = ImportSheetObj[]

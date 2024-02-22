@@ -51,7 +51,7 @@ export default function CartCompo() {
             <li onClick={onCartDrow} className='cart-icon-div cursor-pointer'><BsCart3 />
                 {(cartQuantity !== 0) ? <span className='cart-icon-div-quantity'>{cartQuantity}</span> : null}</li>
 
-            <div className="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+            <div className="relative z-10" >
 
                 {
                     cartOpen ? <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div> : null

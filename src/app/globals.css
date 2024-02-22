@@ -55,7 +55,11 @@ h3{
   @apply text-xl;
 }
 .btn-prim {
-  @apply md:text-[0.8rem] text-[0.7rem] text-center inline-flex items-center justify-center bg-act text-black rounded-full font-semibold md:py-2 py-1.5 md:px-6 px-3 hover:bg-prim hover:text-act transition ease-linear;
+  @apply md:text-[0.8rem] text-[0.7rem] text-center inline-flex items-center justify-center bg-act text-prim rounded-full font-semibold md:py-2 py-1.5 md:px-6 px-3 hover:bg-prim hover:text-act transition ease-linear;
+}
+
+.btn-prim-sec {
+  @apply md:text-[0.8rem] text-[0.7rem] text-center inline-flex items-center justify-center bg-[#2a3e56] text-white rounded-full font-semibold md:py-2 py-1.5 md:px-6 px-3 hover:bg-act hover:text-act transition ease-linear;
 }
 
 .loader-parent {
@@ -292,6 +296,24 @@ span.cart-icon-div-quantity {
 
 
 /* home */
+.tv-newlaunch-bg{
+  background-image: url('/img/newlaunch-bg.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.wc2-newlaunch-bg{
+  background-image: url('/img/newlaunch-2t.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.wc-newlaunch-bg{
+  background-image: url('/img/newlaunch-tv.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .slider-overflow::-webkit-scrollbar {
   width: 0;
   height: 0;

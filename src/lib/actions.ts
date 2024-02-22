@@ -1,13 +1,30 @@
-// import { connect } from "@/dbConfig/dbConfig"
-// import Product from "@/models/product";
+"use server";
 
-// export async function featureProd() {
-//     try {
-//         await connect();
-//         const featProd = await Product.find({isFeatured:true}).limit(2).select('-discription -productimg -productrpd');
-//         // const strifyData = await JSON.stringify(featProd);
-//         return featProd
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+import { connect } from "@/dbConfig/dbConfig";
+import Banner from "@/models/banner";
+import Product from "@/models/product";
+import { revalidatePath } from "next/cache";
+
+export const fetchNewLaunchProd = async (tag:string) => {
+    try {
+        await connect();
+        const findNewLaunch = await Product.find({tag:tag}).select('name slug mainproductimg productSalePrice productNormalPrice category tag brand model').exec();
+        // console.log(findNewLaunch)
+        revalidatePath('/');
+        return findNewLaunch;
+    } catch (error) {
+        
+    }
+}
+
+export const fetchBanner = async (tag:string) => {
+    try {
+        await connect();
+        const bannerData = await Banner.find();
+        // console.log(findNewLaunch)
+        revalidatePath('/');
+        return bannerData;
+    } catch (error) {
+        
+    }
+}
