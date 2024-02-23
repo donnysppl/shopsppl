@@ -45,15 +45,19 @@ body {
   background: rgb(var(--background-end-rgb));
   overflow-x: hidden;
 }
-h1{
+
+h1 {
   @apply text-3xl;
 }
-h2{
+
+h2 {
   @apply text-2xl;
 }
-h3{
+
+h3 {
   @apply text-xl;
 }
+
 .btn-prim {
   @apply md:text-[0.8rem] text-[0.7rem] text-center inline-flex items-center justify-center bg-act text-prim rounded-full font-semibold md:py-2 py-1.5 md:px-6 px-3 hover:bg-prim hover:text-act transition ease-linear;
 }
@@ -296,24 +300,27 @@ span.cart-icon-div-quantity {
 
 
 /* home */
-.tv-newlaunch-bg{
+.tv-newlaunch-bg {
   background-image: url('/img/newlaunch-bg.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.wc2-newlaunch-bg{
+
+.wc2-newlaunch-bg {
   background-image: url('/img/newlaunch-2t.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.wc-newlaunch-bg{
+
+.wc-newlaunch-bg {
   background-image: url('/img/newlaunch-tv.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .slider-overflow::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -337,7 +344,7 @@ span.cart-icon-div-quantity {
   height: 100px;
 }
 
-.home-cate-slider{
+.home-cate-slider {
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -410,11 +417,67 @@ footer {
 
 
 /* customer dashboard */
-.dashboard-nav{
+.dashboard-nav {
   @apply flex font-medium items-center gap-3 py-2 px-2 hover:bg-gray-100 active:bg-gray-100 rounded-lg;
 }
-.dashboard-nav.active{
+
+.dashboard-nav.active {
   @apply bg-act;
+}
+
+
+/* 360 product view  */
+.threesix-product-outer {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.cloudimage-360-icons-container {
+  top: 5px;
+  right: 5px;
+}
+
+.cloudimage-360-fullscreen-modal {
+  top: 0;
+  bottom: 0;
+}
+
+.cloudimage-360-magnifier-icon {
+  background: url(https://scaleflex.cloudimg.io/v7/filerobot/js-cloudimage-360-view/loupe.svg) 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360-close-fullscreen-icon {
+  background: url(https://scaleflex.cloudimg.io/v7/filerobot/js-cloudimage-360-view/cross.svg) 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360-view-360-circle {
+  margin: auto;
+}
+
+.cloudimage-360-loader {
+  margin: auto;
+}
+
+.cloudimage-360-view-360-icon {
+  background: url(https://scaleflex.cloudimg.io/v7/filerobot/js-cloudimage-360-view/360_view.svg) 50% 50% / cover no-repeat;
+}
+
+.cloudimage-360-box-shadow {
+  top: 0;
+  left: 0;
+}
+
+.cloudimage-360-img-magnifier-glass {
+  border: 3px solid #000;
+  border-radius: 50%;
 }
 
 
@@ -434,13 +497,16 @@ footer {
   }
 
   /* product table */
-  .specification figure.table table tbody tr{
+  .specification figure.table table tbody tr {
     width: 100%;
   }
-  .specification figure.table table tbody tr td,.specification figure.table table ul li{
+
+  .specification figure.table table tbody tr td,
+  .specification figure.table table ul li {
     font-size: 12px;
   }
-  .specification figure.table table tbody tr{
+
+  .specification figure.table table tbody tr {
     padding: 8px;
   }
 
@@ -477,23 +543,29 @@ footer {
     width: 100%;
   }
 }
-@media only screen and (max-width: 767.99px){
-  h1{
+
+@media only screen and (max-width: 767.99px) {
+  h1 {
     @apply text-2xl;
   }
-  h2{
+
+  h2 {
     @apply text-xl;
   }
-  h3{
+
+  h3 {
     @apply text-lg;
   }
+
   .cateslide .swiper-pagination {
     top: 40px !important;
     height: 100px;
   }
+
   .swiper-pagination-bullet {
     @apply text-[0.7rem];
   }
+
   /* .home-cate-slider{
     width: 100%;
     height: 100%;
@@ -501,18 +573,21 @@ footer {
     background-position: center;
   } */
 
-  form.modal-form input:nth-child(1){
+  form.modal-form input:nth-child(1) {
     width: 49%;
     float: left;
   }
-  form.modal-form input:nth-child(2){
+
+  form.modal-form input:nth-child(2) {
     width: 49%;
     float: right;
   }
-  form.modal-form textarea{
+
+  form.modal-form textarea {
     height: auto;
   }
-  form.modal-form{
+
+  form.modal-form {
     scale: 0.85;
     transform: translateY(-30px)
   }

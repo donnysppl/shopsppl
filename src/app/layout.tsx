@@ -32,6 +32,7 @@ export default function RootLayout({
         {children}
       </body>
 
+      <Script id='3d_script' src="/Scripts/Scrr3d.js" async />
       {
         (process.env.NODE_ENV === 'production') ?
           <>

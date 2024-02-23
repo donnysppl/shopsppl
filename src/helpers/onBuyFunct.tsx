@@ -99,20 +99,21 @@ export default function OnBuyFunct({ id }: buyBtn) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900 mb-2.5"
                   >
-                    Check Area Availability
+                    {/* Check Area Availability */}
+                    Delivery
                   </Dialog.Title>
                   <form onSubmit={checkPinCodeAvailability}>
                     <div className="w-full">
                       <div className="pincode-input front-form relative">
                         <div className="mb-3">
-                          <input className="form-control" placeholder="Enter Pincode" type="text" name="pincode"
+                          <input className="form-control" placeholder="Check Pincode" type="text" name="pincode"
                             onChange={(e) => setpincodeInp(e.target.value)} />
                         </div>
                       </div>
                     </div>
 
                     <div className="mt-4">
-                      <button type="submit" className="btn-prim">Check</button>
+                      <button type="submit" className="btn-prim ms-auto">Check</button>
                     </div>
                   </form>
                 </Dialog.Panel>

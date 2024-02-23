@@ -8,6 +8,7 @@ import QuantyPart from '@/components/front/product/QuantyPart';
 import ProductRecommed from '@/components/front/product/ProductRecommed';
 import Link from 'next/link';
 import { priceFormat } from '@/helpers/common';
+import Product360 from '@/components/front/product/Product360';
 
 async function fetchSingleProd(slug: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
@@ -43,6 +44,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
 
   return (
     <>
+    {/* <Product360 /> */}
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 md:py-24 py-5 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">

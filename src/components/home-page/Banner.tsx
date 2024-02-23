@@ -25,7 +25,7 @@ export default function Banner() {
         const bannerFetch = async () => {
             await fetch('/api/banner/list', {
                 method: 'GET',
-                next:{revalidate: 10,}
+                cache:'no-cache',
             }).then(res => res.json())
                 .then(res => {
                     // console.log(res);
@@ -74,8 +74,8 @@ export default function Banner() {
                     bannerData.map((item, index) => (
                         <SwiperSlide key={index} className=' '>
                             <Link href={item.link} className='' >
-                                <Image src={(width > 990) ? item.bannerimg : item.bannermobimg} width={1920} height={600}
-                                    className='object-cover object-center'
+                                <img src={(width > 990) ? item.bannerimg : item.bannermobimg} 
+                                    className='object-cover object-center w-full'
                                     alt={item.name} />
                             </Link>
                         </SwiperSlide>
