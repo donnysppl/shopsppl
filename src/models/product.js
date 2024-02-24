@@ -54,65 +54,73 @@ const productSchema = new Schema({
     productrpd: {
         type: Array,
     },
-    productNormalPrice:{
+    productNormalPrice: {
         type: Number,
         required: [true, "Please provide a Product Regular Price"],
     },
-    productSalePrice:{
+    productSalePrice: {
         type: Number,
     },
-    productPriceDiffAmt:{
+    productPriceDiffAmt: {
         type: Number
     },
-    productPriceDiffpercent:{
+    productPriceDiffpercent: {
         type: Number
     },
-    isPublish:{
+    isPublish: {
         type: Boolean,
     },
-    isStatus:{
+    isStatus: {
         type: Boolean,
     },
-    isFeatured:{
+    isFeatured: {
         type: Boolean,
     },
-    weight : {
+    weight: {
         type: Number,
     },
-    lenght : {
+    lenght: {
         type: Number,
     },
-    width : {
+    width: {
         type: Number,
     },
-    height : {
+    height: {
         type: Number,
     },
-    inStock:{
-        type: Boolean, 
+    inStock: {
+        type: Boolean,
     },
-    stock:{
-        type:Number,
+    stock: {
+        type: Number,
     },
-    tag:{
-        type:Array,
+    tag: {
+        type: Array,
     },
-    sizeOF:{
-        type:String,
+    sizeOF: {
+        type: String,
     },
-    size:{
-        type:String,  
+    size: {
+        type: String,
     },
-    productSeries:{
-        type:String,
+    productSeries: {
+        type: String,
     },
-    sizeAvai:{
-        type:Boolean,
+    sizeAvai: {
+        type: Boolean,
     },
-    availableSize:{
-        type:Array,
+    availableSize: {
+        type: Array,
+    },
+    threeDView: {
+        type: Boolean,
+    },
+    threeDViewData: {
+        imgfilepath: { type: String },
+        imgformat: { type: String, },
+        totalimg: { type: String, }
     }
-},{ timestamps: true })
+}, { timestamps: true })
 
 const Product = models.Product || model("Product", productSchema);
 

@@ -32,7 +32,14 @@ export interface Product {
   productPriceDiffpercent: number,
   productPriceDiffAmt: number
   inStock: boolean
-tag:Array<{}>;
+  size:string
+tag:Array<{}>
+threeDView: boolean,
+  threeDViewData: {
+    imgfilepath: string,
+    imgformat: string,
+    totalimg: string,
+  }
 }
 
 export type ImportSheetArr = ImportSheetObj[]

@@ -9,6 +9,7 @@ import ProductRecommed from '@/components/front/product/ProductRecommed';
 import Link from 'next/link';
 import { priceFormat } from '@/helpers/common';
 import Product360 from '@/components/front/product/Product360';
+import { Product } from '@/helpers/interFace';
 
 async function fetchSingleProd(slug: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
@@ -37,19 +38,20 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function ProductSingle({ params }: { params: { slug: string } }) {
   const pagesData = await fetchSingleProd(params.slug);
   const pageRes = pagesData.result;
-  const prodDetailData = pageRes.product;
+  const prodDetailData : Product = pageRes.product;
   const checkSizeAvai = pageRes.sizeAvai as Boolean;
 
+  console.log(prodDetailData)
   let loading = false;
 
   return (
     <>
-    {/* <Product360 /> */}
+    
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 md:py-24 py-5 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
 
-            <div className="lg:w-2/4 w-full">
+            <div className="lg:w-2/4 w-full relative">
               {
                 loading ?
                   <div className="w-full h-[500px] bg-gray-300 rounded-lg border border-gray-200 animate-pulse">
@@ -58,6 +60,10 @@ export default async function ProductSingle({ params }: { params: { slug: string
                   :
                   <ProdImgSlider {...prodDetailData} />
               }
+              {
+                prodDetailData.threeDView ? <Product360 {...prodDetailData.threeDViewData} /> : null
+              }
+              
             </div>
             <div className={`lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 
                   ${loading ? "space-y-3.5" : null}`}>
