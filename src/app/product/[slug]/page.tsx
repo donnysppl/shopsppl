@@ -40,8 +40,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
   const pageRes = pagesData.result;
   const prodDetailData : Product = pageRes.product;
   const checkSizeAvai = pageRes.sizeAvai as Boolean;
-
-  console.log(prodDetailData)
+  
   let loading = false;
 
   return (

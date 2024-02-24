@@ -17,10 +17,6 @@ export async function POST(req: NextRequest) {
         await connect();
         const { email, name, phone, address, city, state, pincode, orderprod, totalbill, companyname, ship_add, ship_address, totalprodprice, coupon, discountammount } = await req.json();
 
-        
-
-
-
 
         // checking lattest orderid and creating new orderid 
         const oldOrderData = (await ProductOrder.find().select('sppl_orderid')).reverse();

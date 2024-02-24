@@ -37,8 +37,6 @@ export default function Product360({imgfilepath, imgformat, totalimg}:{imgfilepa
                                     data-transformation="w=400&h=200&func=fit"
                                     data-speed="120"
                                     data-drag-speed="120"
-                                    data-autoplay-reverse
-                                    data-autoplay
                                 ></div>
                             </div>
 
