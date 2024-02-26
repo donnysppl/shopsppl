@@ -10,14 +10,14 @@ import FeatureProd from '@/components/home-page/FeatureProd';
 
 export const dynamic = 'force-dynamic';
 
-export default function Home() {
+export default async function Home() {
 
   return (
 
     <FrontLayout innercol={'bg-gray-100'}>
 
 
-      <Banner />
+      <Banner/>
 
       <Brand />
       <NewLauch />

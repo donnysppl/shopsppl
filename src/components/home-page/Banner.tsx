@@ -74,7 +74,7 @@ export default function Banner() {
                     bannerData.map((item, index) => (
                         <SwiperSlide key={index} className=' '>
                             <Link href={item.link} className='' >
-                                <img src={(width > 990) ? item.bannerimg : item.bannermobimg} 
+                                <img src={`/uploads/banner/${(width > 990) ? item.bannerimg : item.bannermobimg}`} 
                                     className='object-cover object-center w-full'
                                     alt={item.name} />
                             </Link>

@@ -23,6 +23,8 @@ export default function BannerForm({ method, id }: BannerFormProps) {
         bannerimg: '',
         bannermobimg: '',
     })
+    const [bannerimg, setbannerimg] = useState<File>()
+    const [bannermobimg, setbannermobimg] = useState<File>()
     const [loader, setloader] = useState<boolean>(false)
 
     useEffect(() => {
@@ -30,7 +32,7 @@ export default function BannerForm({ method, id }: BannerFormProps) {
             setloader(true)
             await fetch(`/api/banner/list/${id}`, {
                 method: 'GET',
-                cache:'no-cache',
+                cache: 'no-cache',
             }).then(res => res.json())
                 .then(res => {
                     console.log(res);
@@ -58,11 +60,19 @@ export default function BannerForm({ method, id }: BannerFormProps) {
         e.preventDefault()
         setloader(true);
 
+
+        const formdata = new FormData();
+        formdata.append("name", bannerInp.name);
+        formdata.append("order", bannerInp.order);
+        formdata.append("link", bannerInp.link);
+        formdata.append("bannerimg", bannerimg as File);
+        formdata.append("bannermobimg", bannermobimg as File);
+
+
         const url = (method === 'POST') ? '/api/banner/add' : `/api/banner/edit/${id}`
         await fetch(url, {
             method: method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(bannerInp),
+            body: formdata,
         }).then(res => res.json())
             .then(res => {
                 console.log(res);
@@ -87,7 +97,7 @@ export default function BannerForm({ method, id }: BannerFormProps) {
             {
                 loader ? <div className='relative w-full min-h-[500px]'><Loader /></div> :
 
-                    <form className={`p-3 `} onSubmit={onBannerdDataSubmit}  >
+                    <form encType="multipart/form-data" className={`p-3 `} onSubmit={onBannerdDataSubmit}  >
                         <div className="mb-4 form-inp">
                             <label htmlFor="name" className="form-label">Banner Name</label>
                             <input type="text" name='name' className="form-ctrl" placeholder='Banner Name'
@@ -111,17 +121,24 @@ export default function BannerForm({ method, id }: BannerFormProps) {
                         </div>
                         <div className="mb-4 form-inp">
                             <label htmlFor="bannerimg" className="form-label">Banner bannerimg</label>
-                            <input type="text" name='bannerimg' className="form-ctrl" placeholder='Banner bannerimg'
-                                onChange={(e) => setbannerInp({ ...bannerInp, bannerimg: e.target.value })}
-                                value={'' || bannerInp.bannerimg}
+                            <input
+                                type="file"
+                                name='bannerimg'
+                                className="form-ctrl"
+                                placeholder='Banner bannerimg'
+                                onChange={(e) => setbannerimg(e.target.files?.[0])}
                             />
                         </div>
                         <div className="mb-4 form-inp">
                             <label htmlFor="bannermobimg" className="form-label">Banner bannermobimg</label>
-                            <input type="text" name='bannermobimg' className="form-ctrl" placeholder='Banner bannermobimg'
-                                onChange={(e) => setbannerInp({ ...bannerInp, bannermobimg: e.target.value })}
-                                value={'' || bannerInp.bannermobimg}
+                            <input
+                                type="file"
+                                name='bannerimg'
+                                className="form-ctrl"
+                                placeholder='Banner bannerimg'
+                                onChange={(e) => setbannermobimg(e.target.files?.[0])}
                             />
+
                         </div>
 
                         <div className="banner-image-prev">

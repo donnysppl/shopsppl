@@ -17,10 +17,10 @@ export const fetchNewLaunchProd = async (tag:string) => {
     }
 }
 
-export const fetchBanner = async (tag:string) => {
+export const fetchBanner = async () => {
     try {
         await connect();
-        const bannerData = await Banner.find();
+        const bannerData = await Banner.find().exec();
         // console.log(findNewLaunch)
         revalidatePath('/');
         return bannerData;
