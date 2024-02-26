@@ -73,12 +73,12 @@ export default function ListBanner() {
         {
             header: 'Banner Image',
             accessorFn: (row, index) => roe + 1,
-            cell: cell => (<Image width={200} height={100} src={cell.row.original.bannerimg} alt="bannerimg" />)
+            cell: cell => (<Image width={200} height={100} src={`/uploads/banner/${cell.row.original.bannerimg}`} alt="bannerimg" />)
         },
         {
             header: 'Banner Mobile Image',
             accessorFn: (row, index) => roe + 1,
-            cell: cell => (<Image width={200} height={100} src={cell.row.original.bannermobimg} alt="bannerimg" />)
+            cell: cell => (<Image width={200} height={100} src={`/uploads/banner/${cell.row.original.bannermobimg}`} alt="bannerimg" />)
         },
         {
           header: 'Banner Order',
