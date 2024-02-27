@@ -1,9 +1,8 @@
 "use client";
 import React, { useEffect, useCallback, useRef } from 'react'
 
-export default function RazorpayOffer({ amountData }) {
-
-    const key = `${process.env.RAZORPAY_SECRET_ID}`;
+export default function RazorpayOffer({ amountData,razorkey }) {
+    const key = razorkey;
     const amount = Number(amountData * 100); 
 
     const initializeRazorpay = useCallback(() => {
@@ -30,7 +29,6 @@ export default function RazorpayOffer({ amountData }) {
                 script.async = true;
                 script.onload = initializeRazorpay;
                 document.body.appendChild(script);
-                console.log('script added')
             } else {
                 initializeRazorpay();
             }

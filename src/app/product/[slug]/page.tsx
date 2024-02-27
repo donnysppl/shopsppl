@@ -110,7 +110,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
               }
 
               <div className="razorpay-offer">
-                <RazorpayOffer amountData={prodDetailData?.productSalePrice} />
+                <RazorpayOffer razorkey={process.env.RAZORPAY_SECRET_ID} amountData={prodDetailData?.productSalePrice} />
               </div>
               <div className="product-btn-part mt-3">
                 {
