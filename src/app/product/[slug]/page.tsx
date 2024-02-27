@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { priceFormat } from '@/helpers/common';
 import Product360 from '@/components/front/product/Product360';
 import { Product } from '@/helpers/interFace';
+import RazorpayOffer from '@/components/front/product/RazorpayOffer';
 
 async function fetchSingleProd(slug: string) {
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/products/front/${slug}`, {
@@ -38,14 +39,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function ProductSingle({ params }: { params: { slug: string } }) {
   const pagesData = await fetchSingleProd(params.slug);
   const pageRes = pagesData.result;
-  const prodDetailData : Product = pageRes.product;
+  const prodDetailData: Product = pageRes.product;
   const checkSizeAvai = pageRes.sizeAvai as Boolean;
-  
+
   let loading = false;
 
   return (
     <>
-    
+
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 md:py-24 py-5 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
@@ -62,7 +63,7 @@ export default async function ProductSingle({ params }: { params: { slug: string
               {
                 prodDetailData.threeDView ? <Product360 {...prodDetailData.threeDViewData} /> : null
               }
-              
+
             </div>
             <div className={`lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 
                   ${loading ? "space-y-3.5" : null}`}>
@@ -108,7 +109,9 @@ export default async function ProductSingle({ params }: { params: { slug: string
                   </div> : null
               }
 
-
+              <div className="razorpay-offer">
+                <RazorpayOffer amountData={prodDetailData?.productSalePrice} />
+              </div>
               <div className="product-btn-part mt-3">
                 {
                   (prodDetailData?.inStock === false) ?

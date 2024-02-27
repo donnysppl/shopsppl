@@ -229,6 +229,7 @@ export default function Checkout() {
                 }
                 else if (res.status === 400){
                     toast.error(res.message);
+                    setrazorpayLoader(false);
                 } 
             })
             .catch(err => {

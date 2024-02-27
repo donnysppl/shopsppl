@@ -33,11 +33,14 @@ export default function RootLayout({
       </body>
 
       <Script id='3d_script' src="/Scripts/Scrr3d.js" async />
+      {/* <Script id='razorpay_offer' src="https://cdn.razorpay.com/widgets/affordability/affordability.js" async/> */}
+      <Script id='razorpay_checkout' src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+
       {
         (process.env.NODE_ENV === 'production') ?
           <>
             <GoogleAnalytics gaId='G-RFYKYCY9PW' />
-            <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+            
             <Script src="https://embed.tawk.to/6586dfe707843602b8050e1d/1hibdl8av" async />
 
             <Script async src='https://www.googletagmanager.com/gtag/js?id=G-EHE0S3ZKJR' />
