@@ -21,7 +21,6 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
         { title: 'Discription', content: discription },
         { title: 'Specification', content: specification },
     ];
-
     const renderTabs = () => {
         return tabs.map((tab, index) => (
             <li className={`${activeTab === index ? 'active' : null} cursor-pointer btn-prim`}
@@ -31,13 +30,12 @@ export default function ProdTabs({ discription, specification }: prodTabType) {
             </li>
         ));
     };
-
     return (
         <>
             <section className="bg-black text-gray-100 py-4">
                 <div className="container lg:p-5 py-5 px-1 mx-auto">
                     {
-                        discription ?
+                        (discription.length > 0 && discription[0] !== '') ?
                             <div className="prod-spec mb-4">
                                 <Disclosure defaultOpen as="div" className="border border-gray-400 lg:p-6 py-3 px-1.5 rounded-xl bg-[#191919]">
                                     {({ open }) => (

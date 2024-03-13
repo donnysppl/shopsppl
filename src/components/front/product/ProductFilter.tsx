@@ -21,6 +21,7 @@ const Brand = [
   { slug: 'thomson', name: 'Thomson' },
   { slug: 'westinghouse', name: 'Westinghouse' },
   { slug: 'white-westinghouse', name: 'White Westinghouse' },
+  { slug: 'svl', name: 'SVL' },
 ]
 
 interface pageType {

@@ -12,24 +12,28 @@ import 'swiper/css/pagination';
 
 const brand = [
     {
-        img: 'thomson.webp',
+        img: 'Group 7.png',
         link: '/product?brand=Thomson',
     },
     {
-        img: 'Kodak Logo.webp',
+        img: 'Group 8.png',
         link: '/product?brand=Kodak TV',
     },
     {
-        img: 'blaupunkt.webp',
+        img: 'Group 5.png',
         link: '/product?brand=Blaupunkt',
     },
     {
-        img: 'Westinghouse.webp',
+        img: 'Group 4.png',
         link: '/product?brand=Westinghouse',
     },
     {
-        img: 'White westinghouse.webp',
+        img: 'Group 6.png',
         link: '/product?brand=White Westinghouse',
+    },
+    {
+        img: 'Group 3.png',
+        link: '/product?brand=svl',
     }
 ]
 
