@@ -5,26 +5,26 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-function priceFormat(price:number){
+function priceFormat(price: number) {
     const formattedPrice = new Intl.NumberFormat('en-IN', {
         style: 'currency',
         currency: 'INR'
-      }).format(price);
-      return formattedPrice
+    }).format(price);
+    return formattedPrice
 }
 
-export default function ProductCard(item:Product) {
+export default function ProductCard(item: Product) {
     return (
         <li className="p-1.5 border rounded-2xl bg-white flex flex-col justify-between relative overflow-hidden">
-            {
-                !item.inStock ?
-                <>
-                <div className='out-of-stock-prod absolute w-full h-full bg-gray-900 bg-opacity-25 inset-0 z-10 flex justify-center items-center'>
-                    <div className='bg-act inline-block p-1.5 font-semibold uppercase'>{!item.inStock ? 'Out of Stock' : null}</div>
-                </div>
-                </> : null 
-            }
             <Link href={`/product/${item.slug}`}>
+                {
+                    !item.inStock ?
+                        <>
+                            <div className='out-of-stock-prod absolute w-full h-full bg-gray-900 bg-opacity-25 inset-0 z-10 flex justify-center items-center'>
+                                <div className='bg-act inline-block p-1.5 font-semibold uppercase'>{!item.inStock ? 'Out of Stock' : null}</div>
+                            </div>
+                        </> : null
+                }
 
                 <div className="relative prod-img-wrap w-full h-64 overflow-hidden flex items-center justify-center">
                     <Image src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${item.mainproductimg}`} width={300} height={275} alt={item.name} className="object-contain object-center mx-auto w-full h-full" />
@@ -34,9 +34,7 @@ export default function ProductCard(item:Product) {
                             : 'N/A'}
                     </span>
                 </div>
-            </Link>
-            <div className="bg-gray-100 rounded-xl p-2.5">
-                <Link href={`/product/${item.slug}`}>
+                <div className="bg-gray-100 rounded-xl p-2.5">
                     <h5 className="text-[0.8rem] text-gray-600 line-clamp-2 mb-2.5">{item.name}</h5>
                     <div className="price">
                         <span className='flex gap-2 items-center mb-2'>
@@ -44,13 +42,13 @@ export default function ProductCard(item:Product) {
                             <span className="line-through text-[0.7rem]">{priceFormat(item.productNormalPrice)}</span>
                         </span>
                     </div>
-                    </Link>
                     <div className="btn-part ">
                         <OnCartFunct id={item._id} />
                         <OnBuyFunct id={item?._id} />
                     </div>
-                
-            </div>
+
+                </div>
+            </Link>
 
 
         </li>
