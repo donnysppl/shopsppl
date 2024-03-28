@@ -12,8 +12,23 @@ interface bannerType {
     name: string;
     bannerimg: string;
     bannermobimg: string;
-    link:string,
+    link: string,
 }
+
+const bannerDataRe = [
+    {
+        name: 'banner',
+        bannerimg: '/img/banner.png',
+        bannermobimg: '/img/banner-mob.webp',
+        link: '/',
+    },
+    {
+        name: 'banner',
+        bannerimg: '/img/banner.png',
+        bannermobimg: '/img/banner-mob.webp',
+        link: '/',
+    }
+]
 
 export default function Banner() {
 
@@ -25,7 +40,7 @@ export default function Banner() {
         const bannerFetch = async () => {
             await fetch('/api/banner/list', {
                 method: 'GET',
-                cache:'no-cache',
+                cache: 'no-cache',
             }).then(res => res.json())
                 .then(res => {
                     // console.log(res);
@@ -38,7 +53,7 @@ export default function Banner() {
                     else if (res.status === 400) {
 
                     }
-                     else if (res.status === 500) {
+                    else if (res.status === 500) {
 
                     }
                 })
@@ -54,7 +69,7 @@ export default function Banner() {
     return (
         <Swiper
             slidesPerView={'auto'}
-            loop={true} speed={2000}
+            loop={true}
             spaceBetween={0} initialSlide={1}
             pagination={{
                 clickable: true,
@@ -65,23 +80,38 @@ export default function Banner() {
             modules={[Pagination, Autoplay]}
             className="banner-slider"
         >
+
             {
+                bannerDataRe.map((item, index) => (
+                    <SwiperSlide key={index} className=' '>
+                        <Link href={item.link} className='' >
+                            <img src={`${(width > 990) ? item.bannerimg : item.bannermobimg}`}
+                                className='object-cover object-center w-full md:h-[92dvh]'
+                                alt={item.name} />
+                        
+                        </Link>
+                    </SwiperSlide>
+                ))
+            }
+            {/* {
                 loading ?
                     <SwiperSlide className='animate-pulse'>
                         <div className='w-screen h-[500px] bg-gray-400' >
                         </div>
                     </SwiperSlide> :
-                    bannerData.map((item, index) => (
-                        <SwiperSlide key={index} className=' '>
-                            <Link href={item.link} className='' >
-                                <img src={`/uploads/banner/${(width > 990) ? item.bannerimg : item.bannermobimg}`} 
-                                    className='object-cover object-center w-full'
-                                    alt={item.name} />
-                            </Link>
-                        </SwiperSlide>
 
-                    ))
-            }
+                    
+                    // bannerData.map((item, index) => (
+                    //     <SwiperSlide key={index} className=' '>
+                    //         <Link href={item.link} className='' >
+                    //             <img src={`/uploads/banner/${(width > 990) ? item.bannerimg : item.bannermobimg}`}
+                    //                 className='object-cover object-center w-full'
+                    //                 alt={item.name} />
+                    //         </Link>
+                    //     </SwiperSlide>
+
+                    // ))
+            } */}
         </Swiper>
     )
 }

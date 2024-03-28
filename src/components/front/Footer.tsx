@@ -26,6 +26,18 @@ const support = [
         link: 'policy/privacy-policy',
     },
     {
+        titlt: 'Track your order',
+        link: 'policy/privacy-policy',
+    },
+    {
+        titlt: 'Register a Complaint',
+        link: 'policy/privacy-policy',
+    },
+    {
+        titlt: 'Product Registration',
+        link: 'policy/privacy-policy',
+    },
+    {
         titlt: 'FAQ',
         link: 'policy/faq',
     },
@@ -68,6 +80,100 @@ const social = [
     }
 ]
 
+const aboutshopsppl = [
+    {
+        titlt: 'About us',
+        link: '/',
+    },
+    {
+        titlt: 'Blogs',
+        link: '/',
+    },
+    {
+        titlt: 'Support',
+        link: '/',
+    },
+    {
+        titlt: 'Product',
+        link: '/',
+    },
+    {
+        titlt: 'In The Press',
+        link: '/',
+    },
+]
+
+const shopcate = [
+    {
+        titlt: 'Shop HD TV',
+        link: '/collections/shop-hd-tv',
+    },
+    {
+        titlt: 'Shop Full HD TV',
+        link: '/collections/shop-full-hd-tv',
+    },
+    {
+        titlt: 'Shop 4K Android TV',
+        link: '/collections/shop-4k-android-tv',
+    },
+    {
+        titlt: 'Shop 4k Google TV',
+        link: '/collections/shop-4k-google-tv',
+    },
+    {
+        titlt: 'Shop QLED TV',
+        link: '/collections/shop-qled-tv',
+    },
+    {
+        titlt: 'Shop Semi Automatic Washing Machines',
+        link: '/collections/shop-semi-automatic-washing-machines',
+    },
+    {
+        titlt: 'Shop Top Load Fully Automatic Washing Machines',
+        link: '/collections/shop-top-load-fully-automatic-washing-machines',
+    },
+    {
+        titlt: 'Shop Front Load Fully Automatic Washing Machines',
+        link: '/collections/shop-front-load-fully-automatic-washing-machines',
+    },
+    {
+        titlt: 'Shop Air Conditioners',
+        link: '/collections/shop-air-conditioners',
+    },
+    {
+        titlt: 'Shop Air Coolers',
+        link: '/collections/shop-air-coolers',
+    },
+]
+
+const shopprice = [
+    {
+        titlt: 'Under 0 -10,000 ',
+        link: '/collections/under-10000',
+    },
+    {
+        titlt: 'between 10,000 -20,000',
+        link: '/collections/between-10000-20000',
+    },
+    {
+        titlt: 'Between 20,000 -30,000',
+        link: '/collections/between-20000-30000',
+    },
+    {
+        titlt: 'Between 30,000 -40,000',
+        link: '/collections/between-30000-40000',
+    },
+    {
+        titlt: 'Between 40,000 -50,000',
+        link: '/collections/between-40000-50000',
+    },
+    {
+        titlt: 'And 50,000 Above ',
+        link: '/collections/between-50000-100000',
+    },
+]
+
+
 export default function Footer() {
     const date: Date = new Date();
     const year = date.getFullYear();
@@ -75,102 +181,167 @@ export default function Footer() {
     return (
         <>
             <footer className="text-gray-100">
-                <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
+                <div className="footerone pb-12">
+                    <div className="mx-auto max-w-screen-2xl px-4 py-10 sm:px-6 lg:px-10">
 
-                    <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
-                        <div className="mx-auto max-w-sm lg:max-w-none">
-                            <strong
-                                className="block text-base font-bold "
-                            >
-                                Want us to email you with the latest blockbuster news?
-                            </strong>
-                            <form className="mt-6">
-                                <div className="relative max-w-lg">
-                                    <label className="sr-only" htmlFor="email"> Email </label>
+                        <div className="flex justify-between gap-10 flex-wrap">
+                            <div className="md:w-[30%] w-full">
+                                <div className="footer-logo-par">
+                                    <div className="logo">
+                                        <Link href={'/'}>
+                                            <img src="/img/logo.png" alt="Logo" className='w-48 mb-4' />
+                                        </Link>
+                                        <h2 className='font-medium text-white mb-2.5'>Subscribe to our email alerts!</h2>
 
-                                    <input
-                                        className="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
-                                        id="email"
-                                        type="email"
-                                        placeholder="john@doe.com"
-                                    />
+                                        <div className="mb-6">
+                                            <input type="email" name="subscribe"
+                                                className='text-sm text-gray-900 placeholder::text-[#9F9F9F] bg-white rounded-xl py-5 px-5 w-full h-[45px]' placeholder='Enter your email address' />
+                                        </div>
 
-                                    <button
-                                        className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-act px-5 py-3 text-sm font-medium text-black transition hover:bg-prim hover:text-white"
-                                    >
-                                        Subscribe
-                                    </button>
+                                        <div className="follow">
+                                            <div className='text-xl font-medium text-white' >Follow Us On</div>
+                                            <div className="mt-2 flex gap-4 justify-start">
+
+                                                {
+                                                    social.map((item, index) => (
+                                                        <a key={index}
+                                                            className="text-gray-300 transition hover:text-gray-200/75 text-2xl"
+                                                            href={item.link}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                        >
+                                                            <span className="sr-only">{item.titlt}</span>
+
+                                                            {item.icon}
+                                                        </a>
+                                                    ))
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
-                            <strong  className="block text-base font-bold mt-4" >
-                                Follow Us On
-                            </strong>
-                            <div className="mt-2 flex justify-center gap-4 lg:justify-start">
 
-                                {
-                                    social.map((item, index) => (
-                                        <a key={index}
-                                            className="text-gray-300 transition hover:text-gray-200/75"
-                                            href={item.link}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            <span className="sr-only">{item.titlt}</span>
+                            </div>
 
-                                            {item.icon}
-                                        </a>
-                                    ))
-                                }
+                            <div className="md:w-[60%] w-full">
 
+                                <div className='flex md:flex-row flex-col justify-between flex-wrap gap-5'>
+
+                                    <div className="shop-list ">
+
+                                        <h4 className='md:text-xl text-base text-white font-medium mb-2.5'>Shop</h4>
+                                        <div className='flex flex-col gap-2'>
+                                            {
+                                                quick.map((item, index) => (
+                                                    <Link className='md:text-sm text-xs text-[#AFAFAF]' href={`${item.link}`} key={index}>{item.titlt}</Link>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+
+
+                                    <div className="shop-list">
+
+                                        <h4 className='md:text-xl text-base text-white font-medium mb-2.5'>Support </h4>
+                                        <div className='flex flex-col gap-2'>
+                                            {
+                                                support.map((item, index) => (
+                                                    <Link className='md:text-sm text-xs text-[#AFAFAF]' href={`${item.link}`} key={index}>{item.titlt}</Link>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div className="shop-list">
+
+                                        <h4 className='md:text-xl text-base text-white font-medium mb-2.5'>About Shopsppl </h4>
+                                        <div className='flex flex-col gap-2'>
+                                            {
+                                                aboutshopsppl.map((item, index) => (
+                                                    <Link className='md:text-sm text-xs text-[#AFAFAF]' href={`${item.link}`} key={index}>{item.titlt}</Link>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-8 text-center lg:grid-cols-2 lg:text-left" >
 
-                            <div>
-                                <strong className="font-bold text-gray-300"> About </strong>
-
-                                <ul className="mt-6 space-y-1">
-
-                                    {
-                                        quick.map((item, index) => (
-                                            <li key={index}>
-                                                <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.link}`} className="text-gray-300 transition hover:text-gray-300/75">
-                                                    {item.titlt}</Link>
-                                            </li>
-                                        ))
-                                    }
-
-
-
-                                </ul>
-                            </div>
-
-                            <div>
-                                <strong className="font-bold text-gray-300"> Support </strong>
-                                <ul className="mt-6 space-y-1">
-                                    {
-                                        support.map((item, index) => (
-                                            <li key={index}>
-                                                <Link href={`${process.env.NEXT_PUBLIC_BASE_URL}/${item.link}`} className="text-gray-300 transition hover:text-gray-300/75">
-                                                    {item.titlt}</Link>
-                                            </li>
-                                        ))
-                                    }
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="mt-16 border-t border-gray-100 pt-8">
-                        <p className="text-center text-xs/relaxed text-gray-300">
-                            © Company {year}. All rights reserved.
-                        </p>
                     </div>
                 </div>
+
+                <div className='footertwo'>
+                    <div className="mx-auto max-w-screen-2xl px-5 py-8  sm:px-6 lg:px-10">
+
+                        <div className='flex justify-between flex-wrap gap-5 md:flex-row flex-col'>
+
+                            <div className="shop-list">
+
+                                <h4 className='md:text-xl text-base text-white font-medium mb-2.5'>Shop by Category</h4>
+                                <div className='flex flex-col gap-2'>
+                                    {
+                                        shopcate.map((item, index) => (
+                                            <Link className='md:text-sm text-xs text-[#AFAFAF]' href={`${item.link}`} key={index}>{item.titlt}</Link>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+
+                            <div className="shop-list">
+
+                                <h4 className='md:text-xl text-base text-white font-medium mb-2.5'>Shop by Price</h4>
+                                <div className='flex flex-col gap-2'>
+                                    {
+                                        shopprice .map((item, index) => (
+                                            <Link className='md:text-sm text-xs text-[#AFAFAF]' href={`${item.link}`} key={index}>{item.titlt}</Link>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <div className="shop-list">
+
+                                <h4 className='md:text-xl text-base text-white font-medium mb-2.5'>Shop by latest launches</h4>
+                                <div className='flex flex-col gap-2'>
+                                    {
+                                        quick.map((item, index) => (
+                                            <Link className='md:text-sm text-xs text-[#AFAFAF]' href={`${item.link}`} key={index}>{item.titlt}</Link>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <div className="shop-list">
+
+                                <h4 className='md:text-xl text-base text-white font-medium mb-2.5'>Shop best Selling</h4>
+                                <div className='flex flex-col gap-2'>
+                                    {
+                                        quick.map((item, index) => (
+                                            <Link className='md:text-sm text-xs text-[#AFAFAF]' href={`${item.link}`} key={index}>{item.titlt}</Link>
+                                        ))
+                                    }
+                                </div>
+                            </div>         
+
+                        </div>
+
+
+
+
+                        <div className="md:mt-16 mt-10 border-t border-gray-100 pt-8">
+                            <p className="text-center text-sm text-white">
+                                © Company {year}. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </footer>
-            <Modal/>
+            {/* <Modal /> */}
         </>
     )
 }

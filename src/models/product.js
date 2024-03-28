@@ -91,6 +91,10 @@ const productSchema = new Schema({
     inStock: {
         type: Boolean,
     },
+    isNewProductData:{
+        type: Boolean,
+        default: false,
+    },
     stock: {
         type: Number,
     },

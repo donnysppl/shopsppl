@@ -12,28 +12,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
-const brand = [
-    {
-        img: 'thomson.webp',
-        link: '/product?brand=Thomson',
-    },
-    {
-        img: 'Kodak Logo.webp',
-        link: '/product?brand=Kodak TV',
-    },
-    {
-        img: 'blaupunkt.webp',
-        link: '/product?brand=Blaupunkt',
-    },
-    {
-        img: 'Westinghouse.webp',
-        link: '/product?brand=Westinghouse',
-    },
-    {
-        img: 'White westinghouse.webp',
-        link: '/product?brand=White Westinghouse',
-    }
-]
+export const dynamic = 'force-dynamic';
 
 export default function Category() {
 
@@ -60,23 +39,17 @@ export default function Category() {
         fetchcateData();
     }, [])
 
-    // const findNewLaunch = fetchNewLaunchProd();
-    // console.log(findNewLaunch)
-
     return (
-        <section className="pt-10 pb-10 px-2.5">
-            
-            <div className="max-w-screen-2xl mx-auto">
-                <div className="section-head text-center">
-                    <h2 className="font-semibold"><span className="text-act">Shop</span> By Category</h2>
-                </div>
+        <section className="md:pt-10 pt-4 px-2.5">
 
-                <div className="w-full grid md:grid-cols-4 grid-cols-2 lg:gap-4 gap-2.5 mt-4 ">
+            <div className="md:w-[1200px] mx-auto">
+
+                <div className="w-full flex cate-card-upper lg:gap-4 gap-2.5 my-2.5 ">
                     {
                         loader ?
                             [1, 2, 3, 4].map((item: number) => (
-                                <div key={item} className="w-full h-full animate-pulse bg-gray-200 flex flex-col rounded-lg overflow-hidden border border-gray-200 transition-all hover:shadow-lg">
-                                    <div className="img-part w-full h-[375px] overflow-hidden bg-gray-400"></div>
+                                <div key={item} className="w-full h-full animate-pulse flex items-center flex-col overflow-hidden  transition-all hover:shadow-lg">
+                                    <div className="img-part  md:w-[250px] w-[90px] md:h-[250px] h-[90px] rounded-full overflow-hidden bg-gray-400"></div>
                                     <div className="card-head text-center px-1.5 py-2 flex justify-center items-center">
                                         <div className="w-[80%] h-5 bg-gray-400 rounded-lg"></div>
                                     </div>
@@ -84,13 +57,14 @@ export default function Category() {
                             ))
                             :
                             frontCate && frontCate.map((item: Category, index: number) => (
-                                <div key={index} className="w-full h-full bg-gray-200 flex flex-col rounded-lg overflow-hidden border border-gray-200 transition-all hover:shadow-lg">
+                                <div key={index} className=" cate-card-inner w-full h-full flex items-center flex-col ">
                                     <Link href={`/product?category=${item.name}`}>
-                                        <div className="img-part w-full h-auto overflow-hidden">
-                                            <Image width={380} height={380} src={item.img} alt={item.name} />
+                                        <div className="img-part md:w-[250px] w-full md:h-[250px] overflow-hidden rounded-full">
+                                            <Image sizes="(min-width: 808px) 90%, 80%" width={250} height={250} src={item.img} alt={item.name} />
+                                            {/* <img src={item.img} alt={item.name} className="w-full h-full rounded-full" /> */}
                                         </div>
-                                        <div className="card-head text-center px-1.5 py-2">
-                                            <h3 className="md:text-lg text-base">{item.name}</h3>
+                                        <div className="card-head text-center px-1.5 pt-5">
+                                            <h3 className="md:text-lg text-xs font-medium">{item.name}</h3>
                                         </div>
                                     </Link>
                                 </div>

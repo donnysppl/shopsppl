@@ -2,6 +2,7 @@ import { connect } from '@/dbConfig/dbConfig';
 import Product from '../models/product';
 import Blog from '../models/blog';
 import Pages from '../models/pages';
+import CollectionProd from '../models/collectionprod';
 
 export default async function sitemap() {
   const url = 'https://shopsppl.in';
@@ -40,6 +41,16 @@ export default async function sitemap() {
     }
   })
 
+    // collection
+    const collectionData = await CollectionProd.find().select('name slug');
+
+    const CollEnt = collectionData.map((item) => {
+      return {
+        url: `${url}/collections/${item.slug}`,
+        lastModified: new Date(),
+      }
+    })
+
   return [
     {
       url: `${url}`,
@@ -59,7 +70,8 @@ export default async function sitemap() {
     },
     ...ProductEnt,
     ...BlogEnt,
-    ...TermEnt
+    ...TermEnt,
+    ...CollEnt
 
   ]
 }

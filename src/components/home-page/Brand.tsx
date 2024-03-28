@@ -1,5 +1,4 @@
 'use client';
-;
 import Link from "next/link";
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,49 +11,73 @@ import 'swiper/css/pagination';
 
 const brand = [
     {
-        img: 'Group 7.png',
+        img: 'thomson.png',
         link: '/product?brand=Thomson',
     },
     {
-        img: 'Group 8.png',
+        img: 'kodak.png',
         link: '/product?brand=Kodak TV',
     },
     {
-        img: 'Group 5.png',
+        img: 'blau.png',
         link: '/product?brand=Blaupunkt',
     },
     {
-        img: 'Group 4.png',
+        img: 'west.png',
         link: '/product?brand=Westinghouse',
     },
     {
-        img: 'Group 6.png',
+        img: 'wwh.png',
         link: '/product?brand=White Westinghouse',
     },
     {
-        img: 'Group 3.png',
+        img: 'svl.png',
+        link: '/product?brand=svl',
+    },
+    {
+        img: 'thomson.png',
+        link: '/product?brand=Thomson',
+    },
+    {
+        img: 'kodak.png',
+        link: '/product?brand=Kodak TV',
+    },
+    {
+        img: 'blau.png',
+        link: '/product?brand=Blaupunkt',
+    },
+    {
+        img: 'west.png',
+        link: '/product?brand=Westinghouse',
+    },
+    {
+        img: 'wwh.png',
+        link: '/product?brand=White Westinghouse',
+    },
+    {
+        img: 'svl.png',
         link: '/product?brand=svl',
     }
 ]
 
 export default function Brand() {
     return (
-        <section className="pt-10 pb-5 px-2.5">
-            <div className="max-w-screen-xl mx-auto">
-                <div className="section-head text-center mb-4">
-                    <h2 className="font-semibold "><span className="text-act">Shop</span> By Brand</h2>
+        <section className="px-2.5 pb-5">
+            <div className="w-full mx-auto">
+                <div className="section-head mb-4">
+                <h2 className="font-medium uppercase">SHOP BY BRAND</h2>
                 </div>
 
                 <div className="w-full ">
-                    <Swiper autoplay={{ delay: 2500 }}
+                    <Swiper autoplay={{ delay: 2500 }} 
                         breakpoints={{
-                            320: { slidesPerView: 2, },
-                            360: { slidesPerView: 2, },
-                            480: { slidesPerView: 2, },
-                            576: { slidesPerView: 2, },
+                            320: { slidesPerView: 3, },
+                            360: { slidesPerView: 3, },
+                            480: { slidesPerView: 3, },
+                            576: { slidesPerView: 3, },
                             768: { slidesPerView: 3, },
                             991: { slidesPerView: 4, },
-                            1024: { slidesPerView: 5, },
+                            1024: { slidesPerView: 6, },
                         }}
                         slidesPerView={5} loop={true}
                         spaceBetween={30}
@@ -66,7 +89,7 @@ export default function Brand() {
                                 <SwiperSlide key={index}>
                                     <Link href={item.link}>
                                         <div >
-                                            <img src={`/img/${item.img}`} alt="category images" className="mx-auto" />
+                                            <img src={`/img/brand-logo/${item.img}`} alt="category images" className="mx-auto" />
                                         </div>
                                     </Link>
                                 </SwiperSlide>

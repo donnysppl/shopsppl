@@ -62,6 +62,56 @@ export default function ListProduct() {
             })
     }
 
+    const onFeatureHandle = async (e, id) => {
+        e.preventDefault();
+        setloading(true);
+        await fetch(`/api/product/products/feature/${id}`, {
+            method: 'PUT',
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if (res.status === 200) {
+                    toast.success(res.message);
+                    window.location.reload();
+                }
+                else if (res.status === 400) {
+                    toast.error(res.message);
+                }
+                else if (res.status === 500) {
+                    toast.error(res.message);
+                }
+                // setloading(false);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const onisNewHandle = async (e, id) => {
+        e.preventDefault();
+        setloading(true);
+        await fetch(`/api/product/products/new/${id}`, {
+            method: 'PUT',
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if (res.status === 200) {
+                    toast.success(res.message);
+                    window.location.reload();
+                }
+                else if (res.status === 400) {
+                    toast.error(res.message);
+                }
+                else if (res.status === 500) {
+                    toast.error(res.message);
+                }
+                // setloading(false);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     const data = useMemo(() => catetableData, [catetableData])
 
     /** @type import('@tanstack/react-table').ColumnDef<any> */
@@ -87,8 +137,24 @@ export default function ListProduct() {
             accessorFn: (row, index) => row.category.toString(),
         },
         {
+            header: 'Size',
+            accessorFn: (row, index) => parseInt(row.size) + ' ' + (row.sizeOF === 'tv' ? 'inch' : row.sizeOF === 'wm' ? 'kg' : row.sizeOF === 'cooler' ? 'leter' : 'ton'),
+        },
+        {
             header: 'Sale / Normal Price',
             accessorFn: (row, index) => `${row && row.productSalePrice} / ${row && row.productNormalPrice}`,
+        },
+        {
+            header: 'New',
+            cell: cell => (
+                <input class="form-check-input" type="checkbox" checked={cell.row.original.isNewProductData} onClick={(e) => onisNewHandle(e,cell.row.original._id)} />
+            )
+        },
+        {
+            header: 'Feature',
+            cell: cell => (
+                <input class="form-check-input" type="checkbox" checked={cell.row.original.isFeatured} onClick={(e) => onFeatureHandle(e,cell.row.original._id)} />
+            )
         },
         {
             header: 'Action',

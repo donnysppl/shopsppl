@@ -36,6 +36,8 @@ export async function GET(req: NextRequest) {
             { header: "InStock", key: "inStock" },
             { header: "Stock Number", key: "stock" },
             { header: "Tag", key: "tag" },
+            { header: "sizeOF", key: "sizeOF" },
+            { header: "size", key: "size" },
         ];
 
         const productData = await Product.find();
@@ -72,6 +74,8 @@ export async function GET(req: NextRequest) {
                 tag:productTagString,
                 inStock:productData[i].inStock,
                 stock:productData[i].stock,
+                sizeOF:productData[i].sizeOF,
+                size:productData[i].size,
             })
         }
 

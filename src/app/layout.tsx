@@ -1,11 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Libre_Baskerville } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import Script from 'next/script';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
-const libre = Libre_Baskerville({
-  weight: ['400', '700'],
+const poppins = Poppins({
+  weight: ['100','200','300','400','500','600', '700'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
@@ -28,7 +28,7 @@ export default function RootLayout({
   // console.log(process.env.NODE_ENV)
   return (
     <html lang="en">
-      <body className={libre.className}>
+      <body className={poppins.className}>
         {children}
       </body>
 
@@ -40,7 +40,7 @@ export default function RootLayout({
         (process.env.NODE_ENV === 'production') ?
           <>
             <GoogleAnalytics gaId='G-RFYKYCY9PW' />
-            
+
             <Script src="https://embed.tawk.to/6586dfe707843602b8050e1d/1hibdl8av" async />
 
             <Script async src='https://www.googletagmanager.com/gtag/js?id=G-EHE0S3ZKJR' />

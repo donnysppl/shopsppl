@@ -10,12 +10,6 @@ export let mailTransport = {
     pass: process.env.MAIL_SMTP_PASS,
   }
 }
-export function shuffleArray(array: Product[]) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
 
 export function priceFormat(price:number){
   const formattedPrice = new Intl.NumberFormat('en-IN', {
@@ -23,4 +17,13 @@ export function priceFormat(price:number){
       currency: 'INR'
     }).format(price);
     return formattedPrice
+}
+
+export function shuffleArray(array: any) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+  array.sort((a: any, b: any) => { return b.inStock - a.inStock })
+  return array;
 }

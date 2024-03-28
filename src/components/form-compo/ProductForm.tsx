@@ -475,7 +475,14 @@ export default function ProductForm({ method, id }: ProdFormProps) {
                         onChange={(e) => setproductinp({ ...productinp, mainproductimg: e.target.value })}
                         value={'' || productinp.mainproductimg}
                     />
+
                 </div>
+
+                {/* <div className="prev-img absolute w-[200px] h-[200px] right-0">
+                    <img src={`https://cloud.shopsppl.com/wp-content/uploads/sppl/${productinp.mainproductimg}`} alt="prev-img" />
+                </div> */}
+
+                
 
             </div>
 

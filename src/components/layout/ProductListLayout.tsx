@@ -31,9 +31,11 @@ export default function ProductListLayout() {
 
     const searchParam = useSearchParams();
     const page = searchParam.get('page');
-    const limit = searchParam.get('limit');
+    const limit = searchParam.get('limit') ;
     const brand = searchParam.get('brand');
     const category = searchParam.get('category');
+    const price = searchParam.get('price');
+    const size = searchParam.get('size');
 
     const [prodList, setprodList] = useState<fetchProd>();
 
@@ -42,11 +44,11 @@ export default function ProductListLayout() {
 
     useEffect(() => {
         productFetch();
-    }, [page,limit,brand,category])
+    }, [page,limit,brand,category,price,size])
 
     const productFetch = async () => {
         setloading(true);
-        await fetch(`/api/product/products/front?page=${page ? page : 1}&limit=${limit ? limit : 12}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}`, {
+        await fetch(`/api/product/products/front?page=${page ? page : 1}&limit=${limit ? limit : 12}&brand=${brand ? brand : 'all'}&category=${category ? category : 'all'}&price=${price ? price : 'all'}&size=${size ? size : 'all'}`, {
             method: 'GET',
             next: { revalidate: 10 }
         }).then(res => res.json())
@@ -64,7 +66,7 @@ export default function ProductListLayout() {
 
     return (
         <>
-            <ul className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-5">
+            <ul className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-4">
                 {
                     loading ?
                         [1, 2, 3, 4, 5, 6, 7, 8].map((item: any, index: number) => (
@@ -86,19 +88,19 @@ export default function ProductListLayout() {
                 <div className='flex gap-3'>
                 {
                   prodList?.prev ?
-                    <div className="next ">
-                      <Link className='btn-prim gap-2' href={`?${new URLSearchParams({
+                    <div className="next w-28 ">
+                      <Link className='btn-sec gap-2' href={`?${new URLSearchParams({
                         page: prodList.prev.page.toString(), limit: limitStr,
-                        brand: (brand ? brand : 'all'), category: (category ? category : 'all')
+                        brand: (brand ? brand : 'all'), category: (category ? category : 'all'), price : (price ? price : 'all'), size : size ? size : 'all'
                       })}`}><GrNext className='rotate-180' /> Prev</Link>
                     </div> : null
                 }
                 {
                   prodList?.next ?
-                    <div className="next">
-                      <Link className='btn-prim gap-2' href={`?${new URLSearchParams({
+                    <div className="next w-28">
+                      <Link className='btn-sec gap-2' href={`?${new URLSearchParams({
                         page: prodList.next.page.toString(), limit: limitStr,
-                        brand: (brand ? brand : 'all'), category: (category ? category : 'all')
+                        brand: (brand ? brand : 'all'), category: (category ? category : 'all'), price : (price ? price : 'all'), size : size ? size : 'all'
                       })}`}>Next <GrNext /></Link>
                     </div> : null
                 }

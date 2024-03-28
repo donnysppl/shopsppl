@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import { shuffleArray } from '@/helpers/common';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
     try {
         await connect();

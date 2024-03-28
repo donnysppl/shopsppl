@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        prim:'#013088',
+        prim:'#012F87',
         act:'#F6AF17'
       },
       backgroundImage: {

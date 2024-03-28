@@ -9,6 +9,6 @@ export default function OnBuyFunct({ id }: buyBtn) {
   const { buyFromCart } = useShoppingCart();
 
   return (
-    <button onClick={() => buyFromCart(id)} className="btn-prim ms-2">Buy Now</button>
+    <button onClick={() => buyFromCart(id)} className="btn-prim">Buy Now</button>
   )
 }

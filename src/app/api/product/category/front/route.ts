@@ -2,6 +2,7 @@ import Category from '@/models/category';
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
     try {

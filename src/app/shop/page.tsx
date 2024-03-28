@@ -26,28 +26,30 @@ export const metadata: Metadata = {
   title: 'Product | Shop',
   description: 'Product | Shop',
   alternates: {
-      canonical: `/product`
+    canonical: `/product`
   }
 }
 
 export default async function ProductList({ searchParams }: {
   searchParams: {
-    page: string, limit: string, brand: string, category: string
+    page: string, limit: string, brand: string, category: string, price: string, size:string
   }
 }) {
-  const pageParams = parseInt(searchParams.page ? searchParams.page : '1') ;
+  const pageParams = parseInt(searchParams.page ? searchParams.page : '1');
   const limitParams = parseInt(searchParams.limit);
   const brandParams = searchParams.brand;
   const categoryParams = searchParams.category;
+  const priceParams = searchParams.price;
+  const sizeParams = searchParams.size;
 
   return (
-    <div className="max-w-screen-2xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
-      <div className="product-filter-main grid grid-cols-1 gap-x-8 md:gap-y-10 gap-y-2 lg:grid-cols-4">
-        <div className="product-filter-part">
-          <ProductFilter brand={brandParams} category={categoryParams} page={searchParams.page} limit={searchParams.limit} />
+    <div className="">
+      <div className="product-filter-main ">
+        <div className="product-filter-part ">
+        <ProductFilter brand={brandParams} category={categoryParams} page={searchParams.page} limit={searchParams.limit} price={priceParams} size={sizeParams} />
         </div>
-        <div className="product-part lg:col-span-3">
-          <div className="mx-auto max-w-screen-xl">
+        <div className="product-part">
+          <div className="px-4">
             <div className='flex justify-between p-4'>
               <h2>Product List</h2>
               <div>

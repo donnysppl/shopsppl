@@ -70,7 +70,7 @@ export default function CommonTable({ data, columns, loading }) {
               </thead>
               <tbody>
                 {table.getRowModel().rows.map(row => (
-                  <tr className="border-b border-dashed border-gray-200 hover:bg-gray-100" key={row.id}>
+                  <tr className="border-b border-dashed border-gray-200 hover:bg-gray-100 text-xs" key={row.id}>
                     {row.getVisibleCells().map(cell => (
                       <td className="px-6 py-4 text-gray-900" key={cell.id}>
                         {flexRender(

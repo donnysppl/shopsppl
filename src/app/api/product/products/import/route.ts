@@ -74,6 +74,8 @@ export async function POST(req: NextRequest) {
                     brandArr: brandData,
                     inStock:record.InStock,
                     tag:productTagArr,
+                    size:record.size,
+                    sizeOF:record.sizeOF,
                 },
             };
 

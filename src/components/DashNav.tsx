@@ -111,6 +111,10 @@ const dashNavList = [
                 innernavlink: "/backend/backend-dashboard/product/list-product"
             },
             {
+                innernavname: "Add Collection",
+                innernavlink: "/backend/backend-dashboard/product/collection/add"
+            },
+            {
                 innernavname: "Coupon Add",
                 innernavlink: "/backend/backend-dashboard/coupon/add"
             },
